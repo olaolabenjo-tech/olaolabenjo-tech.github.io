@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSG DataWorks - AI Training Dataset Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        nav {
+            background-color: #f8f9fa;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #667eea;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #764ba2;
+        }
+
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .service-card h3 {
+            margin-top: 0;
+        }
+
+        .pricing-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .contact-info strong {
+            color: #667eea;
+        }
+
+        .privacy-section {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #667eea;
+        }
+
+        .privacy-section h3 {
+            margin-top: 0;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 60px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-direction: column;
+            }
+
+            h2 {
+                font-size: 1.5em;
+            }
+
+            section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>BSG DataWorks</h1>
+        <p>AI Training Dataset Solutions for African Languages</p>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#privacy">Privacy Policy</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Us</h2>
+        <p>BSG DataWorks is a Nigerian AI training dataset company specializing in the collection, curation, and commercial licensing of human-sourced audio, voice, image, video, and language data. Our primary purpose is to train, test, evaluate, fine-tune, and improve artificial intelligence systems, machine learning models, natural language processing engines, speech recognition systems, and computer vision systems.</p>
+        
+        <p>We are committed to addressing the critical underrepresentation of African voices in global artificial intelligence systems by specializing in indigenous African languages, regional African dialects, and African-accented variants of international languages. We operate in full compliance with applicable Nigerian and international legal frameworks, including the Nigeria Data Protection Act 2023 (NDPA 2023) and the EU General Data Protection Regulation (GDPR) where applicable.</p>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <h2>Our Services</h2>
+        
+        <div class="service-grid">
+            <div class="service-card">
+                <h3>AI Training Data Collection & Licensing</h3>
+                <p>We collect, curate, process, and commercially distribute human-sourced audio recordings, voice data, speech data, image data, video data, and language datasets. These datasets are crucial for training and improving various AI and machine learning technologies. We license these datasets to AI companies, technology developers, research institutions, and government agencies globally.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>African Language & Accent Specialization</h3>
+                <p>We specialize in developing and commercializing datasets in indigenous African languages (Yoruba, Igbo, Hausa, Nigerian Pidgin English) and African-accented variants of international languages. This focus aims to preserve and promote Nigerian and African linguistic heritage while enhancing the representation of African languages in AI.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Technology Development & IP Licensing</h3>
+                <p>We design, develop, acquire, and commercially exploit software platforms, APIs, data annotation tools, quality assurance systems, and AI applications related to data collection and digital content management. We also protect and license our intellectual property, including patents, trademarks, and copyrights.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Language Services & Transcription</h3>
+                <p>We provide professional language services such as translation, transcription, localization, interpretation, subtitling, and captioning. We leverage AI-assisted and human-verified methodologies to deliver high-quality language solutions and assist clients in localizing AI products for African and international markets.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Digital Content Creation & Publishing</h3>
+                <p>We create, produce, publish, distribute, and commercially exploit various digital content, including eBooks, audio productions, podcasts, documentary and educational videos, and branded content for digital platforms. We develop and monetize digital content brands and channels, including subscription services and online courses.</p>
+            </div>
+
+            <div class="service-card">
+                <h3>Consultancy & Training</h3>
+                <p>We offer consultancy, advisory, and training services in AI training data strategy, data collection methodology, data quality assurance, data protection compliance, and African language technology. We design and deliver training programs, workshops, and seminars for corporate clients, academic institutions, and professionals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing">
+        <h2>Pricing</h2>
+        <div class="pricing-box">
+            <h3>Customized Solutions</h3>
+            <p>Our pricing for services is tailored to meet the specific needs and scope of each project. We work with you to understand your requirements and deliver cost-effective solutions.</p>
+            <p><strong>Contact us directly for a personalized quote and detailed information regarding our service packages.</strong></p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <p>For inquiries, partnerships, or to learn more about our services, please reach out to us:</p>
+        <div class="contact-info">
+            <p><strong>Email:</strong> dataservices@bilingualsolutiongenius.com</p>
+            <p><strong>Phone/WhatsApp:</strong> +234 8067904903</p>
+            <p><strong>Address:</strong> Nigeria</p>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Section -->
+    <section id="privacy">
+        <h2>Privacy Policy</h2>
+        
+        <div class="privacy-section">
+            <h3>Overview</h3>
+            <p>This Privacy Policy outlines how BSG DataWorks collects, uses, stores, and shares personal data from individuals who contribute voice recordings, audio files, video clips, or language data. We are committed to protecting your privacy and handling your data in compliance with the Nigeria Data Protection Act 2023 (NDPA 2023), the NDPC General Application and Implementation Directive (GAID) 2025, and other applicable international regulations like GDPR and PIPEDA.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Data We Collect</h3>
+            <p>We collect Identity and Contact Data (name, email, phone, location, age, gender), Language and Speaker Profile Data, Contributed Content (voice/video recordings, scripts), Biometric Data (voice recordings), Financial Data (payment details), and Transaction and Consent Records.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>How We Collect Data</h3>
+            <p>Data is collected directly from you via consent forms, submission forms, WhatsApp, email, and uploaded recordings. We do not collect data from third parties.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Why We Process Your Data</h3>
+            <p>We process your data for purposes such as registering you as a contributor, collecting and processing recordings, quality review, storing data, licensing recordings to AI buyers, processing payments, maintaining compliance records, and communicating with you. Our legal bases include consent, performance of contract, legitimate interests, and legal obligations.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>How We Use Your Data</h3>
+            <p>Your data is used for onboarding, task assignment, quality review, secure storage, inclusion in commercial AI training datasets, licensing to AI companies, payment processing, and responding to data subject requests. We never use your data for purposes beyond those stated without your explicit consent.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Who We Share Your Data With</h3>
+            <p>We share approved voice/video recordings (without personal contact details) with dataset buyers, who are contractually bound to prohibit re-identification. We also share data with service providers like Google, Filen.io, Proton Drive, and payment platforms. Regulatory authorities may also receive data for compliance. We do not sell personal contact details or share data with advertisers.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>International Data Transfers</h3>
+            <p>Your data may be transferred internationally to dataset buyers or storage providers. All transfers comply with NDPA 2023 Part VIII, utilizing adequacy decisions, Standard Contractual Clauses, or our Data Buyer Agreement to ensure adequate data protection.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Data Retention</h3>
+            <p>Voice/video recordings are retained indefinitely as part of licensed datasets. Personal contact data is retained for a specified period after your last interaction, and consent/payment records are kept for legal compliance. Data is securely deleted or anonymized after retention periods.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Your Data Subject Rights</h3>
+            <p>Under NDPA 2023, you have rights including the right to be informed, access, rectification, erasure (for contact data), restrict processing, data portability, object, and withdraw consent. Requests can be made via email, and we will respond within 30 days. You can also lodge a complaint with the Nigeria Data Protection Commission (NDPC).</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Data Protection</h3>
+            <p>We implement robust technical and organizational measures to protect your data, including encrypted storage, restricted access, contractual prohibitions on re-identification by buyers, and secure data transmission. In case of a data breach, we will notify the NDPC and affected individuals as required by NDPA 2023.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Special Note on Biometric Data</h3>
+            <p>Voice recordings, which may constitute biometric data, receive heightened protections. They are collected with explicit consent, stored encrypted, accessed only by authorized personnel, and used exclusively for AI training, with strict prohibitions against biometric profiling or identification.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Children and Minors</h3>
+            <p>We do not knowingly collect data from individuals under 18 without explicit parental or guardian consent. Data collected without appropriate consent will be immediately deleted.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Automated Decision-Making</h3>
+            <p>BSG DataWorks does not use automated decision-making that produces legal or similarly significant effects. Human review is involved in quality assessment, and you have the right to request human intervention.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Governing Law and Regulatory Jurisdiction</h3>
+            <p>Our primary governing law is the Nigeria Data Protection Act 2023 (NDPA 2023) and the NDPC General Application and Implementation Directive (GAID) 2025. GDPR and Canadian PIPEDA apply where relevant. The Nigeria Data Protection Commission (NDPC) is our regulatory body.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Updates to This Policy</h3>
+            <p>This policy may be updated to reflect changes in practices or law. Active contributors will be notified, and significant changes will require fresh consent. The 'Last Reviewed' date will be updated accordingly.</p>
+        </div>
+
+        <div class="privacy-section">
+            <h3>Contact Us for Privacy Concerns</h3>
+            <p><strong>Email:</strong> dataservices@bilingualsolutiongenius.com | Subject: 'NDPA Privacy Enquiry'<br>
+            <strong>Phone/WhatsApp:</strong> +234 8067904903<br>
+            <strong>Address:</strong> Nigeria</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 BSG DataWorks. All rights reserved.</p>
+        <p>Committed to data protection compliance under NDPA 2023, GDPR, and PIPEDA.</p>
+    </footer>
+</body>
+</html>
