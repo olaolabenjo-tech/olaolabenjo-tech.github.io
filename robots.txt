@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://olaolabenjo-tech.github.io/sitemap.xml
