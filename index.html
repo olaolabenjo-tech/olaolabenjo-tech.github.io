@@ -28,8 +28,7 @@
   a:hover{text-decoration:underline}
   a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 
-  /* placeholders you must replace before going live */
-  .todo{background:#FFF3C4;border:2px dashed var(--amber);padding:2px 8px;border-radius:4px;font-family:var(--mono);font-size:.85em}
+  /* (placeholder styling removed — all placeholders resolved) */
 
   /* nav */
   nav{border-bottom:1px solid var(--line);background:var(--paper);position:sticky;top:0;z-index:50}
@@ -253,7 +252,7 @@
   <h2>Hear it before you buy it.</h2>
   <div class="sample-box">
     <p>Our sample pack includes representative audio in Nigerian-accented English and Yorùbá, <strong>matching time-aligned transcripts</strong>, and a <strong>redacted speaker consent form</strong> — so your team can evaluate audio quality, transcription accuracy, and our compliance documentation in one download.</p>
-    <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1FX-lKIeqlzyDYzWBq_kCKnsOvgpKi9VB">Download sample pack</a>
+    <a class="btn btn-primary" href="https://drive.google.com/drive/folders/1FX-lKIeqlzyDYzWBq_kCKnsOvgpKi9VB" target="_blank" rel="noopener">Download sample pack</a>
   </div>
 </section>
 
@@ -286,19 +285,63 @@
   <div class="contact-band">
     <h2>Tell us what your model needs to hear.</h2>
     <p style="margin:10px auto 26px;max-width:520px">Send us your target languages, domains, and volumes — we'll reply with availability, timelines, and the sample pack.</p>
-    <a class="btn" href="mailto:[PASTE-YOUR-EMAIL-HERE]"><span class="todo">CONNECT EMAIL</span> Email BSG DataWorks</a>
+    <a class="btn" href="mailto:dataservices@bilingualsolutiongenius.com">Email BSG DataWorks</a>
   </div>
 
   <details class="policy">
     <summary>Privacy Policy</summary>
-    <div style="margin-top:14px">
-      <!-- ============================================================
-           PASTE YOUR EXISTING PRIVACY POLICY TEXT HERE.
-           Before replacing your old index.html, copy the full privacy
-           policy text from your current site and paste it in this spot,
-           replacing this comment and the placeholder line below.
-           ============================================================ -->
-      <p><span class="todo">PASTE YOUR EXISTING PRIVACY POLICY TEXT HERE</span></p>
+    <div style="margin-top:14px;font-size:.92rem" class="policy-body">
+      <style>.policy-body h4{font-family:'Archivo',sans-serif;font-size:.95rem;margin:18px 0 6px}.policy-body p{margin-bottom:10px}</style>
+
+      <h4>Overview</h4>
+      <p>This Privacy Policy outlines how BSG DataWorks collects, uses, stores, and shares personal data from individuals who contribute voice recordings, audio files, video clips, or language data. We are committed to protecting your privacy and handling your data in compliance with the Nigeria Data Protection Act 2023 (NDPA 2023), the NDPC General Application and Implementation Directive (GAID) 2025, and other applicable international regulations like GDPR and PIPEDA.</p>
+
+      <h4>Data We Collect</h4>
+      <p>We collect Identity and Contact Data (name, email, phone, location, age, gender), Language and Speaker Profile Data, Contributed Content (voice/video recordings, scripts), Biometric Data (voice recordings), Financial Data (payment details), and Transaction and Consent Records.</p>
+
+      <h4>How We Collect Data</h4>
+      <p>Data is collected directly from you via consent forms, submission forms, WhatsApp, email, and uploaded recordings. We do not collect data from third parties.</p>
+
+      <h4>Why We Process Your Data</h4>
+      <p>We process your data for purposes such as registering you as a contributor, collecting and processing recordings, quality review, storing data, licensing recordings to AI buyers, processing payments, maintaining compliance records, and communicating with you. Our legal bases include consent, performance of contract, legitimate interests, and legal obligations.</p>
+
+      <h4>How We Use Your Data</h4>
+      <p>Your data is used for onboarding, task assignment, quality review, secure storage, inclusion in commercial AI training datasets, licensing to AI companies, payment processing, and responding to data subject requests. We never use your data for purposes beyond those stated without your explicit consent.</p>
+
+      <h4>Who We Share Your Data With</h4>
+      <p>We share approved voice/video recordings (without personal contact details) with dataset buyers, who are contractually bound to prohibit re-identification. We also share data with service providers like Google, Filen.io, Proton Drive, and payment platforms. Regulatory authorities may also receive data for compliance. We do not sell personal contact details or share data with advertisers.</p>
+
+      <h4>International Data Transfers</h4>
+      <p>Your data may be transferred internationally to dataset buyers or storage providers. All transfers comply with NDPA 2023 Part VIII, utilizing adequacy decisions, Standard Contractual Clauses, or our Data Buyer Agreement to ensure adequate data protection.</p>
+
+      <h4>Data Retention</h4>
+      <p>Voice/video recordings are retained indefinitely as part of licensed datasets. Personal contact data is retained for a specified period after your last interaction, and consent/payment records are kept for legal compliance. Data is securely deleted or anonymized after retention periods.</p>
+
+      <h4>Your Data Subject Rights</h4>
+      <p>Under NDPA 2023, you have rights including the right to be informed, access, rectification, erasure (for contact data), restrict processing, data portability, object, and withdraw consent. Requests can be made via email, and we will respond within 30 days. You can also lodge a complaint with the Nigeria Data Protection Commission (NDPC).</p>
+
+      <h4>Data Protection</h4>
+      <p>We implement robust technical and organizational measures to protect your data, including encrypted storage, restricted access, contractual prohibitions on re-identification by buyers, and secure data transmission. In case of a data breach, we will notify the NDPC and affected individuals as required by NDPA 2023.</p>
+
+      <h4>Special Note on Biometric Data</h4>
+      <p>Voice recordings, which may constitute biometric data, receive heightened protections. They are collected with explicit consent, stored encrypted, accessed only by authorized personnel, and used exclusively for AI training, with strict prohibitions against biometric profiling or identification.</p>
+
+      <h4>Children and Minors</h4>
+      <p>We do not knowingly collect data from individuals under 18 without explicit parental or guardian consent. Data collected without appropriate consent will be immediately deleted.</p>
+
+      <h4>Automated Decision-Making</h4>
+      <p>BSG DataWorks does not use automated decision-making that produces legal or similarly significant effects. Human review is involved in quality assessment, and you have the right to request human intervention.</p>
+
+      <h4>Governing Law and Regulatory Jurisdiction</h4>
+      <p>Our primary governing law is the Nigeria Data Protection Act 2023 (NDPA 2023) and the NDPC General Application and Implementation Directive (GAID) 2025. GDPR and Canadian PIPEDA apply where relevant. The Nigeria Data Protection Commission (NDPC) is our regulatory body.</p>
+
+      <h4>Updates to This Policy</h4>
+      <p>This policy may be updated to reflect changes in practices or law. Active contributors will be notified, and significant changes will require fresh consent. The 'Last Reviewed' date will be updated accordingly.</p>
+
+      <h4>Contact Us for Privacy Concerns</h4>
+      <p>Email: dataservices@bilingualsolutiongenius.com | Subject: 'NDPA Privacy Enquiry'<br>
+      Phone/WhatsApp: +234 8067904903<br>
+      Address: Nigeria</p>
     </div>
   </details>
 </section>
