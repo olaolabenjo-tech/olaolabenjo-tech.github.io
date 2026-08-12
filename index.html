@@ -204,10 +204,55 @@
   details.policy summary{cursor:pointer;font-weight:600;font-family:'Archivo',sans-serif}
   .policy-body h4{font-family:'Archivo',sans-serif;font-size:.95rem;margin:18px 0 6px}
   .policy-body p{margin-bottom:10px;font-size:.92rem}
+/* privacy-first analytics consent banner */
+.cookie-banner{
+  position:fixed;
+  left:18px;
+  right:18px;
+  bottom:18px;
+  z-index:100;
+  max-width:760px;
+  margin:0 auto;
+  padding:22px;
+  background:#14231C;
+  color:#fff;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:14px;
+  box-shadow:0 18px 45px rgba(20,35,28,.28);
+}
+.cookie-banner[hidden]{display:none}
+.cookie-banner h2{color:#fff;font-size:1.35rem;margin-bottom:8px}
+.cookie-banner p{color:#EAF2EC;font-size:.93rem;line-height:1.55}
+.cookie-banner a{color:#fff;text-decoration:underline}
+.cookie-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
+.cookie-choice{
+  border-radius:6px;
+  padding:11px 16px;
+  font:600 .94rem 'IBM Plex Sans',sans-serif;
+  cursor:pointer;
+}
+.cookie-accept{background:#fff;color:#0A4A2C;border:1px solid #fff}
+.cookie-decline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.75)}
+.cookie-settings{
+  background:none;
+  border:0;
+  color:var(--green);
+  cursor:pointer;
+  font:inherit;
+  padding:0;
+  text-decoration:underline;
+}
 </style>
 </head>
 <body>
-
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" hidden>
+  <h2 id="cookie-title">Your privacy choices</h2>
+  <p>We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. You can change your choice at any time through Cookie settings. Read our <a href="#privacy-policy">Privacy Policy</a>.</p>
+  <div class="cookie-actions">
+    <button type="button" class="cookie-choice cookie-accept" onclick="bsgSetAnalyticsConsent('granted')">Accept analytics</button>
+    <button type="button" class="cookie-choice cookie-decline" onclick="bsgSetAnalyticsConsent('denied')">Decline</button>
+  </div>
+</div>
 <nav>
   <div class="nav-inner">
     <div class="logo">BSG <span>DataWorks</span></div>
@@ -471,7 +516,7 @@
     <a class="btn" href="mailto:dataservices@bsgdataworks.com">Email BSG DataWorks</a>
   </div>
 
-  <details class="policy">
+  <details class="policy" id="privacy-policy">
     <summary>Privacy Policy</summary>
     <div class="policy-body" style="margin-top:14px">
       <h4>Overview</h4>
@@ -488,7 +533,14 @@
 
       <h4>How We Use Your Data</h4>
       <p>Your data is used for onboarding, task assignment, quality review, secure storage, inclusion in commercial AI training datasets, licensing to AI companies, payment processing, and responding to data subject requests. We never use your data for purposes beyond those stated without your explicit consent.</p>
+<h4>Website Analytics and Cookies</h4>
+<p>We use Google Analytics only when you give explicit consent through the cookie banner on this website. If you select “Accept analytics”, Google Analytics may collect information about your use of the website, including pages viewed, interactions with links, device and browser information, and approximate location. Google may receive IP-address information as part of a web request and use it to derive approximate location information. If you select “Decline”, Google Analytics does not load. You can withdraw or change your consent at any time by selecting “Cookie settings” in the website footer.</p>
 
+<h4>International Analytics Data Transfers</h4>
+<p>Google Analytics is provided by Google. Analytics information may be processed by Google LLC and its affiliates outside Nigeria and, where applicable, outside the European Economic Area and the United Kingdom, including in the United States. Where applicable data-protection law requires it, we will use appropriate transfer mechanisms and safeguards for such transfers. You may contact us at dataservices@bsgdataworks.com for further information about the safeguards relevant to your data.</p>
+
+<h4>Your Choices and Data-Protection Rights</h4>
+<p>Where the GDPR or UK GDPR applies, you may have rights under Chapter III, including rights of access, rectification, erasure, restriction of processing, objection, and data portability. You may withdraw consent at any time through Cookie settings; withdrawal does not affect the lawfulness of processing before withdrawal. You may also have the right to lodge a complaint with the relevant supervisory authority. To exercise rights or ask a privacy question, email dataservices@bsgdataworks.com with the subject line “Privacy Enquiry”.</p>
       <h4>Who We Share Your Data With</h4>
       <p>We share approved voice/video recordings (without personal contact details) with dataset buyers, who are contractually bound to prohibit re-identification. We also share data with service providers like Google, Filen.io, Proton Drive, and payment platforms. Regulatory authorities may also receive data for compliance. We do not sell personal contact details or share data with advertisers.</p>
 
@@ -530,7 +582,7 @@
 <footer>
   <div class="wrap foot-inner">
     <div>© 2026 BSG DataWorks (Private) Limited — AI Training Dataset Division. All rights reserved.</div>
-    <div>NDPC Reg. No. NDPC/DCP/13596 · NDPA 2023 compliant</div>
+    <div>NDPC Reg. No. NDPC/DCP/13596 · NDPA 2023 compliant</div><div><button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button></div>
   </div>
 </footer>
 
