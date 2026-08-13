@@ -242,6 +242,48 @@
   padding:0;
   text-decoration:underline;
 }
+/* hero proof strip: visual evidence without changing SEO hierarchy */
+.hero-proof-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin:0 0 42px;
+}
+.proof-card{
+  min-height:138px;
+  padding:20px;
+  border-radius:14px;
+  color:#fff;
+  box-shadow:0 12px 26px rgba(20,35,28,.10);
+}
+.proof-card .proof-kicker{
+  display:block;
+  margin-bottom:10px;
+  font-family:var(--mono);
+  font-size:.7rem;
+  font-weight:500;
+  letter-spacing:.10em;
+  text-transform:uppercase;
+  opacity:.9;
+}
+.proof-card strong{
+  display:block;
+  font-family:'Archivo',sans-serif;
+  font-size:1.1rem;
+  line-height:1.16;
+}
+.proof-card p{
+  margin-top:10px;
+  font-size:.86rem;
+  line-height:1.45;
+  opacity:.92;
+}
+.proof-ready{background:linear-gradient(135deg,#0A4A2C,#0E6B3F)}
+.proof-qa{background:linear-gradient(135deg,#155C79,#2C7FA3)}
+.proof-rights{background:linear-gradient(135deg,#A66313,#C98A1B)}
+@media(max-width:760px){
+  .hero-proof-grid{grid-template-columns:1fr;margin-bottom:36px}
+}
 </style>
 </head>
 <body>
@@ -275,6 +317,24 @@
   <div class="cta-row">
     <a class="btn btn-primary" href="#contact">Commission a dataset</a>
     <a class="btn btn-ghost" href="#samples">Hear a sample first</a>
+  </div>
+  
+  <div class="hero-proof-grid" aria-label="BSG DataWorks dataset evidence">
+    <div class="proof-card proof-ready">
+      <span class="proof-kicker">Ready to evaluate</span>
+      <strong>Nigerian English and Yorùbá speech</strong>
+      <p>Representative samples and time-aligned transcripts available for technical review.</p>
+    </div>
+    <div class="proof-card proof-qa">
+      <span class="proof-kicker">Native-speaker QA</span>
+      <strong>Human review at every delivery stage</strong>
+      <p>Transcriptions, annotations, and metadata checked against agreed quality criteria.</p>
+    </div>
+    <div class="proof-card proof-rights">
+      <span class="proof-kicker">Rights-ready</span>
+      <strong>Consent-documented commercial data</strong>
+      <p>Built with contributor records and a clear audit trail for AI training use.</p>
+    </div>
   </div>
 </header>
 
