@@ -348,6 +348,37 @@
   .hero-proof-grid{grid-template-columns:1fr;margin-bottom:36px}
 }
 .policy-updated{margin:12px 0 18px;color:#3C4A42;font-size:.9rem}
+/* email-led dataset brief */
+.contact-intro{margin:10px auto 20px;max-width:600px}
+.brief-checklist{
+  max-width:610px;
+  margin:0 auto 22px;
+  padding:18px 22px;
+  text-align:left;
+  background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:10px;
+}
+.brief-checklist-title{
+  margin:0 0 9px;
+  color:#fff;
+  font-family:var(--mono);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+}
+.brief-checklist ul{margin:0;padding-left:20px}
+.brief-checklist li{margin:5px 0;color:#F5FAF6;font-size:.94rem;line-height:1.45}
+.brief-reassurance{
+  margin:14px 0 0;
+  color:#EAF2EC;
+  font-size:.9rem;
+  line-height:1.5;
+}
+@media(max-width:640px){
+  .brief-checklist{padding:16px 18px}
+} 
 </style>
 </head>
 <body>
@@ -633,14 +664,28 @@
     </div>
   </div>
 </section>
-
 <section class="wrap" id="contact">
   <div class="contact-band">
-    <h2>Tell us what your model needs.</h2>
-    <p style="margin:10px auto 26px;max-width:560px">Send us your target languages, data type, domains, and volumes — we'll reply within 48 hours with scope, timeline, and pricing.</p>
-    <a class="btn" href="mailto:dataservices@bsgdataworks.com">Email BSG DataWorks</a>
-  </div>
+    <h2>Start a dataset brief by email</h2>
+    <p class="contact-intro">Share a few project details and we will reply within 48 hours with initial scoping questions, a likely timeline, and the next step.</p>
 
+    <div class="brief-checklist">
+      <p class="brief-checklist-title">What helps us get started</p>
+      <ul>
+        <li>Dataset type and intended model use</li>
+        <li>Languages, markets, or participant profile</li>
+        <li>Target volume and preferred format</li>
+        <li>Desired delivery timeline</li>
+        <li>Rights, governance, or compliance requirements</li>
+        <li>Approximate pilot budget or licensing range, if known — under US$5k, US$5k–50k, or US$50k+</li>
+      </ul>
+      <p class="brief-reassurance"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
+    </div>
+
+    <a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=Dataset%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Dataset%20type%20and%20intended%20model%20use%3A%0A-%20Languages%2C%20markets%2C%20or%20participant%20profile%3A%0A-%20Target%20volume%20and%20preferred%20format%3A%0A-%20Desired%20delivery%20timeline%3A%0A-%20Rights%2C%20governance%2C%20or%20compliance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A" aria-label="Start a dataset brief by email — opens your email application">Start a dataset brief by email</a>
+  </div>
+</section>
+  
   <details class="policy" id="privacy-policy">
     <summary>Privacy Policy</summary>
     <p class="policy-updated"><strong>Last updated:</strong> 14 August 2026</p>
