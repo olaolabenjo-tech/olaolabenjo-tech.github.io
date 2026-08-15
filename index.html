@@ -6,20 +6,53 @@
   (function () {
     const CONSENT_KEY = 'bsgAnalyticsConsent';
     const MEASUREMENT_ID = 'G-KLRS6WP5ML';
+    const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
+
+    function savedConsent() {
+      return localStorage.getItem(CONSENT_KEY);
+    }
+
+    function updateConsentDisplay(choice) {
+      const status = document.getElementById('cookie-current-choice');
+      const accept = document.getElementById('cookie-accept');
+      const decline = document.getElementById('cookie-decline');
+
+      if (status) {
+        status.textContent = choice === 'granted'
+          ? 'Current setting: Analytics is enabled.'
+          : choice === 'denied'
+            ? 'Current setting: Analytics is disabled.'
+            : 'Current setting: No choice has been saved yet.';
+      }
+
+      if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
+      if (decline) decline.setAttribute('aria-pressed', choice === 'denied' ? 'true' : 'false');
+    }
+
+    function disableAnalyticsNow() {
+      window[DISABLE_KEY] = true;
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      }
+    }
 
     function loadGoogleAnalytics() {
       if (window.bsgAnalyticsLoaded) return;
       window.bsgAnalyticsLoaded = true;
+      window[DISABLE_KEY] = false;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', { analytics_storage: 'denied' });
 
       const analyticsScript = document.createElement('script');
       analyticsScript.async = true;
       analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
       document.head.appendChild(analyticsScript );
 
-      window.dataLayer = window.dataLayer || [];
-      window.gtag = function () { window.dataLayer.push(arguments); };
       window.gtag('js', new Date());
-      window.gtag('config', MEASUREMENT_ID, { 'anonymize_ip': true });
+      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      window.gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
     }
 
     window.bsgSetAnalyticsConsent = function (choice) {
@@ -27,25 +60,40 @@
 
       if (choice === 'granted') {
         loadGoogleAnalytics();
+      } else {
+        disableAnalyticsNow();
       }
 
+      updateConsentDisplay(choice);
       const banner = document.getElementById('cookie-banner');
       if (banner) banner.setAttribute('hidden', '');
     };
 
     window.bsgOpenCookieSettings = function () {
+      const choice = savedConsent();
+      updateConsentDisplay(choice);
       const banner = document.getElementById('cookie-banner');
-      if (banner) banner.removeAttribute('hidden');
+      if (banner) {
+        banner.removeAttribute('hidden');
+        const focusedButton = choice === 'denied'
+          ? document.getElementById('cookie-decline')
+          : document.getElementById('cookie-accept');
+        if (focusedButton) focusedButton.focus();
+      }
     };
 
     document.addEventListener('DOMContentLoaded', function () {
-      const consent = localStorage.getItem(CONSENT_KEY);
+      const choice = savedConsent();
+      updateConsentDisplay(choice);
 
-      if (consent === 'granted') {
+      if (choice === 'granted') {
         loadGoogleAnalytics();
-      } else if (consent === null) {
-        const banner = document.getElementById('cookie-banner');
-        if (banner) banner.removeAttribute('hidden');
+      } else {
+        disableAnalyticsNow();
+        if (choice === null) {
+          const banner = document.getElementById('cookie-banner');
+          if (banner) banner.removeAttribute('hidden');
+        }
       }
     });
   }());
@@ -79,9 +127,7 @@
   "knowsLanguage": ["en-NG", "yo", "ig", "ha", "pcm", "kr", "efi", "fr", "de"]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/fonts.css">
 <style>
   :root{
     --ink:#14231C;
@@ -226,13 +272,30 @@
 .cookie-banner a{color:#fff;text-decoration:underline}
 .cookie-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}
 .cookie-choice{
+  min-width:160px;
+  border:1px solid #fff;
   border-radius:6px;
   padding:11px 16px;
+  background:#fff;
+  color:#0A4A2C;
   font:600 .94rem 'IBM Plex Sans',sans-serif;
   cursor:pointer;
 }
-.cookie-accept{background:#fff;color:#0A4A2C;border:1px solid #fff}
-.cookie-decline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.75)}
+.cookie-choice:hover,
+.cookie-choice:focus-visible{
+  outline:3px solid #C98A1B;
+  outline-offset:3px;
+}
+.cookie-choice[aria-pressed="true"]{
+  background:#EAF2EC;
+  border-color:#EAF2EC;
+  box-shadow:inset 0 0 0 2px #0A4A2C;
+}
+.cookie-current-choice{
+  margin-top:12px;
+  color:#EAF2EC;
+  font-weight:600;
+}
 .cookie-settings{
   background:none;
   border:0;
@@ -284,18 +347,20 @@
 @media(max-width:760px){
   .hero-proof-grid{grid-template-columns:1fr;margin-bottom:36px}
 }
+.policy-updated{margin:12px 0 18px;color:#3C4A42;font-size:.9rem}
 </style>
 </head>
 <body>
-<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" hidden>
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" aria-describedby="cookie-description cookie-current-choice" hidden>
   <h2 id="cookie-title">Your privacy choices</h2>
-  <p>We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. You can change your choice at any time through Cookie settings. Read our <a href="#privacy-policy">Privacy Policy</a>.</p>
+  <p id="cookie-description">We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. You can change your choice at any time through Cookie settings. Read our <a href="#privacy-policy">Privacy Policy</a>.</p>
+  <p id="cookie-current-choice" class="cookie-current-choice" role="status" aria-live="polite"></p>
   <div class="cookie-actions">
-    <button type="button" class="cookie-choice cookie-accept" onclick="bsgSetAnalyticsConsent('granted')">Accept analytics</button>
-    <button type="button" class="cookie-choice cookie-decline" onclick="bsgSetAnalyticsConsent('denied')">Decline</button>
+    <button id="cookie-accept" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('granted')" aria-pressed="false">Accept analytics</button>
+    <button id="cookie-decline" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('denied')" aria-pressed="false">Decline</button>
   </div>
 </div>
-<nav>
+  <nav>
   <div class="nav-inner">
     <div class="logo">BSG <span>DataWorks</span></div>
     <div class="nav-links">
@@ -509,7 +574,7 @@
     <div class="spec-card">
       <h3>Delivery &amp; SLA</h3>
       <ul>
-        <li>Secure S3 bucket or client-specified transfer</li>
+        <li>Filen.io and Proton Drive, or client-specified secure transfer</li>
         <li>Catalog licensing: delivery within 5 business days of agreement</li>
         <li>Commissioned work: agreed milestone schedule, weekly progress reporting</li>
         <li>Accuracy commitments defined in each statement of work</li>
@@ -578,6 +643,7 @@
 
   <details class="policy" id="privacy-policy">
     <summary>Privacy Policy</summary>
+    <p class="policy-updated"><strong>Last updated:</strong> 14 August 2026</p>
     <div class="policy-body" style="margin-top:14px">
       <h4>Overview</h4>
       <p>This Privacy Policy outlines how BSG DataWorks collects, uses, stores, and shares personal data from individuals who contribute voice recordings, audio files, video clips, images, or language data. We are committed to protecting your privacy and handling your data in compliance with the Nigeria Data Protection Act 2023 (NDPA 2023), the NDPC General Application and Implementation Directive (GAID) 2025, and other applicable international regulations like GDPR and PIPEDA.</p>
@@ -593,25 +659,18 @@
 
       <h4>How We Use Your Data</h4>
       <p>Your data is used for onboarding, task assignment, quality review, secure storage, inclusion in commercial AI training datasets, licensing to AI companies, payment processing, and responding to data subject requests. We never use your data for purposes beyond those stated without your explicit consent.</p>
-<h4>Website Analytics and Cookies</h4>
-<p>We use Google Analytics only when you give explicit consent through the cookie banner on this website. If you select “Accept analytics”, Google Analytics may collect information about your use of the website, including pages viewed, interactions with links, device and browser information, and approximate location. Google may receive IP-address information as part of a web request and use it to derive approximate location information. If you select “Decline”, Google Analytics does not load. You can withdraw or change your consent at any time by selecting “Cookie settings” in the website footer.</p>
-
-<h4>International Analytics Data Transfers</h4>
-<p>Google Analytics is provided by Google. Analytics information may be processed by Google LLC and its affiliates outside Nigeria and, where applicable, outside the European Economic Area and the United Kingdom, including in the United States. Where applicable data-protection law requires it, we will use appropriate transfer mechanisms and safeguards for such transfers. You may contact us at dataservices@bsgdataworks.com for further information about the safeguards relevant to your data.</p>
-
+<h4>Website Analytics, Cookies, International Transfers, and Your Choices</h4>
+<p>We use Google Analytics only when you give explicit consent through the cookie banner on this website. If you select “Accept analytics”, Google Analytics may collect information about your use of the website, including pages viewed, interactions with links, device and browser information, and approximate location. Google may receive IP-address information as part of a web request and use it to derive approximate location information. If you select “Decline”, Google Analytics does not load. You can withdraw or change your consent at any time through “Cookie settings” in the website footer; your changed choice applies to future measurement and does not affect the lawfulness of processing before withdrawal.</p>
+<p>Analytics information may be processed by Google LLC and its affiliates outside Nigeria and, where applicable, outside the European Economic Area and the United Kingdom, including in the United States. Your data may also be transferred internationally to dataset buyers or service providers where necessary for the services described in this policy. Where applicable data-protection law requires it, we use appropriate transfer mechanisms and safeguards for such transfers. You may contact us at dataservices@bsgdataworks.com for further information about the safeguards relevant to your data.</p>
+<p>Where the GDPR or UK GDPR applies, you may have rights including access, rectification, erasure, restriction of processing, objection, and data portability. You may also have the right to lodge a complaint with the relevant supervisory authority. To exercise rights or ask a privacy question, email dataservices@bsgdataworks.com with the subject line “Privacy Enquiry”.</p>
+      
 <h4>Your Choices and Data-Protection Rights</h4>
 <p>Where the GDPR or UK GDPR applies, you may have rights under Chapter III, including rights of access, rectification, erasure, restriction of processing, objection, and data portability. You may withdraw consent at any time through Cookie settings; withdrawal does not affect the lawfulness of processing before withdrawal. You may also have the right to lodge a complaint with the relevant supervisory authority. To exercise rights or ask a privacy question, email dataservices@bsgdataworks.com with the subject line “Privacy Enquiry”.</p>
       <h4>Who We Share Your Data With</h4>
-      <p>We share approved voice/video recordings (without personal contact details) with dataset buyers, who are contractually bound to prohibit re-identification. We also share data with service providers like Google, Filen.io, Proton Drive, and payment platforms. Regulatory authorities may also receive data for compliance. We do not sell personal contact details or share data with advertisers.</p>
-
-      <h4>International Data Transfers</h4>
-      <p>Your data may be transferred internationally to dataset buyers or storage providers. All transfers comply with NDPA 2023 Part VIII, utilizing adequacy decisions, Standard Contractual Clauses, or our Data Buyer Agreement to ensure adequate data protection.</p>
+      <p>We may share data with contracted dataset buyers, authorised personnel, regulators where required by law, and service providers that support secure storage or transfer, including Filen.io and Proton Drive. We use Google only for optional website analytics where you have consented through the cookie banner. We do not operate a payment platform embedded in this website; client payments are arranged separately by bank transfer. We do not sell personal contact details or share them for unrelated marketing.</p>
 
       <h4>Data Retention</h4>
       <p>Voice/video recordings are retained indefinitely as part of licensed datasets. Personal contact data is retained for a specified period after your last interaction, and consent/payment records are kept for legal compliance. Data is securely deleted or anonymized after retention periods.</p>
-
-      <h4>Your Data Subject Rights</h4>
-      <p>Under NDPA 2023, you have rights including the right to be informed, access, rectification, erasure (for contact data), restrict processing, data portability, object, and withdraw consent. Requests can be made via email, and we will respond within 30 days. You can also lodge a complaint with the Nigeria Data Protection Commission (NDPC).</p>
 
       <h4>Data Protection</h4>
       <p>We implement robust technical and organizational measures to protect your data, including encrypted storage, restricted access, contractual prohibitions on re-identification by buyers, and secure data transmission. In case of a data breach, we will notify the NDPC and affected individuals as required by NDPA 2023.</p>
@@ -629,7 +688,7 @@
       <p>Our primary governing law is the Nigeria Data Protection Act 2023 (NDPA 2023) and the NDPC General Application and Implementation Directive (GAID) 2025. GDPR and Canadian PIPEDA apply where relevant. The Nigeria Data Protection Commission (NDPC) is our regulatory body.</p>
 
       <h4>Updates to This Policy</h4>
-      <p>This policy may be updated to reflect changes in practices or law. Active contributors will be notified, and significant changes will require fresh consent. The 'Last Reviewed' date will be updated accordingly.</p>
+      <p>This policy may be updated to reflect changes in practices or law. Active contributors will be notified, and significant changes will require fresh consent.</p>
 
       <h4>Contact Us for Privacy Concerns</h4>
       <p>Email: dataservices@bsgdataworks.com | Subject: 'NDPA Privacy Enquiry'<br>
