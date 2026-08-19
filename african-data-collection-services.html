@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Privacy-first Google Analytics: loaded only after explicit consent -->
+  <script>
+    (function () {
+      const CONSENT_KEY = 'bsgAnalyticsConsent';
+      const MEASUREMENT_ID = 'G-KLRS6WP5ML';
+      const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
+
+      function savedConsent() { return localStorage.getItem(CONSENT_KEY); }
+
+      function updateConsentDisplay(choice) {
+        const status = document.getElementById('cookie-current-choice');
+        const accept = document.getElementById('cookie-accept');
+        const decline = document.getElementById('cookie-decline');
+        if (status) {
+          status.textContent = choice === 'granted'
+            ? 'Current setting: Analytics is enabled.'
+            : choice === 'denied'
+              ? 'Current setting: Analytics is disabled.'
+              : 'Current setting: No choice has been saved yet.';
+        }
+        if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
+        if (decline) decline.setAttribute('aria-pressed', choice === 'denied' ? 'true' : 'false');
+      }
+
+      function disableAnalyticsNow() {
+        window[DISABLE_KEY] = true;
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', { analytics_storage: 'denied' });
+        }
+      }
+
+      function loadGoogleAnalytics() {
+        if (window.bsgAnalyticsLoaded) return;
+        window.bsgAnalyticsLoaded = true;
+        window[DISABLE_KEY] = false;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('consent', 'default', { analytics_storage: 'denied' });
+        const analyticsScript = document.createElement('script');
+        analyticsScript.async = true;
+        analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
+        document.head.appendChild(analyticsScript);
+        window.gtag('js', new Date());
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        window.gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
+      }
+
+      window.bsgSetAnalyticsConsent = function (choice) {
+        localStorage.setItem(CONSENT_KEY, choice);
+        if (choice === 'granted') { loadGoogleAnalytics(); } else { disableAnalyticsNow(); }
+        updateConsentDisplay(choice);
+        const banner = document.getElementById('cookie-banner');
+        if (banner) banner.setAttribute('hidden', '');
+      };
+
+      window.bsgOpenCookieSettings = function () {
+        const choice = savedConsent();
+        updateConsentDisplay(choice);
+        const banner = document.getElementById('cookie-banner');
+        if (banner) {
+          banner.removeAttribute('hidden');
+          const focusTarget = choice === 'denied'
+            ? document.getElementById('cookie-decline')
+            : document.getElementById('cookie-accept');
+          if (focusTarget) focusTarget.focus();
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const choice = savedConsent();
+        updateConsentDisplay(choice);
+        if (choice === 'granted') { loadGoogleAnalytics(); }
+        else {
+          disableAnalyticsNow();
+          if (choice === null) {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.removeAttribute('hidden');
+          }
+        }
+      });
+    }());
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>African Data Collection Services for AI Training | BSG DataWorks</title>
+  <meta name="description" content="Commissioned African data collection for AI training across speech, text, image and video, with consenting contributors, quality assurance, documentation and commercial delivery.">
+  <link rel="canonical" href="https://bsgdataworks.com/african-data-collection-services.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BSG DataWorks">
+  <meta property="og:title" content="African Data Collection Services for AI Training | BSG DataWorks">
+  <meta property="og:description" content="Commissioned African speech, text, image and video data collection for AI training, scoped to your use case with consent, QA and documentation.">
+  <meta property="og:url" content="https://bsgdataworks.com/african-data-collection-services.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="African Data Collection Services for AI Training | BSG DataWorks">
+  <meta name="twitter:description" content="Commissioned African data collection for AI training across speech, text, image and video.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "African Data Collection Services for AI Training",
+    "description": "Commissioned human-sourced African data collection for AI training across speech, text, image and video, with contributor consent, quality assurance, documentation and commercial delivery.",
+    "provider": {
+      "@type": "Organization",
+      "name": "BSG DataWorks",
+      "url": "https://bsgdataworks.com/"
+    },
+    "areaServed": {"@type": "Country", "name": "Nigeria"},
+    "serviceType": "AI training data collection and contributor recruitment services"
+  }
+  </script>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <style>
+    :root{--ink:#14231C;--paper:#FBFAF7;--green:#0E6B3F;--green-deep:#0A4A2C;--mist:#E9F1EB;--amber:#C98A1B;--blue:#155C79;--line:#D8DFD9;--mono:'IBM Plex Mono',monospace}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+    body{font-family:'IBM Plex Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;font-size:16.5px}
+    a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+    .wrap{width:min(1080px,calc(100% - 48px));margin:0 auto}
+    nav{position:sticky;top:0;z-index:30;background:rgba(251,250,247,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;min-height:68px}
+    .logo{font-family:'Archivo',sans-serif;font-weight:900;font-stretch:110%;font-size:1.15rem;letter-spacing:.02em;color:var(--ink)}.logo span{color:var(--green)}
+    .nav-links{display:flex;align-items:center;gap:18px;font-size:.88rem;font-weight:500}.nav-links a{color:var(--ink)}.nav-links a:last-child{color:var(--green);font-weight:700}
+    .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);font-weight:600}
+    .hero{padding:82px 0 54px;background:linear-gradient(135deg,#F4F8F4 0%,#FBFAF7 58%,#F8F0DF 100%)}
+    .hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:48px;align-items:center}
+    h1,h2,h3{font-family:'Archivo',sans-serif;line-height:1.08;letter-spacing:-.025em}h1{font-size:clamp(2.45rem,5vw,4.6rem);margin:12px 0 22px;max-width:760px}h1 em{font-style:normal;color:var(--green)}h2{font-size:clamp(1.85rem,3.2vw,3rem);margin:10px 0 16px}h3{font-size:1.18rem;margin-bottom:9px}
+    .hero-copy{font-size:1.11rem;max-width:700px;color:#314138}.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:12px 18px;font-weight:700;font-size:.96rem;text-decoration:none;border:1px solid var(--green);cursor:pointer}.btn:hover{text-decoration:none;transform:translateY(-1px)}.btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-deep)}.btn-secondary{background:transparent;color:var(--green)}
+    .hero-panel{border:1px solid #BFD0C2;border-radius:16px;background:#fff;padding:26px;box-shadow:0 18px 40px rgba(20,35,28,.09)}.hero-panel h2{font-size:1.35rem;margin-top:8px}.hero-panel p{font-size:.96rem;color:#3E5045}.panel-list{list-style:none;margin-top:18px}.panel-list li{border-top:1px solid var(--line);padding:11px 0;font-size:.94rem}.panel-list li::before{content:'✓';color:var(--green);font-weight:800;margin-right:10px}
+    section{padding:74px 0}.section-head{max-width:730px;margin-bottom:32px}.section-head p{color:#4C5A51;max-width:670px}
+    .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{border:1px solid var(--line);border-radius:12px;padding:24px;background:#fff}.card p{font-size:.94rem;color:#4C5A51}.card .icon{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--green);margin-bottom:14px}
+    .band{background:var(--green-deep);color:#fff}.band h2{color:#fff}.band .section-head p{color:#EAF2EC}.scope-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.scope-card{border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:23px;background:rgba(255,255,255,.05)}.scope-card h3{color:#fff}.scope-card p{color:#EAF2EC;font-size:.94rem}
+    .spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.spec-card{border:1px solid #BFD0C2;border-radius:14px;padding:26px;background:linear-gradient(135deg,#EFF6F0,#fff)}.spec-card ul{margin:15px 0 0;padding-left:20px}.spec-card li{margin:8px 0}.spec-card li::marker{color:var(--green)}
+    .process{counter-reset:step;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.process-card{position:relative;padding:20px 18px 18px;border:1px solid var(--line);border-radius:12px;background:#fff}.process-card::before{counter-increment:step;content:'0' counter(step);display:block;font-family:var(--mono);font-weight:700;font-size:.82rem;color:var(--amber);margin-bottom:14px}.process-card p{font-size:.91rem;color:#4C5A51}
+    .faq{max-width:820px}.faq details{border-top:1px solid var(--line);padding:17px 0}.faq summary{font-family:'Archivo',sans-serif;font-weight:700;cursor:pointer}.faq p{padding-top:10px;color:#4C5A51;max-width:760px}
+    .contact-band{border-radius:16px;background:linear-gradient(135deg,#0A4A2C,#0E6B3F);color:#fff;padding:42px;text-align:center}.contact-band h2{color:#fff}.contact-band>p{color:#EAF2EC;max-width:680px;margin:12px auto 20px}.brief{max-width:640px;margin:0 auto 22px;padding:17px 20px;text-align:left;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:10px}.brief-title{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600}.brief ul{padding-left:20px;margin:8px 0 0}.brief li{font-size:.92rem;margin:4px 0}.brief-note{font-size:.88rem;margin-top:12px;color:#EAF2EC}.contact-band .btn{background:#fff;border-color:#fff;color:var(--green-deep)}
+    footer{border-top:1px solid var(--line);padding:30px 0 38px;color:#5A675F;font-size:.86rem}.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.footer-actions{display:flex;gap:16px;flex-wrap:wrap}.cookie-settings{border:0;background:none;padding:0;color:var(--green);font:inherit;cursor:pointer;text-decoration:underline}
+    .cookie-banner{position:fixed;left:18px;right:18px;bottom:18px;z-index:100;max-width:760px;margin:0 auto;padding:22px;background:#14231C;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:14px;box-shadow:0 18px 45px rgba(20,35,28,.28)}.cookie-banner[hidden]{display:none}.cookie-banner h2{font-size:1.35rem;color:#fff;margin-bottom:8px}.cookie-banner p{color:#EAF2EC;font-size:.93rem;line-height:1.55}.cookie-banner a{color:#fff;text-decoration:underline}.cookie-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.cookie-choice{min-width:160px;border:1px solid #fff;border-radius:6px;padding:11px 16px;background:#fff;color:#0A4A2C;font:600 .94rem 'IBM Plex Sans',sans-serif;cursor:pointer}.cookie-choice:hover,.cookie-choice:focus-visible{outline:3px solid #C98A1B;outline-offset:3px}.cookie-choice[aria-pressed="true"]{background:#EAF2EC;border-color:#EAF2EC;box-shadow:inset 0 0 0 2px #0A4A2C}.cookie-current-choice{margin-top:12px;color:#EAF2EC;font-weight:600}
+    @media(max-width:800px){.hero-grid,.card-grid,.scope-grid,.spec-grid,.process{grid-template-columns:1fr 1fr}.hero-grid{gap:30px}.nav-links{display:none}.hero{padding:58px 0 40px}.contact-band{padding:32px 22px}}@media(max-width:560px){.wrap{width:min(100% - 34px,1080px)}.card-grid,.scope-grid,.spec-grid,.process{grid-template-columns:1fr}.hero-panel{padding:22px}.cookie-choice{width:100%}}
+  </style>
+</head>
+<body>
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" aria-describedby="cookie-description cookie-current-choice" hidden>
+    <h2 id="cookie-title">Your privacy choices</h2>
+    <p id="cookie-description">We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. You can change your choice at any time through Cookie settings. Read our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+    <p id="cookie-current-choice" class="cookie-current-choice" role="status" aria-live="polite"></p>
+    <div class="cookie-actions">
+      <button id="cookie-accept" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('granted')" aria-pressed="false">Accept analytics</button>
+      <button id="cookie-decline" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('denied')" aria-pressed="false">Decline</button>
+    </div>
+  </div>
+
+  <nav aria-label="Primary navigation">
+    <div class="wrap nav-inner">
+      <a class="logo" href="index.html" aria-label="BSG DataWorks home">BSG <span>DataWorks</span></a>
+      <div class="nav-links">
+        <a href="#availability">Availability</a>
+        <a href="#uses">Use cases</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Start a brief</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Commissioned collection · Nigeria & West Africa</p>
+          <h1>African data collection for <em>AI training</em>, built to your brief.</h1>
+          <p class="hero-copy">Commission human-sourced speech, text, image and video data around the people, languages, scenarios and technical requirements your model needs. BSG DataWorks recruits consenting contributors, runs collection and quality workflows, and delivers the records your technical and legal teams need.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Start a collection brief</a>
+            <a class="btn btn-secondary" href="#availability">Explore collection scope</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="African data collection services overview">
+          <p class="eyebrow">What teams can specify</p>
+          <h2>More than a file delivery.</h2>
+          <p>Start with a clear collection specification so recruitment, consent, capture, quality checks and final documentation are aligned to the intended model use.</p>
+          <ul class="panel-list"><li>Languages, domains, demographics, devices and target volume</li><li>Speech, text, image and video scenarios to brief</li><li>Consent, provenance, metadata and commercial-delivery requirements</li></ul>
+        </aside>
+      </div>
+    </header>
+
+    <section id="availability">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Collection scope</p>
+          <h2>Start with the task, then build the data route around it.</h2>
+          <p>Most BSG DataWorks collection work is commissioned. You define the model use, data type, language or market, contributor profile, scenario, device requirements and volume; we turn that brief into an operational collection plan.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card"><p class="icon">01 · SPECIFY</p><h3>Define the data your model needs.</h3><p>Set the use case, modality, language, domain, target participants, capture setting, required metadata and delivery criteria before fieldwork begins.</p></article>
+          <article class="card"><p class="icon">02 · RECRUIT + CONSENT</p><h3>Build a documented contributor route.</h3><p>Recruit contributors to the agreed profile, obtain informed consent, and maintain the records required for the agreed commercial scope.</p></article>
+          <article class="card"><p class="icon">03 · COLLECT + QA</p><h3>Deliver to an agreed standard.</h3><p>Run the capture, collection and quality workflow to brief, then deliver the agreed data, metadata and supporting documentation through an approved route.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="uses">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Data types and use cases</p>
+          <h2>Collect the human-sourced data your AI system needs to learn from.</h2>
+          <p>Collection design should reflect the target model behaviour, not simply the available format. We scope the relevant data type, scenario and contributor profile with you before collection begins.</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card"><h3>Speech and voice</h3><p>Collect scripted, conversational-style, dialogue, voice-over or domain-specific speech with the transcript, time-alignment and metadata requirements agreed for the project.</p></article>
+          <article class="scope-card"><h3>Text and language</h3><p>Scope written, transcribed, bilingual, prompt-response or instruction data around the language treatment and use case required for low-resource NLP and language systems.</p></article>
+          <article class="scope-card"><h3>Image and video</h3><p>Plan consented image or scenario-based video capture around the required objects, environments, activities, devices, angles and lighting variation.</p></article>
+          <article class="scope-card"><h3>Custom and combined projects</h3><p>Use a coordinated brief where the work needs more than one modality, such as speech with image, video with structured tags, or collection with downstream annotation.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="delivery">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Quality, rights and delivery</p>
+          <h2>Agree the evidence behind the data before collection starts.</h2>
+          <p>Each collection scope documents the technical specification, contributor requirements, quality criteria, documentation package and delivery path. The final package is agreed in the applicable proposal, statement of work or licence.</p>
+        </div>
+        <div class="spec-grid">
+          <article class="spec-card"><h3>Collection specification</h3><ul><li>Language, domain, scenario, contributor and device requirements to brief</li><li>Audio, image or video formats and capture variation agreed for the project</li><li>Transcript, metadata and annotation requirements where applicable</li><li>Quality criteria and reporting defined before delivery</li></ul></article>
+          <article class="spec-card"><h3>Rights and documentation</h3><ul><li>Written, informed contributor consent covering the agreed commercial use</li><li>Contributor records and data provenance retained for the agreed scope</li><li>Data-card, licence and consent documentation materials for the delivery</li><li>Client-specified secure transfer or another approved delivery destination</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">From collection brief to delivery</p>
+          <h2>A clear operational route for custom African data.</h2>
+          <p>Share enough detail for BSG DataWorks to assess fit, then agree the collection plan and evidence requirements before work starts.</p>
+        </div>
+        <div class="process">
+          <article class="process-card"><h3>Brief</h3><p>Share the model use, data type, language or market, scenario, target profile, volume, technical requirements and timeline.</p></article>
+          <article class="process-card"><h3>Scope</h3><p>Agree the collection plan, consent route, delivery specification, quality criteria and commercial path.</p></article>
+          <article class="process-card"><h3>Collect & QA</h3><p>Recruit and consent contributors, collect to the agreed specification and report progress against the project plan.</p></article>
+          <article class="process-card"><h3>Deliver</h3><p>Receive the agreed data, metadata, quality reporting and documentation through client-specified secure transfer or an approved destination.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap faq">
+        <p class="eyebrow">Frequently asked questions</p>
+        <h2>Questions teams ask before commissioning data collection.</h2>
+        <details><summary>Can you collect data to our custom specification?</summary><p>Yes. Start with the target model use, data type, language or market, participant profile, scenario, device requirements, volume and timeline. BSG DataWorks will discuss the appropriate collection and commercial route.</p></details>
+        <details><summary>Which data types can you collect?</summary><p>Current collection scope includes human-sourced speech, text and language data, image data and scenario-based video capture. The final scope is agreed around the requested use case and collection specification.</p></details>
+        <details><summary>How are contributor rights and consent handled?</summary><p>BSG DataWorks obtains written, informed contributor consent covering the agreed commercial scope and maintains contributor and consent documentation as part of the collection and delivery process.</p></details>
+        <details><summary>What should we send in the first collection brief?</summary><p>Tell us the intended model use, data type, languages or markets, target participant profile, target volume, technical format, desired timeline, governance requirements and approximate budget or licensing range if known.</p></details>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-band">
+          <p class="eyebrow" style="color:#E6C98E">Start a collection brief</p>
+          <h2>Tell us what your model needs collected.</h2>
+          <p>Share a few project details and we will reply within 48 hours with initial scoping questions, a likely timeline and the next step.</p>
+          <div class="brief">
+            <p class="brief-title">What helps us get started</p>
+            <ul>
+              <li>Intended model use and required data type</li>
+              <li>Languages, markets, scenarios or participant profile</li>
+              <li>Target volume, device and technical format requirements</li>
+              <li>Transcript, metadata, annotation or quality requirements</li>
+              <li>Desired delivery timeline and governance requirements</li>
+              <li>Approximate pilot budget or licensing range, if known</li>
+            </ul>
+            <p class="brief-note"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
+          </div>
+          <a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=African%20data%20collection%20brief&body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20discuss%20an%20African%20data-collection%20project.%0A%0A-%20Intended%20model%20use%20and%20required%20data%20type%3A%0A-%20Languages%2C%20markets%2C%20scenarios%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20device%20and%20technical%20format%20requirements%3A%0A-%20Transcript%2C%20metadata%2C%20annotation%20or%20quality%20requirements%3A%0A-%20Desired%20delivery%20timeline%20and%20governance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A" aria-label="Start an African data collection brief by email — opens your email application">Start a collection brief by email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© 2026 BSG DataWorks. African data collection for AI.</p>
+      <div class="footer-actions">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button>
+        <a href="index.html">Back to BSG DataWorks home</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
