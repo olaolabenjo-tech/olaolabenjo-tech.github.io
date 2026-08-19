@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Privacy-first Google Analytics: loaded only after explicit consent -->
+  <script>
+    (function () {
+      const CONSENT_KEY = 'bsgAnalyticsConsent';
+      const MEASUREMENT_ID = 'G-KLRS6WP5ML';
+      const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
+
+      function savedConsent() { return localStorage.getItem(CONSENT_KEY); }
+
+      function updateConsentDisplay(choice) {
+        const status = document.getElementById('cookie-current-choice');
+        const accept = document.getElementById('cookie-accept');
+        const decline = document.getElementById('cookie-decline');
+        if (status) {
+          status.textContent = choice === 'granted'
+            ? 'Current setting: Analytics is enabled.'
+            : choice === 'denied'
+              ? 'Current setting: Analytics is disabled.'
+              : 'Current setting: No choice has been saved yet.';
+        }
+        if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
+        if (decline) decline.setAttribute('aria-pressed', choice === 'denied' ? 'true' : 'false');
+      }
+
+      function disableAnalyticsNow() {
+        window[DISABLE_KEY] = true;
+        if (typeof window.gtag === 'function') {
+          window.gtag('consent', 'update', { analytics_storage: 'denied' });
+        }
+      }
+
+      function loadGoogleAnalytics() {
+        if (window.bsgAnalyticsLoaded) return;
+        window.bsgAnalyticsLoaded = true;
+        window[DISABLE_KEY] = false;
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { window.dataLayer.push(arguments); };
+        window.gtag('consent', 'default', { analytics_storage: 'denied' });
+        const analyticsScript = document.createElement('script');
+        analyticsScript.async = true;
+        analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
+        document.head.appendChild(analyticsScript);
+        window.gtag('js', new Date());
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        window.gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
+      }
+
+      window.bsgSetAnalyticsConsent = function (choice) {
+        localStorage.setItem(CONSENT_KEY, choice);
+        if (choice === 'granted') { loadGoogleAnalytics(); } else { disableAnalyticsNow(); }
+        updateConsentDisplay(choice);
+        const banner = document.getElementById('cookie-banner');
+        if (banner) banner.setAttribute('hidden', '');
+      };
+
+      window.bsgOpenCookieSettings = function () {
+        const choice = savedConsent();
+        updateConsentDisplay(choice);
+        const banner = document.getElementById('cookie-banner');
+        if (banner) {
+          banner.removeAttribute('hidden');
+          const focusTarget = choice === 'denied'
+            ? document.getElementById('cookie-decline')
+            : document.getElementById('cookie-accept');
+          if (focusTarget) focusTarget.focus();
+        }
+      };
+
+      document.addEventListener('DOMContentLoaded', function () {
+        const choice = savedConsent();
+        updateConsentDisplay(choice);
+        if (choice === 'granted') { loadGoogleAnalytics(); }
+        else {
+          disableAnalyticsNow();
+          if (choice === null) {
+            const banner = document.getElementById('cookie-banner');
+            if (banner) banner.removeAttribute('hidden');
+          }
+        }
+      });
+    }());
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nigerian Language Data for AI Training | BSG DataWorks</title>
+  <meta name="description" content="Commission Nigerian language and text data for AI training: task-specific collection, annotation, native-speaker QA, provenance, and delivery support.">
+  <link rel="canonical" href="https://bsgdataworks.com/nigerian-language-data.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="BSG DataWorks">
+  <meta property="og:title" content="Nigerian Language Data for AI Training | BSG DataWorks">
+  <meta property="og:description" content="Commission Nigerian language and text data for AI training, built around your model task, domain, linguistic conventions, and quality requirements.">
+  <meta property="og:url" content="https://bsgdataworks.com/nigerian-language-data.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Nigerian Language Data for AI Training | BSG DataWorks">
+  <meta name="twitter:description" content="Commission Nigerian language and text data for AI training, built around your model task, domain, linguistic conventions, and quality requirements.">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Nigerian Language Data for AI Training",
+    "description": "Commissioned Nigerian language and text data support for AI training, including task-specific data preparation, annotation, native-speaker quality review, provenance, and delivery documentation.",
+    "provider": {
+      "@type": "Organization",
+      "name": "BSG DataWorks",
+      "url": "https://bsgdataworks.com/"
+    },
+    "areaServed": {"@type": "Country", "name": "Nigeria"},
+    "serviceType": "Nigerian Language and Text Data Services for AI Training"
+  }
+  </script>
+  <link rel="stylesheet" href="assets/fonts/fonts.css">
+  <style>
+    :root{--ink:#14231C;--paper:#FBFAF7;--green:#0E6B3F;--green-deep:#0A4A2C;--mist:#E9F1EB;--amber:#C98A1B;--blue:#155C79;--line:#D8DFD9;--mono:'IBM Plex Mono',monospace}
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+    body{font-family:'IBM Plex Sans',sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;font-size:16.5px}
+    a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
+    .wrap{width:min(1080px,calc(100% - 48px));margin:0 auto}
+    nav{position:sticky;top:0;z-index:30;background:rgba(251,250,247,.96);border-bottom:1px solid var(--line);backdrop-filter:blur(8px)}
+    .nav-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;min-height:68px}
+    .logo{font-family:'Archivo',sans-serif;font-weight:900;font-stretch:110%;font-size:1.15rem;letter-spacing:.02em;color:var(--ink)}.logo span{color:var(--green)}
+    .nav-links{display:flex;align-items:center;gap:18px;font-size:.88rem;font-weight:500}.nav-links a{color:var(--ink)}.nav-links a:last-child{color:var(--green);font-weight:700}
+    .eyebrow{font-family:var(--mono);font-size:.76rem;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);font-weight:600}
+    .hero{padding:82px 0 54px;background:linear-gradient(135deg,#F4F8F4 0%,#FBFAF7 58%,#F8F0DF 100%)}
+    .hero-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:48px;align-items:center}
+    h1,h2,h3{font-family:'Archivo',sans-serif;line-height:1.08;letter-spacing:-.025em}h1{font-size:clamp(2.45rem,5vw,4.6rem);margin:12px 0 22px;max-width:760px}h1 em{font-style:normal;color:var(--green)}h2{font-size:clamp(1.85rem,3.2vw,3rem);margin:10px 0 16px}h3{font-size:1.18rem;margin-bottom:9px}
+    .hero-copy{font-size:1.11rem;max-width:700px;color:#314138}.cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:6px;padding:12px 18px;font-weight:700;font-size:.96rem;text-decoration:none;border:1px solid var(--green);cursor:pointer}.btn:hover{text-decoration:none;transform:translateY(-1px)}.btn-primary{background:var(--green);color:#fff}.btn-primary:hover{background:var(--green-deep)}.btn-secondary{background:transparent;color:var(--green)}
+    .hero-panel{border:1px solid #BFD0C2;border-radius:16px;background:#fff;padding:26px;box-shadow:0 18px 40px rgba(20,35,28,.09)}.hero-panel h2{font-size:1.35rem;margin-top:8px}.hero-panel p{font-size:.96rem;color:#3E5045}.panel-list{list-style:none;margin-top:18px}.panel-list li{border-top:1px solid var(--line);padding:11px 0;font-size:.94rem}.panel-list li::before{content:'✓';color:var(--green);font-weight:800;margin-right:10px}
+    section{padding:74px 0}.section-head{max-width:730px;margin-bottom:32px}.section-head p{color:#4C5A51;max-width:670px}
+    .card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{border:1px solid var(--line);border-radius:12px;padding:24px;background:#fff}.card p{font-size:.94rem;color:#4C5A51}.card .icon{font-family:var(--mono);font-size:.8rem;font-weight:600;color:var(--green);margin-bottom:14px}
+    .band{background:var(--green-deep);color:#fff}.band h2{color:#fff}.band .section-head p{color:#EAF2EC}.scope-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.scope-card{border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:23px;background:rgba(255,255,255,.05)}.scope-card h3{color:#fff}.scope-card p{color:#EAF2EC;font-size:.94rem}
+    .spec-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.spec-card{border:1px solid #BFD0C2;border-radius:14px;padding:26px;background:linear-gradient(135deg,#EFF6F0,#fff)}.spec-card ul{margin:15px 0 0;padding-left:20px}.spec-card li{margin:8px 0}.spec-card li::marker{color:var(--green)}
+    .process{counter-reset:step;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.process-card{position:relative;padding:20px 18px 18px;border:1px solid var(--line);border-radius:12px;background:#fff}.process-card::before{counter-increment:step;content:'0' counter(step);display:block;font-family:var(--mono);font-weight:700;font-size:.82rem;color:var(--amber);margin-bottom:14px}.process-card p{font-size:.91rem;color:#4C5A51}
+    .faq{max-width:820px}.faq details{border-top:1px solid var(--line);padding:17px 0}.faq summary{font-family:'Archivo',sans-serif;font-weight:700;cursor:pointer}.faq p{padding-top:10px;color:#4C5A51;max-width:760px}
+    .contact-band{border-radius:16px;background:linear-gradient(135deg,#0A4A2C,#0E6B3F);color:#fff;padding:42px;text-align:center}.contact-band h2{color:#fff}.contact-band>p{color:#EAF2EC;max-width:680px;margin:12px auto 20px}.brief{max-width:640px;margin:0 auto 22px;padding:17px 20px;text-align:left;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28);border-radius:10px}.brief-title{font-family:var(--mono);font-size:.76rem;text-transform:uppercase;letter-spacing:.08em;font-weight:600}.brief ul{padding-left:20px;margin:8px 0 0}.brief li{font-size:.92rem;margin:4px 0}.brief-note{font-size:.88rem;margin-top:12px;color:#EAF2EC}.contact-band .btn{background:#fff;border-color:#fff;color:var(--green-deep)}
+    footer{border-top:1px solid var(--line);padding:30px 0 38px;color:#5A675F;font-size:.86rem}.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.footer-actions{display:flex;gap:16px;flex-wrap:wrap}.cookie-settings{border:0;background:none;padding:0;color:var(--green);font:inherit;cursor:pointer;text-decoration:underline}
+    .cookie-banner{position:fixed;left:18px;right:18px;bottom:18px;z-index:100;max-width:760px;margin:0 auto;padding:22px;background:#14231C;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:14px;box-shadow:0 18px 45px rgba(20,35,28,.28)}.cookie-banner[hidden]{display:none}.cookie-banner h2{font-size:1.35rem;color:#fff;margin-bottom:8px}.cookie-banner p{color:#EAF2EC;font-size:.93rem;line-height:1.55}.cookie-banner a{color:#fff;text-decoration:underline}.cookie-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.cookie-choice{min-width:160px;border:1px solid #fff;border-radius:6px;padding:11px 16px;background:#fff;color:#0A4A2C;font:600 .94rem 'IBM Plex Sans',sans-serif;cursor:pointer}.cookie-choice:hover,.cookie-choice:focus-visible{outline:3px solid #C98A1B;outline-offset:3px}.cookie-choice[aria-pressed="true"]{background:#EAF2EC;border-color:#EAF2EC;box-shadow:inset 0 0 0 2px #0A4A2C}.cookie-current-choice{margin-top:12px;color:#EAF2EC;font-weight:600}
+    @media(max-width:800px){.hero-grid,.card-grid,.scope-grid,.spec-grid,.process{grid-template-columns:1fr 1fr}.hero-grid{gap:30px}.nav-links{display:none}.hero{padding:58px 0 40px}.contact-band{padding:32px 22px}}@media(max-width:560px){.wrap{width:min(100% - 34px,1080px)}.card-grid,.scope-grid,.spec-grid,.process{grid-template-columns:1fr}.hero-panel{padding:22px}.cookie-choice{width:100%}}
+  </style>
+</head>
+<body>
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" aria-describedby="cookie-description cookie-current-choice" hidden>
+    <h2 id="cookie-title">Your privacy choices</h2>
+    <p id="cookie-description">We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. You can change your choice at any time through Cookie settings. Read our <a href="privacy-policy.html">Privacy Policy</a>.</p>
+    <p id="cookie-current-choice" class="cookie-current-choice" role="status" aria-live="polite"></p>
+    <div class="cookie-actions">
+      <button id="cookie-accept" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('granted')" aria-pressed="false">Accept analytics</button>
+      <button id="cookie-decline" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('denied')" aria-pressed="false">Decline</button>
+    </div>
+  </div>
+
+  <nav aria-label="Primary navigation">
+    <div class="wrap nav-inner">
+      <a class="logo" href="index.html" aria-label="BSG DataWorks home">BSG <span>DataWorks</span></a>
+      <div class="nav-links">
+        <a href="#availability">Availability</a>
+        <a href="#uses">Use cases</a>
+        <a href="#delivery">Delivery</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Start a brief</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">Commissioned language and text data</p>
+          <h1>Nigerian language data for <em>AI that needs local context.</em></h1>
+          <p class="hero-copy">Build a language-data project around the language variety, domain, task, writing conventions, and quality requirements your model must handle. BSG DataWorks scopes text collection, linguistic annotation, and native-speaker quality review for teams that need evidence-ready Nigerian language data rather than a generic corpus.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#contact">Start a language-data brief</a>
+            <a class="btn btn-secondary" href="african-ai-training-data-types.html">Browse all data types</a>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="Nigerian language data overview">
+          <p class="eyebrow">What teams can specify</p>
+          <h2>Language data shaped by the model task.</h2>
+          <p>Define the language context and the evidence route together—before collection, annotation, or delivery begins.</p>
+          <ul class="panel-list"><li>Language, variety, domain, and intended AI use</li><li>Text, terminology, annotation, and metadata requirements</li><li>Native-speaker review and project-specific quality criteria</li></ul>
+        </aside>
+      </div>
+    </header>
+
+    <section id="availability">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Project scope</p>
+          <h2>Commission language data around the context your model actually needs.</h2>
+          <p>Language work is scoped to a written form, domain, linguistic task, and evaluation need. We confirm what is practical for the requested brief before committing to collection, preparation, or delivery.</p>
+        </div>
+        <div class="card-grid">
+          <article class="card"><p class="icon">01 / LANGUAGE CONTEXT</p><h3>Text and terminology</h3><p>Define the language variety, domain, writing conventions, terminology, registers, and real-world contexts that should be represented in the project.</p></article>
+          <article class="card"><p class="icon">02 / LINGUISTIC TASK</p><h3>Annotation and enrichment</h3><p>Specify the labels, guidelines, taxonomy, metadata, translation, transcription, or review steps that make the data useful for the intended model task.</p></article>
+          <article class="card"><p class="icon">03 / REVIEW ROUTE</p><h3>Native-speaker QA</h3><p>Agree the linguistic review process, quality criteria, acceptance checks, and issue-escalation route before delivery.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="band" id="uses">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">AI use cases</p>
+          <h2>Language data for tasks that cannot be solved with a generic English corpus.</h2>
+          <p>Tell us what the model must understand, classify, retrieve, generate, translate, or support. We use the task to shape the data brief, rather than assuming one language dataset fits every use case.</p>
+        </div>
+        <div class="scope-grid">
+          <article class="scope-card"><h3>Text classification</h3><p>Build task-relevant examples, labels, and guidelines for categories such as intent, topic, sentiment, safety, or support-routing workflows.</p></article>
+          <article class="scope-card"><h3>Entity and information extraction</h3><p>Prepare text and annotation guidance for named entities, terminology, attributes, relations, or other structured information relevant to the project domain.</p></article>
+          <article class="scope-card"><h3>Search, retrieval, and assistants</h3><p>Scope queries, answers, terminology, contextual examples, and evaluation material for systems that need to handle local language use appropriately.</p></article>
+          <article class="scope-card"><h3>Translation and language evaluation</h3><p>Define parallel-text, linguistic-review, correction, or benchmark requirements around the language pair, domain, and quality standard you need to assess.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="delivery">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Technical and quality requirements</p>
+          <h2>Specify the linguistic detail that makes the dataset usable.</h2>
+          <p>A good language-data brief captures more than the language name. It explains the text source, domain, register, conventions, annotations, metadata, and review method needed for the target AI task.</p>
+        </div>
+        <div class="spec-grid">
+          <article class="spec-card"><h3>Language and source specification</h3><ul><li>Language variety, written form, and intended audience</li><li>Domain, use case, topic boundaries, and exclusions</li><li>Original text, commissioned collection, or existing-source route</li><li>Representational needs agreed for the project</li></ul></article>
+          <article class="spec-card"><h3>Orthography and linguistic conventions</h3><ul><li>Spelling, punctuation, diacritic, script, and formatting expectations</li><li>Rules for code-switching, borrowed terms, abbreviations, or variants</li><li>Terminology and style references supplied or agreed for the brief</li><li>Version control for any evolving guidance</li></ul></article>
+          <article class="spec-card"><h3>Annotation and metadata</h3><ul><li>Task-specific label schema and written annotation guidance</li><li>Document, utterance, span, or token-level requirements as needed</li><li>Metadata fields relevant to the buyer's evaluation route</li><li>Sample review and issue-handling process</li></ul></article>
+          <article class="spec-card"><h3>Quality and governance evidence</h3><ul><li>Native-speaker review and agreed acceptance criteria</li><li>Source, consent, or rights documentation appropriate to the scope</li><li>Provenance notes and data-handling questions visible to reviewers</li><li>Delivery structure agreed with the buyer</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">From language brief to delivery</p>
+          <h2>A practical path for language-data projects.</h2>
+          <p>We start with the linguistic and product context, then turn it into an operational specification that collection, annotation, quality, and governance teams can work from.</p>
+        </div>
+        <div class="process">
+          <article class="process-card"><h3>Define</h3><p>Clarify the language variety, project domain, intended model task, user context, and the data type or source route you need.</p></article>
+          <article class="process-card"><h3>Design</h3><p>Agree the data schema, examples, writing conventions, metadata, review approach, and evidence requirements before production work begins.</p></article>
+          <article class="process-card"><h3>Prepare</h3><p>Collect, organise, annotate, translate, transcribe, or review the scoped material with the agreed quality controls.</p></article>
+          <article class="process-card"><h3>Deliver</h3><p>Provide the dataset and the agreed documentation in the format, structure, and delivery route required for the project.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap faq">
+        <p class="eyebrow">Frequently asked questions</p>
+        <h2>Questions about Nigerian language data.</h2>
+        <details><summary>Which Nigerian languages can you support?</summary><p>Tell us the language variety, written form, domain, task, and required quality standard. We assess the project brief and confirm the practical scope before making a commitment; this page does not claim a ready-made catalogue for every language.</p></details>
+        <details><summary>Can a project include code-switching, diacritics, or local terminology?</summary><p>Yes—when these are included in the brief and reflected in the written guidance. The project should state how language variants, code-switching, orthography, diacritics, terminology, and exceptions are to be represented and reviewed.</p></details>
+        <details><summary>Is this page for text data only?</summary><p>This page focuses on language and text data. If the project also needs voice recordings or speech transcripts, the speech-data route can be scoped alongside it. See the <a href="african-speech-data.html">African Speech Data page</a> for the related voice-data route.</p></details>
+        <details><summary>Can you annotate language data we already have?</summary><p>Yes. If you already hold the source material, we can discuss an annotation and labelling scope around an agreed taxonomy, guidance, quality process, and delivery structure. See the <a href="annotation-labelling-services.html">Annotation and Labelling Services page</a>.</p></details>
+        <details><summary>How do consent and provenance apply to language data?</summary><p>The right documentation depends on the actual source route and project facts. We can make source, consent, rights, provenance, and buyer-review questions visible in the project scope; a buyer should obtain independent professional advice for its particular legal and governance obligations.</p></details>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-band">
+          <p class="eyebrow" style="color:#E6C98E">Start with the language context</p>
+          <h2>Start a Nigerian language-data brief.</h2>
+          <p>Send the requirements you know. We will help turn the language, task, and quality context into the right next conversation.</p>
+          <div class="brief"><p class="brief-title">A useful first email includes</p><ul><li>Language variety, written form, and intended model or product use</li><li>Domain, audience, register, terminology, or real-world context</li><li>Whether you need new text, existing-source preparation, annotation, or a combination</li><li>Target volume, output format, metadata, and quality requirements</li><li>Rules for diacritics, variants, code-switching, translation, or transcription, if relevant</li><li>Rights, governance, delivery timing, and procurement context, if known</li></ul><p class="brief-note">If you do not have all of this yet, send what you have. We will help clarify the remaining questions on a call.</p></div>
+          <a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=Nigerian%20language%20data%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Language%20variety%2C%20written%20form%2C%20and%20intended%20model%20or%20product%20use%3A%0A-%20Domain%2C%20audience%2C%20register%2C%20terminology%2C%20or%20real-world%20context%3A%0A-%20Whether%20we%20need%20new%20text%2C%20existing-source%20preparation%2C%20annotation%2C%20or%20a%20combination%3A%0A-%20Target%20volume%2C%20output%20format%2C%20metadata%2C%20and%20quality%20requirements%3A%0A-%20Rules%20for%20diacritics%2C%20variants%2C%20code-switching%2C%20translation%2C%20or%20transcription%2C%20if%20relevant%3A%0A-%20Rights%2C%20governance%2C%20delivery%20timing%2C%20and%20procurement%20context%2C%20if%20known%3A%0A%0AThanks%2C%0A" aria-label="Start a Nigerian language-data brief by email — opens your email application">Start a language-data brief by email</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <p>© 2026 BSG DataWorks. African data collection for AI.</p>
+      <div class="footer-actions">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button>
+        <a href="index.html">Back to BSG DataWorks home</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
