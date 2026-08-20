@@ -143,6 +143,17 @@
     footer{border-top:1px solid var(--line);padding:30px 0 38px;color:#5A675F;font-size:.86rem}.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}.footer-actions{display:flex;gap:16px;flex-wrap:wrap}.cookie-settings{border:0;background:none;padding:0;color:var(--green);font:inherit;cursor:pointer;text-decoration:underline}
     .cookie-banner{position:fixed;left:18px;right:18px;bottom:18px;z-index:100;max-width:760px;margin:0 auto;padding:22px;background:#14231C;color:#fff;border:1px solid rgba(255,255,255,.28);border-radius:14px;box-shadow:0 18px 45px rgba(20,35,28,.28)}.cookie-banner[hidden]{display:none}.cookie-banner h2{font-size:1.35rem;color:#fff;margin-bottom:8px}.cookie-banner p{color:#EAF2EC;font-size:.93rem;line-height:1.55}.cookie-banner a{color:#fff;text-decoration:underline}.cookie-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:18px}.cookie-choice{min-width:160px;border:1px solid #fff;border-radius:6px;padding:11px 16px;background:#fff;color:#0A4A2C;font:600 .94rem 'IBM Plex Sans',sans-serif;cursor:pointer}.cookie-choice:hover,.cookie-choice:focus-visible{outline:3px solid #C98A1B;outline-offset:3px}.cookie-choice[aria-pressed="true"]{background:#EAF2EC;border-color:#EAF2EC;box-shadow:inset 0 0 0 2px #0A4A2C}.cookie-current-choice{margin-top:12px;color:#EAF2EC;font-weight:600}
     @media(max-width:800px){.hero-grid,.card-grid,.scope-grid,.spec-grid,.process{grid-template-columns:1fr 1fr}.hero-grid{gap:30px}.nav-links{display:none}.hero{padding:58px 0 40px}.contact-band{padding:32px 22px}}@media(max-width:560px){.wrap{width:min(100% - 34px,1080px)}.card-grid,.scope-grid,.spec-grid,.process{grid-template-columns:1fr}.hero-panel{padding:22px}.cookie-choice{width:100%}}
+
+    /* Verified registration and collection-route baseline */
+    .trust-chip{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.78rem;color:var(--green-deep);background:var(--mist);border:1px solid var(--green);border-radius:100px;padding:6px 14px;margin:0 0 14px}
+    .trust-chip::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green)}
+    .trust-route{max-width:680px;margin:0 0 12px;color:#3C4A42;font-size:.9rem;line-height:1.5}
+    .trust-route a{font-weight:700}
+    .collection-consent{max-width:680px;margin:0 0 18px;padding-left:13px;border-left:3px solid var(--green);color:#3C4A42;font-size:.9rem;line-height:1.5}
+    .related-speech{padding:40px 0;background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .related-speech .related-box{max-width:820px;border:1px solid #BFD0C2;border-radius:12px;padding:24px;background:#fff}
+    .related-speech h2{margin:5px 0 10px;font-size:clamp(1.35rem,2.5vw,1.8rem)}
+    .related-speech p:last-child{margin:0;color:#3C4A42}
   </style>
 </head>
 <body>
@@ -174,6 +185,10 @@
       <div class="wrap hero-grid">
         <div>
           <p class="eyebrow">Available to evaluate · Nigerian-accented English</p>
+          <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+          <p class="trust-route">Registered with the Nigeria Data Protection Commission. Certificate available on request. See our <a href="ai-training-data-compliance-nigeria.html">Compliance page</a> and <a href="privacy-policy.html">Privacy Policy</a>.</p>
+          <p class="collection-consent">Data is collected only from adult contributors under written, informed consent covering the intended commercial use and AI-training scope.</p>
+
           <h1>Nigerian English speech data for <em>AI training</em>.</h1>
           <p class="hero-copy">Evaluate representative Nigerian-accented English speech samples, or commission a scope built around your model, speakers, scenarios and delivery requirements. BSG DataWorks provides human-sourced collection, native-speaker review, consent documentation and commercial licensing support.</p>
           <div class="cta-row">
@@ -245,10 +260,11 @@
           <article class="spec-card">
             <h3>Quality and documentation</h3>
             <ul>
-              <li>Native-speaker review of transcriptions</li>
-              <li>Quality criteria and reporting agreed for the project</li>
-              <li>Audio screening for signal quality, clipping and duplication as applicable</li>
-              <li>Data-card, licence and consent documentation materials for the agreed delivery</li>
+              <li>Native-speaker review of 100% of Nigerian English transcriptions</li>
+              <li>Inter-annotator agreement of ≥ 80% (word-level or Cohen’s κ per project), measured on a 10% blind sample per batch and reported in the batch QC report</li>
+              <li>Free re-delivery on any batch failing agreed QA thresholds (up to two re-deliveries per batch)</li>
+              <li>Audio screening for signal quality, clipping and duplication where relevant to the agreed delivery</li>
+              <li>Data-card, licence and consent documentation materials for the delivery</li>
             </ul>
           </article>
         </div>
@@ -279,6 +295,16 @@
         <details><summary>Can we commission a Nigerian English collection to our specification?</summary><p>Yes. A commissioned discussion can cover the speech scenario, speaker profile, recording environment, target volume, transcript and metadata requirements, delivery timeline, rights and quality criteria.</p></details>
         <details><summary>Can transcripts and time alignment be included?</summary><p>Yes. State the transcript format, annotation and time-alignment requirements in your initial brief. These are scoped against the intended model use and delivery format.</p></details>
         <details><summary>How do commercial rights and consent documentation work?</summary><p>Commercial use, permitted sublicensing and the documentation package are addressed in the applicable licence or project agreement. BSG DataWorks collects and maintains contributor-consent records consistent with the agreed scope.</p></details>
+      </div>
+    </section>
+
+    <section class="related-speech" aria-labelledby="related-speech-heading">
+      <div class="wrap">
+        <div class="related-box">
+          <p class="eyebrow">Explore related Nigerian speech data</p>
+          <h2 id="related-speech-heading">Expand from Nigerian English to the wider speech route.</h2>
+          <p>Also from BSG DataWorks: <a href="yoruba-speech-data.html">Yorùbá speech data</a> is available now. Igbo, Hausa, and Nigerian Pidgin are in pipeline. Kanuri, Efik, and minority languages are collected on commission. See the <a href="african-speech-data.html">African Speech Data page</a> for the current language-coverage route.</p>
+        </div>
       </div>
     </section>
 
