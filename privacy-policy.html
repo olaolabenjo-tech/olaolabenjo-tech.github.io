@@ -3,69 +3,126 @@
 <head>
   <!-- Privacy-first Google Analytics: loaded only after explicit consent -->
   <script>
-    (function () {
-      const CONSENT_KEY = 'bsgAnalyticsConsent';
-      const MEASUREMENT_ID = 'G-KLRS6WP5ML';
-      const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
-      function savedConsent() { return localStorage.getItem(CONSENT_KEY); }
-      function updateConsentDisplay(choice) {
-        const status = document.getElementById('cookie-current-choice');
-        const accept = document.getElementById('cookie-accept');
-        const decline = document.getElementById('cookie-decline');
-        if (status) status.textContent = choice === 'granted' ? 'Current setting: Analytics is enabled.' : choice === 'denied' ? 'Current setting: Analytics is disabled.' : 'Current setting: No choice has been saved yet.';
-        if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
-        if (decline) decline.setAttribute('aria-pressed', choice === 'denied' ? 'true' : 'false');
+  (function () {
+    const CONSENT_KEY = 'bsgAnalyticsConsent';
+    const CONSENT_NOTICE_VERSION = '2026-08-20';
+    const MEASUREMENT_ID = 'G-KLRS6WP5ML';
+    const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
+
+    function savedConsent() {
+      const raw = localStorage.getItem(CONSENT_KEY);
+      if (!raw) return null;
+      // Backward compatibility: earlier versions stored just 'granted' or 'denied' as a string
+      if (raw === 'granted' || raw === 'denied') return raw;
+      try {
+        const parsed = JSON.parse(raw);
+        return parsed && parsed.choice ? parsed.choice : null;
+      } catch (e) {
+        return null;
       }
-      function disableAnalyticsNow() {
-        window[DISABLE_KEY] = true;
-        if (typeof window.gtag === 'function') window.gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
+
+    function persistConsent(choice) {
+      localStorage.setItem(CONSENT_KEY, JSON.stringify({
+        choice: choice,
+        ts: new Date().toISOString(),
+        noticeVersion: CONSENT_NOTICE_VERSION
+      }));
+    }
+
+    function updateConsentDisplay(choice) {
+      const status = document.getElementById('cookie-current-choice');
+      const accept = document.getElementById('cookie-accept');
+      const decline = document.getElementById('cookie-decline');
+
+      if (status) {
+        status.textContent = choice === 'granted'
+          ? 'Current setting: Analytics is enabled.'
+          : choice === 'denied'
+            ? 'Current setting: Analytics is disabled.'
+            : 'Current setting: No choice has been saved yet.';
       }
-      function loadGoogleAnalytics() {
-        if (window.bsgAnalyticsLoaded) return;
-        window.bsgAnalyticsLoaded = true;
-        window[DISABLE_KEY] = false;
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function () { window.dataLayer.push(arguments); };
-        window.gtag('consent', 'default', { analytics_storage: 'denied' });
-        const analyticsScript = document.createElement('script');
-        analyticsScript.async = true;
-        analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
-        document.head.appendChild(analyticsScript);
-        window.gtag('js', new Date());
-        window.gtag('consent', 'update', { analytics_storage: 'granted' });
-        window.gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
+
+      if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
+      if (decline) decline.setAttribute('aria-pressed', choice === 'denied' ? 'true' : 'false');
+    }
+
+    function disableAnalyticsNow() {
+      window[DISABLE_KEY] = true;
+      if (typeof window.gtag === 'function') {
+        window.gtag('consent', 'update', { analytics_storage: 'denied' });
       }
-      window.bsgSetAnalyticsConsent = function (choice) {
-        localStorage.setItem(CONSENT_KEY, choice);
-        if (choice === 'granted') loadGoogleAnalytics(); else disableAnalyticsNow();
-        updateConsentDisplay(choice);
-        const banner = document.getElementById('cookie-banner');
-        if (banner) banner.setAttribute('hidden', '');
-      };
-      window.bsgOpenCookieSettings = function () {
-        const choice = savedConsent();
-        updateConsentDisplay(choice);
-        const banner = document.getElementById('cookie-banner');
-        if (banner) {
-          banner.removeAttribute('hidden');
-          const focusTarget = choice === 'denied' ? document.getElementById('cookie-decline') : document.getElementById('cookie-accept');
-          if (focusTarget) focusTarget.focus();
+    }
+
+    function loadGoogleAnalytics() {
+      if (window.bsgAnalyticsLoaded) return;
+      window.bsgAnalyticsLoaded = true;
+      window[DISABLE_KEY] = false;
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function () { window.dataLayer.push(arguments); };
+      window.gtag('consent', 'default', { analytics_storage: 'denied' });
+
+      const analyticsScript = document.createElement('script');
+      analyticsScript.async = true;
+      analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
+      document.head.appendChild(analyticsScript );
+
+      window.gtag('js', new Date());
+      window.gtag('consent', 'update', { analytics_storage: 'granted' });
+      window.gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
+    }
+
+    window.bsgSetAnalyticsConsent = function (choice) {
+      persistConsent(choice);
+
+      if (choice === 'granted') {
+        loadGoogleAnalytics();
+      } else {
+        disableAnalyticsNow();
+      }
+
+      updateConsentDisplay(choice);
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.setAttribute('hidden', '');
+    };
+
+    window.bsgDeferCookieChoice = function () {
+      // Dismiss the banner without saving a choice — analytics stays off
+      // and the banner will appear again on the next visit.
+      const banner = document.getElementById('cookie-banner');
+      if (banner) banner.setAttribute('hidden', '');
+    };
+
+    window.bsgOpenCookieSettings = function () {
+      const choice = savedConsent();
+      updateConsentDisplay(choice);
+      const banner = document.getElementById('cookie-banner');
+      if (banner) {
+        banner.removeAttribute('hidden');
+        const focusedButton = choice === 'denied'
+          ? document.getElementById('cookie-decline')
+          : document.getElementById('cookie-accept');
+        if (focusedButton) focusedButton.focus();
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+      const choice = savedConsent();
+      updateConsentDisplay(choice);
+
+      if (choice === 'granted') {
+        loadGoogleAnalytics();
+      } else {
+        disableAnalyticsNow();
+        if (choice === null) {
+          const banner = document.getElementById('cookie-banner');
+          if (banner) banner.removeAttribute('hidden');
         }
-      };
-      document.addEventListener('DOMContentLoaded', function () {
-        const choice = savedConsent();
-        updateConsentDisplay(choice);
-        if (choice === 'granted') loadGoogleAnalytics();
-        else {
-          disableAnalyticsNow();
-          if (choice === null) {
-            const banner = document.getElementById('cookie-banner');
-            if (banner) banner.removeAttribute('hidden');
-          }
-        }
-      });
-    }());
-  </script>
+      }
+    });
+  }());
+</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Privacy Policy | BSG DataWorks</title>
@@ -93,17 +150,36 @@
   .logo:hover{text-decoration:none}
   .logo-image{display:block;width:188px;height:61px;object-fit:contain;object-position:left center}
   @media(max-width:560px){.nav-inner{padding-top:8px;padding-bottom:8px}.logo-image{width:158px;height:52px}}
+
+.cookie-defer{
+  background:none;
+  border:0;
+  color:#EAF2EC;
+  font:500 .88rem 'IBM Plex Sans',sans-serif;
+  cursor:pointer;
+  padding:11px 8px;
+  text-decoration:underline;
+  align-self:center;
+}
+.cookie-defer:hover,
+.cookie-defer:focus-visible{
+  color:#fff;
+  outline:2px solid #C98A1B;
+  outline-offset:3px;
+}
+
 </style>
   <link rel="icon" type="image/png" href="assets/images/bsg-dataworks-favicon.png">
 </head>
 <body>
   <div id="cookie-banner" class="cookie-banner" role="dialog" aria-modal="true" aria-labelledby="cookie-title" aria-describedby="cookie-description cookie-current-choice" hidden>
     <h2 id="cookie-title">Your privacy choices</h2>
-    <p id="cookie-description">We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. You can change your choice at any time through Cookie settings. Read this <a href="privacy-policy.html">Privacy Policy</a>.</p>
+    <p id="cookie-description">We use optional Google Analytics to understand how visitors use this website. Analytics will not load unless you choose <strong>Accept analytics</strong>. Your choice is saved locally in your browser (using <code>localStorage</code>) so we do not ask again on future visits. You can change your choice at any time through Cookie settings. Read our <a href="privacy-policy.html">Privacy Policy</a>.</p>
     <p id="cookie-current-choice" class="cookie-current-choice" role="status" aria-live="polite"></p>
     <div class="cookie-actions">
       <button id="cookie-accept" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('granted')" aria-pressed="false">Accept analytics</button>
       <button id="cookie-decline" type="button" class="cookie-choice" onclick="bsgSetAnalyticsConsent('denied')" aria-pressed="false">Decline</button>
+      <button id="cookie-defer" type="button" class="cookie-defer" onclick="bsgDeferCookieChoice()" aria-label="Close this notice without saving a choice; Google Analytics will remain off until you decide">Not now</button>
     </div>
   </div>
   <nav aria-label="Primary navigation"><div class="wrap nav-inner"><a class="logo" href="index.html" aria-label="BSG DataWorks home"><img class="logo-image" src="assets/images/bsg-dataworks-logo.png" alt=""></a><div class="nav-actions"><a href="index.html">Home</a><a href="index.html#contact">Start a dataset brief</a></div></div></nav>
