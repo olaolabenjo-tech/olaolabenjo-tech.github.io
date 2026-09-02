@@ -1,0 +1,67 @@
+---
+/* #languages — three availability tiers. */
+const TRACKS = [
+  {
+    status: 'AVAILABLE FOR EVALUATION',
+    statusClass: 's-live',
+    langs: 'Nigerian-accented English · Yorùbá',
+    types: 'Scripted conversational-style & voice-over speech with transcripts; spontaneous speech via bespoke collection',
+    note: 'Samples ready to evaluate today',
+  },
+  {
+    status: 'IN PIPELINE',
+    statusClass: 's-pipe',
+    langs: 'Igbo · Hausa · Nigerian Pidgin',
+    types: 'Speech with time-aligned transcription; collection under way',
+    note: 'Early access & pre-orders welcome — shape the spec with us',
+  },
+  {
+    status: 'ON COMMISSION',
+    statusClass: 's-comm',
+    langs: 'Kanuri · Efik · other minority Nigerian languages',
+    types: 'Bespoke collection to your specification through our native-speaker networks',
+    note: 'Under-represented languages that require bespoke, consent-documented collection — our differentiator',
+  },
+];
+---
+
+<section id="languages" class="wrap">
+  <div class="eyebrow">Language coverage</div>
+  <h2>Three tiers. No ambiguity about what ships today.</h2>
+
+  {TRACKS.map((track) => (
+    <div class="track">
+      <div class:list={['status', track.statusClass]}>{track.status}</div>
+      <div>
+        <div class="langs">{track.langs}</div>
+        <div class="types">{track.types}</div>
+      </div>
+      <div class="types">{track.note}</div>
+    </div>
+  ))}
+</section>
+
+<style>
+  .track {
+    display: grid;
+    grid-template-columns: 150px 1fr 230px;
+    gap: 18px;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    background: #fff;
+  }
+  .status { font-family: var(--mono); font-size: .76rem; letter-spacing: .06em; display: flex; align-items: center; gap: 8px }
+  .status::before { content: ""; width: 9px; height: 9px; border-radius: 50% }
+  .s-live::before { background: var(--green); box-shadow: 0 0 0 4px rgba(14, 107, 63, .15) }
+  .s-pipe::before { background: var(--amber) }
+  .s-comm::before { background: #8A9690 }
+  .langs { font-family: var(--display); font-weight: 700; font-size: 1.22rem }
+  .types { font-size: .87rem; color: var(--slate) }
+
+  @media (max-width: 760px) {
+    .track { grid-template-columns: 1fr; gap: 8px }
+  }
+</style>

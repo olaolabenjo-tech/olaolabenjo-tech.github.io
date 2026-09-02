@@ -1,0 +1,135 @@
+---
+/*
+  Privacy-first Google Analytics gate.
+
+  Copied verbatim from the hand-written pages (all 13 carried a
+  byte-identical copy apart from indentation). It must stay `is:inline` and
+  stay in <head>: it has to run before anything else so `ga-disable-*` is set
+  and no measurement call can fire ahead of a saved choice. Do not convert
+  this to a bundled or deferred script.
+
+  It pairs with CookieBanner.astro, which it drives by element id.
+*/
+---
+
+<script is:inline>
+(function () {
+  const CONSENT_KEY = 'bsgAnalyticsConsent';
+  const CONSENT_NOTICE_VERSION = '2026-08-20';
+  const MEASUREMENT_ID = 'G-KLRS6WP5ML';
+  const DISABLE_KEY = 'ga-disable-' + MEASUREMENT_ID;
+
+  function savedConsent() {
+    const raw = localStorage.getItem(CONSENT_KEY);
+    if (!raw) return null;
+    // Backward compatibility: earlier versions stored just 'granted' or 'denied' as a string
+    if (raw === 'granted' || raw === 'denied') return raw;
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed && parsed.choice ? parsed.choice : null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function persistConsent(choice) {
+    localStorage.setItem(CONSENT_KEY, JSON.stringify({
+      choice: choice,
+      ts: new Date().toISOString(),
+      noticeVersion: CONSENT_NOTICE_VERSION
+    }));
+  }
+
+  function updateConsentDisplay(choice) {
+    const status = document.getElementById('cookie-current-choice');
+    const accept = document.getElementById('cookie-accept');
+    const decline = document.getElementById('cookie-decline');
+
+    if (status) {
+      status.textContent = choice === 'granted'
+        ? 'Current setting: Analytics is enabled.'
+        : choice === 'denied'
+          ? 'Current setting: Analytics is disabled.'
+          : 'Current setting: No choice has been saved yet.';
+    }
+
+    if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
+    if (decline) decline.setAttribute('aria-pressed', choice === 'denied' ? 'true' : 'false');
+  }
+
+  function disableAnalyticsNow() {
+    window[DISABLE_KEY] = true;
+    if (typeof window.gtag === 'function') {
+      window.gtag('consent', 'update', { analytics_storage: 'denied' });
+    }
+  }
+
+  function loadGoogleAnalytics() {
+    if (window.bsgAnalyticsLoaded) return;
+    window.bsgAnalyticsLoaded = true;
+    window[DISABLE_KEY] = false;
+
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag('consent', 'default', { analytics_storage: 'denied' });
+
+    const analyticsScript = document.createElement('script');
+    analyticsScript.async = true;
+    analyticsScript.src = 'https://www.googletagmanager.com/gtag/js?id=' + MEASUREMENT_ID;
+    document.head.appendChild(analyticsScript );
+
+    window.gtag('js', new Date());
+    window.gtag('consent', 'update', { analytics_storage: 'granted' });
+    window.gtag('config', MEASUREMENT_ID, { anonymize_ip: true });
+  }
+
+  window.bsgSetAnalyticsConsent = function (choice) {
+    persistConsent(choice);
+
+    if (choice === 'granted') {
+      loadGoogleAnalytics();
+    } else {
+      disableAnalyticsNow();
+    }
+
+    updateConsentDisplay(choice);
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.setAttribute('hidden', '');
+  };
+
+  window.bsgDeferCookieChoice = function () {
+    // Dismiss the banner without saving a choice — analytics stays off
+    // and the banner will appear again on the next visit.
+    const banner = document.getElementById('cookie-banner');
+    if (banner) banner.setAttribute('hidden', '');
+  };
+
+  window.bsgOpenCookieSettings = function () {
+    const choice = savedConsent();
+    updateConsentDisplay(choice);
+    const banner = document.getElementById('cookie-banner');
+    if (banner) {
+      banner.removeAttribute('hidden');
+      const focusedButton = choice === 'denied'
+        ? document.getElementById('cookie-decline')
+        : document.getElementById('cookie-accept');
+      if (focusedButton) focusedButton.focus();
+    }
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const choice = savedConsent();
+    updateConsentDisplay(choice);
+
+    if (choice === 'granted') {
+      loadGoogleAnalytics();
+    } else {
+      disableAnalyticsNow();
+      if (choice === null) {
+        const banner = document.getElementById('cookie-banner');
+        if (banner) banner.removeAttribute('hidden');
+      }
+    }
+  });
+}());
+</script>

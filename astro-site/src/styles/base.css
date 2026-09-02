@@ -1,0 +1,56 @@
+/*
+  The only CSS shared by every page.
+
+  Deliberately small. The homepage and the service pages are two different
+  design systems that disagree on `section`, `h1`–`h3`, `.btn`, `.eyebrow`
+  and `.wrap`, so anything opinionated lives in service-system.css or
+  home-system.css and is loaded by the matching layout. See
+  DESIGN-DECISIONS.md § "Two systems, not one".
+*/
+
+:root {
+  --ink: #14231C;
+  --paper: #FBFAF7;
+  --green: #0E6B3F;
+  --green-deep: #0A4A2C;
+  --mist: #E9F1EB;
+  --amber: #C98A1B;
+  --line: #D8DFD9;
+  --slate: #4A574F;
+  --muted: #4C5A51;
+
+  --sans: 'IBM Plex Sans', sans-serif;
+  --display: 'Archivo', sans-serif;
+  --mono: 'IBM Plex Mono', monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0 }
+
+html { scroll-behavior: smooth }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto }
+  * { transition: none !important }
+}
+
+body {
+  font-family: var(--sans);
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+  font-size: 16.5px;
+}
+
+a { color: var(--green); text-decoration: none }
+a:hover { text-decoration: underline }
+
+.skip-link { position: absolute; left: -9999px; top: auto }
+.skip-link:focus {
+  left: 20px;
+  top: 20px;
+  z-index: 200;
+  padding: 10px 14px;
+  background: #fff;
+  border: 2px solid var(--green);
+  border-radius: 6px;
+}

@@ -1,0 +1,73 @@
+---
+import type { FooterVariant } from '../types';
+
+interface Props {
+  /**
+   * "corporate" — the four-line legal footer used by index and about.
+   * "service"   — the single-row link footer used by the service pages.
+   */
+  variant?: FooterVariant;
+}
+
+const { variant = 'corporate' } = Astro.props;
+
+const EMAIL = 'mailto:dataservices@bsgdataworks.com';
+const WHATSAPP = 'https://wa.me/2348067904903';
+const WHATSAPP_LABEL = 'Message BSG DataWorks on WhatsApp — opens WhatsApp';
+---
+
+<footer>
+  {variant === 'corporate' ? (
+    <div class="wrap foot-inner">
+      <div class="footer-direct">
+        <a href={EMAIL}>Email BSG</a> ·
+        <a href={WHATSAPP} target="_blank" rel="noopener" aria-label={WHATSAPP_LABEL}>WhatsApp only</a>
+      </div>
+      <div>© 2026 BSG DataWorks (Private) Limited — AI Training Dataset Division. All rights reserved.</div>
+      <div>NDPC Reg. No. NDPC/DCP/13596 · NDPA 2023 compliant</div>
+      <div>
+        <a href="/privacy-policy.html">Privacy Policy</a> ·
+        <button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button>
+      </div>
+    </div>
+  ) : (
+    <div class="wrap footer-inner">
+      <p>© 2026 BSG DataWorks. African data collection for AI.</p>
+      <div class="footer-actions">
+        <a class="footer-contact" href={EMAIL}>Email BSG</a>
+        <a class="footer-contact" href={WHATSAPP} target="_blank" rel="noopener" aria-label={WHATSAPP_LABEL}>WhatsApp only</a>
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button>
+        <a href="/index.html">Back to BSG DataWorks home</a>
+      </div>
+    </div>
+  )}
+</footer>
+
+<style>
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 30px 0 38px;
+    color: #5A675F;
+    font-size: .86rem;
+  }
+
+  .footer-inner,
+  .foot-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap }
+
+  .footer-actions { display: flex; gap: 16px; flex-wrap: wrap }
+  .footer-actions .footer-contact { font-weight: 700 }
+
+  .footer-direct { font-size: .85rem }
+  .footer-direct a { font-weight: 700 }
+
+  .cookie-settings {
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--green);
+    font: inherit;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+</style>

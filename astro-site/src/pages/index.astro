@@ -1,0 +1,69 @@
+---
+import HomeLayout from '../layouts/HomeLayout.astro';
+import PolicyNotice from '../components/PolicyNotice.astro';
+import AboutTeaser from '../components/home/AboutTeaser.astro';
+import Compliance from '../components/home/Compliance.astro';
+import ContactBand from '../components/home/ContactBand.astro';
+import DataTypes from '../components/home/DataTypes.astro';
+import Hero from '../components/home/Hero.astro';
+import Languages from '../components/home/Languages.astro';
+import Process from '../components/home/Process.astro';
+import Samples from '../components/home/Samples.astro';
+import Services from '../components/home/Services.astro';
+import Standards from '../components/home/Standards.astro';
+import Waveform from '../components/home/Waveform.astro';
+import type { NavLink } from '../types';
+
+const navLinks: NavLink[] = [
+  { href: '#collect', label: 'What we collect' },
+  { href: '/african-speech-data.html', label: 'Speech data' },
+  { href: '#services', label: 'Services' },
+  { href: '#languages', label: 'Languages' },
+  { href: '#specs', label: 'Standards' },
+  { href: '#compliance', label: 'Compliance' },
+  { href: '#samples', label: 'Samples' },
+  { href: '#contact', label: 'Contact' },
+];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'BSG DataWorks',
+  alternateName: 'BSG DataWorks (Private) Limited — AI Training Dataset Division',
+  url: 'https://bsgdataworks.com/',
+  email: 'dataservices@bsgdataworks.com',
+  telephone: '+2348067904903',
+  description:
+    'NDPC-registered collection, curation, annotation, and commercial licensing of human-sourced audio, voice, image, video, and language datasets for AI training, with consultancy in data strategy and data protection compliance.',
+  address: { '@type': 'PostalAddress', addressCountry: 'NG' },
+  founder: { '@type': 'Person', name: 'Olayemi Olabenjo', jobTitle: 'Managing Consultant' },
+  knowsLanguage: ['en-NG', 'yo', 'ig', 'ha', 'pcm', 'kr', 'efi', 'fr', 'de'],
+};
+---
+
+<HomeLayout
+  title="BSG DataWorks — African Speech, Image, Video & Language Data for AI"
+  description="NDPC-registered African data collection partner. Commissioned speech, image, video, and language datasets for AI training, plus annotation, labeling, and data-protection consultancy. Nigerian-accented English, Yorùbá, Igbo, Hausa, Pidgin, Kanuri, Efik."
+  canonicalPath="/"
+  ogTitle="BSG DataWorks — African Data Collection for AI"
+  ogDescription="NDPC-registered African data collection partner: commissioned speech, image, video, and language datasets, annotation and labeling, and data-protection consultancy."
+  twitterTitle="BSG DataWorks — African Data Collection for AI"
+  twitterDescription="NDPC-registered: commissioned African speech, image, video and language datasets, annotation, and data-protection consultancy."
+  googleSiteVerification="O5hqGR4KR9cpFhvXc0HqJ480kytFcmrMkPb8nrTHDrQ"
+  navLinks={navLinks}
+  footerVariant="corporate"
+  schema={schema}
+>
+  <Hero />
+  <Waveform />
+  <DataTypes />
+  <Services />
+  <Process />
+  <Languages />
+  <Standards />
+  <Compliance />
+  <Samples />
+  <AboutTeaser />
+  <ContactBand />
+  <PolicyNotice />
+</HomeLayout>

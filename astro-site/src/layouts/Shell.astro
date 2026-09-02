@@ -1,0 +1,59 @@
+---
+/*
+  Page chrome shared by both design systems. Not used directly — go through
+  HomeLayout or ServiceLayout, which add the matching stylesheet.
+*/
+import BaseHead from '../components/BaseHead.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import Footer from '../components/Footer.astro';
+import JsonLd from '../components/JsonLd.astro';
+import Nav from '../components/Nav.astro';
+import type { FooterVariant, NavLink, SystemVariant } from '../types';
+
+import '../styles/base.css';
+
+export interface ShellProps {
+  title: string;
+  description: string;
+  canonicalPath: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterCard?: string;
+  googleSiteVerification?: string;
+  navLinks?: NavLink[];
+  footerVariant?: FooterVariant;
+  schema?: Record<string, unknown> | Record<string, unknown>[];
+  variant?: SystemVariant;
+}
+
+const {
+  navLinks = [],
+  footerVariant = 'corporate',
+  schema,
+  variant = 'service',
+  ...head
+} = Astro.props as ShellProps;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead {...head} />
+    {schema && <JsonLd schema={schema} />}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+
+    <CookieBanner />
+    <Nav links={navLinks} variant={variant} />
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer variant={footerVariant} />
+  </body>
+</html>

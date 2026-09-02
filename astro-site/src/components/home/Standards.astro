@@ -1,0 +1,79 @@
+---
+/*
+  #specs — delivery standards.
+
+  NOTE: `.spec-grid` / `.spec-card` also exist in the service-page system with
+  a different visual design. These styles are component-scoped and the two
+  systems are never loaded together, so the names cannot collide.
+*/
+---
+
+<section id="specs" class="wrap">
+  <div class="eyebrow">Standards</div>
+  <h2>What every delivery looks like.</h2>
+  <div class="spec-grid">
+    <div class="spec-card">
+      <h3>Technical specifications</h3>
+      <ul>
+        <li><span><span class="spec-key">Audio:</span> WAV, 16 kHz (48 kHz studio option), mono, 16-bit PCM</span></li>
+        <li><span><span class="spec-key">Video:</span> MP4 / MOV, 720p–1080p, to brief</span></li>
+        <li><span><span class="spec-key">Image:</span> JPEG / PNG, resolution and variation to brief</span></li>
+        <li><span><span class="spec-key">Transcripts:</span> verbatim, time-aligned; JSON / TXT / CSV; Yorùbá with full tonal diacritics (Unicode NFC)</span></li>
+        <li><span><span class="spec-key">Metadata:</span> contributor age band, gender, region, first language, device, environment</span></li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <h3>Quality assurance</h3>
+      <ul>
+        <li>Native-speaker linguists review 100% of transcriptions</li>
+        <li>Inter-annotator agreement ≥ 80%, reported per batch</li>
+        <li>Audio QC: SNR screening, clipping &amp; duplicate detection</li>
+        <li>Free re-delivery on any batch failing agreed QA thresholds (up to two re-deliveries per batch)</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <h3>Delivery &amp; SLA</h3>
+      <ul>
+        <li>Client-specified secure transfer (AWS S3 bucket, GCP, SFTP, or equivalent); Filen.io or Proton Drive available where the buyer does not provide an approved destination</li>
+        <li>Catalog licensing: delivery within 5 business days of agreement</li>
+        <li>Commissioned work: agreed milestone schedule, weekly progress reporting</li>
+        <li>Accuracy commitments defined in each statement of work</li>
+      </ul>
+    </div>
+    <div class="spec-card">
+      <h3>Licensing</h3>
+      <ul>
+        <li>Exclusive or non-exclusive commercial licenses</li>
+        <li>Rights cover commercial use, sublicensing, and AI/ML training</li>
+        <li>Custom terms for enterprise and consortium buyers</li>
+        <li>Full documentation pack accompanies every license</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px }
+  .spec-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--green);
+    border-radius: 10px;
+    padding: 24px;
+  }
+  .spec-card ul { list-style: none }
+  .spec-card li {
+    padding: 9px 0;
+    border-bottom: 1px dashed var(--line);
+    font-size: .93rem;
+    display: flex;
+    gap: 10px;
+  }
+  .spec-card li:last-child { border-bottom: none }
+  .spec-card li::before { content: "▸"; color: var(--green); font-weight: 700 }
+  .spec-key { font-family: var(--mono); color: var(--green-deep) }
+
+  @media (max-width: 760px) {
+    .spec-grid { grid-template-columns: 1fr }
+  }
+</style>
