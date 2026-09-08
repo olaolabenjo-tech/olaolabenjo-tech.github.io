@@ -50,8 +50,35 @@ is well defined: it is what those 8 pages agree on.
    focused, so no visual change.
 9. **`<main id="main-content">` on every page.** 12 of 13 already had `<main>`;
    only `about` had the id the skip link needs.
-10. **Homepage canonical stays `/`**, not `/index.html`, matching the live tag
-    and `sitemap.xml`. Every other page uses `/<name>.html`.
+10. **Homepage canonical stays `/`**, not `/index.html`, matching the live tag.
+
+## URLs — extensionless, with 301s
+
+**Decided change of direction.** The port originally preserved the live
+`.html` URLs exactly (`build.format: 'file'`). That has been reversed by
+choice: the site now serves extensionless URLs — `/privacy-policy`, not
+`/privacy-policy.html`.
+
+This is safe only because it ships with real redirects, which the GitHub Pages
+host cannot do. It therefore **commits the site to Cloudflare Pages** (or
+another host that honours `_redirects`). Deploying this build to GitHub Pages
+would 404 every indexed URL.
+
+What carries it:
+
+- `build.format: 'directory'` — `about.astro` emits `about/index.html`,
+  served at `/about`; `trailingSlash: 'never'` keeps canonicals bare.
+- `public/_redirects` — 13 rules, one per previously indexed URL, all 301.
+  Generated from the old `sitemap.xml`, so coverage is exact by construction.
+  **This file must ship with every deploy.** Losing it breaks every inbound
+  link and search result the site has.
+- `public/sitemap.xml` — same 13 URLs, extensionless, with the hand-curated
+  `lastmod` values carried over unchanged.
+- Every internal link and `canonicalPath` rewritten in one pass.
+
+Expect a few weeks of Search Console showing both URLs while Google follows
+the redirects and swaps the indexed path. Do not remove the 301s after that —
+external links and citations will keep using `.html` indefinitely.
 
 ## Deferred — genuine conflicts, NOT flattened
 
@@ -76,11 +103,12 @@ Once every page is ported and visually diffed, these can be revisited as a
 single deliberate design pass. Doing it now would mean changing pages nobody
 has looked at yet.
 
-## Two systems, not one
+## Three systems, not one
 
 Porting the homepage exposed something the service-page comparison could not:
 **index.html is a separate design system**, not a variant of the service one.
-They assign different values to the *same global selectors*.
+Porting the privacy policy turned up a third. Each assigns different values to
+the *same global selectors*.
 
 | Selector | Service pages | Homepage |
 |---|---|---|
@@ -95,6 +123,16 @@ They assign different values to the *same global selectors*.
 | `.spec-grid` / `.spec-card` | 2-up, gradient fill, plain list | 1fr 1fr, white fill, 4px top rule, `▸` markers, dashed rows |
 | focus offset | `3px` | `2px` |
 
+And the policy document differs again from both:
+
+| Selector | Service pages | Policy |
+|---|---|---|
+| `body` | `16.5px` / `1.6` | `16px` / `1.65` |
+| `.wrap` | `min(1080px, 100% - 48px)` | `min(900px, 100% - 48px)` |
+| `h1` | `clamp(2.45rem,5vw,4.6rem)` | `clamp(2.3rem,5vw,4rem)` |
+| `h2` | `clamp(1.85rem,3.2vw,3rem)` | `1.35rem`, `margin: 34px 0 9px` |
+| nav links | `.nav-links` | `.nav-actions`, last item boxed |
+
 `.spec-card` is the dangerous one: **identical class name, entirely different
 design.** A single shared stylesheet would have silently restyled the
 homepage's delivery-standards cards.
@@ -105,6 +143,7 @@ So the CSS is layered by system rather than merged:
   Deliberately holds nothing the two systems disagree on.
 - `service-system.css` — the 8-page baseline. Loaded by `ServiceLayout`.
 - `home-system.css` — the homepage's own base. Loaded by `HomeLayout`.
+- `policy-system.css` — long-form document base. Loaded by `PolicyLayout`.
 
 The two system sheets are never loaded together, so their shared class names
 cannot collide. Section-level CSS lives inside the component that owns it,
@@ -114,8 +153,18 @@ Blocks genuinely shared by both systems — `ContactDirect`, `PolicyNotice` —
 became components with their own scoped styles rather than being duplicated
 into each sheet.
 
-**Do not "unify" these two systems as a cleanup.** They are two deliberate
+**Do not "unify" these systems as a cleanup.** They are three deliberate
 designs. Merging them is a design decision for a human, taken after cutover.
+
+`Nav` carries one variant per system (`.nav-links` for service, its own
+spacing for home, `.nav-actions` for policy), and `Shell` exposes a named
+`hero` slot so a page header can sit outside `<main>` where the original had
+it there.
+
+Note on verification: Astro inlines stylesheets under ~4KB into the page
+rather than emitting a `<link>`. When checking which CSS a page ships, read
+both the linked bundles **and** the inline `<style>` blocks, or a correctly
+styled page will look like it is missing its stylesheet.
 
 ## File map
 
@@ -157,7 +206,7 @@ Styles are placed by *who uses them*: a section's CSS lives in its component
 and Astro scopes it; only what page content composes in slotted markup needs
 to be global, and that is split by system.
 
-## Homepage port — verification
+## Page ports — verification
 
 Built output vs the original `index.html`:
 
@@ -171,3 +220,18 @@ Built output vs the original `index.html`:
 Sections were componentised, not split into pages — see the reasoning in the
 migration discussion: every section is 25–201 words, and six of the ten already
 have fuller dedicated pages that they link to.
+
+`privacy-policy.html`, the first page through `PolicyLayout`:
+
+- **Text content identical** — 1111 words, plus the skip link.
+- **Link set identical** — 6 links, plus `#main-content`.
+- **Head tags identical**, including the absence of `twitter:title` and
+  `twitter:description` (this page never had them, so `BaseHead` makes both
+  opt-in rather than defaulting them from the title).
+- **No leakage** from the home or service systems.
+
+Ported: 2 of 13. Remaining: about, and the 10 service pages.
+
+Both pages re-verified after the extensionless switch: text still identical to
+the originals bar the skip link, canonicals now `/` and `/privacy-policy`, and
+every one of the 13 old URLs has a 301.

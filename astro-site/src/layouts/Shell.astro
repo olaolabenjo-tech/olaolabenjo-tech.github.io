@@ -50,6 +50,8 @@ const {
     <CookieBanner />
     <Nav links={navLinks} variant={variant} />
 
+    <slot name="hero" />
+
     <main id="main-content">
       <slot />
     </main>

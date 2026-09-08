@@ -4,8 +4,9 @@ import { defineConfig } from 'astro/config';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://bsgdataworks.com',
-  // Emit `about.html` rather than `about/index.html` so the live URLs
-  // (which are indexed and listed in sitemap.xml) survive the migration.
-  build: { format: 'file' },
+  // Extensionless URLs: `about.astro` -> `about/index.html`, served at
+  // `/about`. The previous `.html` paths are 301'd in public/_redirects —
+  // they are indexed, so those redirects must ship with every deploy.
+  build: { format: 'directory' },
   trailingSlash: 'never',
 });

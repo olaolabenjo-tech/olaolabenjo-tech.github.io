@@ -9,5 +9,6 @@ const props = Astro.props as Omit<ShellProps, 'variant'>;
 ---
 
 <Shell {...props} variant="service">
+  <slot name="hero" slot="hero" />
   <slot />
 </Shell>

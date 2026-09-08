@@ -5,11 +5,11 @@ interface Props {
   /** Nav links differ per page; each page passes its own set. */
   links?: NavLink[];
   homeHref?: string;
-  /** The homepage nav is styled differently from the service pages'. */
+  /** Each design system styles the nav differently. */
   variant?: SystemVariant;
 }
 
-const { links = [], homeHref = '/index.html', variant = 'service' } = Astro.props;
+const { links = [], homeHref = '/', variant = 'service' } = Astro.props;
 ---
 
 <nav class={variant} aria-label="Primary navigation">
@@ -18,7 +18,7 @@ const { links = [], homeHref = '/index.html', variant = 'service' } = Astro.prop
       <img class="logo-image" src="/assets/images/bsg-dataworks-logo.png" alt="" />
     </a>
     {links.length > 0 && (
-      <div class="nav-links">
+      <div class={variant === 'policy' ? 'nav-actions' : 'nav-links'}>
         {links.map((link) => <a href={link.href}>{link.label}</a>)}
       </div>
     )}
@@ -44,7 +44,7 @@ const { links = [], homeHref = '/index.html', variant = 'service' } = Astro.prop
   }
 
   .nav-inner { display: flex; align-items: center; justify-content: space-between }
-  .nav-links { display: flex; align-items: center }
+  .nav-links, .nav-actions { display: flex; align-items: center }
   .nav-links a { color: var(--ink) }
 
   /* ── Service pages ────────────────────────────────────────────────── */
@@ -69,6 +69,25 @@ const { links = [], homeHref = '/index.html', variant = 'service' } = Astro.prop
 
   @media (max-width: 860px) {
     nav.home .nav-links { display: none }
+  }
+
+  /* ── Policy pages ─────────────────────────────────────────────────── */
+  nav.policy {
+    z-index: 30;
+    background: rgba(251, 250, 247, .96);
+    backdrop-filter: blur(8px);
+  }
+  nav.policy .nav-inner { gap: 20px; min-height: 68px }
+  nav.policy .nav-actions { gap: 18px; font-weight: 600; font-size: .9rem }
+  nav.policy .nav-actions a:last-child {
+    display: inline-flex;
+    padding: 9px 13px;
+    border: 1px solid var(--green);
+    border-radius: 6px;
+  }
+
+  @media (max-width: 560px) {
+    nav.policy .nav-actions a:first-child { display: none }
   }
 
   /* ── Both ─────────────────────────────────────────────────────────── */

@@ -22,8 +22,8 @@ const {
   ogTitle = title,
   ogDescription = description,
   ogType = 'website',
-  twitterTitle = title,
-  twitterDescription = description,
+  twitterTitle,
+  twitterDescription,
   twitterCard = 'summary',
   googleSiteVerification,
 } = Astro.props;
@@ -54,8 +54,8 @@ const canonical = new URL(canonicalPath, Astro.site).href;
 <meta property="og:url" content={canonical} />
 
 <meta name="twitter:card" content={twitterCard} />
-<meta name="twitter:title" content={twitterTitle} />
-<meta name="twitter:description" content={twitterDescription} />
+{twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
+{twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
 
 <link rel="stylesheet" href="/assets/fonts/fonts.css" />
 <link rel="icon" type="image/png" href="/assets/images/bsg-dataworks-favicon.png" />
