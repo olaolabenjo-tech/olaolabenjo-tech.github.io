@@ -230,7 +230,23 @@ have fuller dedicated pages that they link to.
   opt-in rather than defaulting them from the title).
 - **No leakage** from the home or service systems.
 
-Ported: 2 of 13. Remaining: about, and the 10 service pages.
+`african-speech-data`, the first page through `ServiceLayout`:
+
+- **Text content identical** — 957 words, plus the skip link.
+- **Link set identical** once `.html` is normalised away.
+- **Head tags and JSON-LD identical**, bar the intended extensionless
+  canonical and `og:url`.
+- **No leakage** from the home or policy systems.
+- The deferred `h1` conflict was handled as designed: the shared system keeps
+  the majority `clamp(2.45rem,5vw,4.6rem)/760px`, and this page overrides to
+  `4.75rem/750px` in a scoped `<style>`. Astro's scoping wins on specificity,
+  so no `!important` and no effect on other pages. `.language-status` and the
+  three `.status-*` pills are unique to this page and live with it.
+
+Ported: 3 of 13. Remaining: about, and 9 service pages.
+
+All three layouts are now exercised by a real page, so the remaining ports are
+repetition rather than design work.
 
 Both pages re-verified after the extensionless switch: text still identical to
 the originals bar the skip link, canonicals now `/` and `/privacy-policy`, and
