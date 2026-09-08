@@ -80,6 +80,118 @@ Expect a few weeks of Search Console showing both URLs while Google follows
 the redirects and swaps the indexed path. Do not remove the 301s after that —
 external links and citations will keep using `.html` indefinitely.
 
+## Fixed — mobile navigation
+
+The live site hides `.nav-links` below 760–860px on **12 of 13 pages with no
+replacement**: on a phone the primary navigation simply does not exist. That
+is a pre-existing defect, not something the port introduced.
+
+`Nav.astro` now renders a real toggle button — `type="button"`,
+`aria-expanded`, `aria-controls`, `aria-label`, 44×44px hit target — that
+reveals the links as a stacked panel. Escape closes it and returns focus to
+the button; following a link closes it too.
+
+Two deliberate choices:
+
+- **Progressive enhancement.** CSS collapses the menu only when the nav
+  carries a `js` class, which the script adds. If the script never runs the
+  links stay visible (stacked) rather than becoming unreachable — failure
+  falls back to *more* navigation, not none.
+- **The policy nav is untouched.** It carries two links and already keeps its
+  CTA visible on small screens, so it needs no toggle.
+
+Cost: one 1.4KB inline script. The pages still ship no external JS and no
+framework runtime.
+
+## Information architecture — language coverage
+
+The first deliberate IA change of the migration, made on request.
+
+`#languages` was 89 words on the homepage while four substantial language
+pages already existed (957–1122 words each). Moving those 89 words to their
+own URL unchanged would have created a thin page competing with all four, so
+it became a **hub** instead: `/language-coverage`, 552 words, carrying the
+three availability tiers plus signposts to every language page.
+
+All copy is drawn from what the site already published — the tiers verbatim
+from `index.html`, the page summaries from each target's own `og:description`.
+Nothing about capability or availability was invented.
+
+The homepage keeps a 43-word teaser linking out, following the pattern
+`#about` already set. Nothing linked to `#languages` from another page, so
+no inbound links broke; the anchor still exists for the two same-page links.
+
+The header gained a **Languages dropdown** listing the hub and the four
+language pages, which also surfaces pages that were previously reachable only
+from body copy. The standalone "Speech data" nav item folded into it.
+
+`/language-coverage` is new, so it needs no redirect; it was added to
+`sitemap.xml` (now 14 URLs).
+
+## Unified header
+
+The originals shipped **three different headers** — home (solid background, no
+blur, its own padding, 860px breakpoint), service (sticky, translucent,
+blurred, 68px, 800px breakpoint) and policy (`.nav-actions`, a boxed CTA, a
+560px breakpoint) — and on top of that **every page declared its own link
+set**, mostly in-page anchors. The header visibly changed as you moved
+between pages.
+
+Now there is one header everywhere, byte-identical across pages (verified by
+hashing the rendered `<nav>`):
+
+- **One treatment**, the majority one: sticky, translucent, blurred, 68px.
+- **One menu**, `src/config/navigation.ts`. Every target is a real URL, since
+  the same menu renders on every page — `#faq` would be dead everywhere but
+  one. The two homepage anchors are absolute (`/#services`, `/#contact`).
+- **One breakpoint**, 900px, raised from 800/860 because the shared menu is
+  wider than any single page's used to be.
+- `.nav-inner` carries **its own measure** (`min(1080px, 100% - 48px)`)
+  instead of the page's `.wrap`, which differs per design system — the policy
+  pages' `.wrap` is 900px, so reusing it would have made the header narrower
+  there.
+
+**What this trades away.** Service-page navs doubled as an in-page table of
+contents (`#scope`, `#process`, `#faq`). A site-wide menu cannot do that.
+If per-page section navigation is wanted back, it belongs as a secondary
+in-page element, not in the header.
+
+Also folded in: the policy header's boxed CTA became the standard green
+emphasis on the last item, and the standalone "Speech data" link moved into
+the Languages dropdown.
+
+`Nav` owns the default (`links = SITE_NAV`); `Shell` passes the prop through
+undefined rather than defaulting it to `[]`, which would silently override.
+
+## Current-page indicator
+
+The header marks where you are, using `aria-current="page"` — the correct
+attribute, so screen readers announce it, and the styling hangs off the same
+hook rather than a parallel class.
+
+Rules:
+
+- **Section links never light up.** `/#services` and `/#contact` point at part
+  of a page, not a page; treating them as "current" would light up every
+  homepage anchor at once.
+- **A dropdown parent inherits from its children.** Landing on
+  `/african-speech-data` marks both the child link and the `Languages` toggle
+  (`data-current` — `aria-current` belongs on links, not on a button that
+  opens a menu).
+- **The logo carries it on `/`**, since the menu has no "Home" item and the
+  logo is the only link home.
+- Pages absent from the menu (`/privacy-policy`, reachable from the footer)
+  correctly mark nothing.
+
+Styling differs by context: desktop gets a green underline anchored 6px under
+the text — deliberately not pinned to the bar's bottom edge, which would
+depend on vertical-centring maths that changes with the bar height. Mobile
+gets an inset left rule, because an underline would collide with the next row
+in the stacked panel.
+
+Trailing slashes are normalised before matching, so `/about/` still resolves
+as current even though `trailingSlash: 'never'` means it should not occur.
+
 ## Deferred — genuine conflicts, NOT flattened
 
 These are real value differences between pages. Flattening any of them would
@@ -243,7 +355,24 @@ have fuller dedicated pages that they link to.
   so no `!important` and no effect on other pages. `.language-status` and the
   three `.status-*` pills are unique to this page and live with it.
 
-Ported: 3 of 13. Remaining: about, and 9 service pages.
+`about`, ported from the original `about.html`:
+
+- **Body content below the header is byte-identical** — 933 words either side.
+  The only whole-page difference is the unified header's larger menu and the
+  skip link.
+- **Head tags identical**, bar the extensionless canonical and `og:url`.
+- The original carried no JSON-LD, so none was invented.
+- Its contact block is worded differently from the shared `ContactDirect`
+  component ("Start a dataset brief by email" vs "Prefer to write directly?"),
+  so that markup stays local to the page rather than being forced into the
+  component.
+- `about.html` was the newest hand-written page and had drifted from the
+  service baseline in a dozen small ways (`h1` 2.55/4.65/770, `h2` 1.8,
+  `h3` 1.16, `.eyebrow` tracking, hero padding and grid, `.section-head`
+  measure, `.contact-band` padding, 880/760 breakpoints). All of it is
+  page-scoped, exactly as the deferred-conflicts table prescribes.
+
+Ported: 5 of 13. Remaining: 8 service pages.
 
 All three layouts are now exercised by a real page, so the remaining ports are
 repetition rather than design work.

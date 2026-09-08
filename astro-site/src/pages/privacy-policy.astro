@@ -4,7 +4,6 @@
   privacy-policy.html — only internal hrefs were made root-absolute.
 */
 import PolicyLayout from '../layouts/PolicyLayout.astro';
-import type { NavLink } from '../types';
 
 const navLinks: NavLink[] = [
   { href: '/', label: 'Home' },
@@ -17,7 +16,6 @@ const navLinks: NavLink[] = [
   description="Read the BSG DataWorks Privacy Policy, including information about contributor data, optional analytics consent, retention, international transfers, and your privacy rights."
   canonicalPath="/privacy-policy"
   ogDescription="Privacy information for BSG DataWorks contributors and website visitors."
-  navLinks={navLinks}
   footerVariant="service"
 >
   <header slot="hero" class="page-hero">

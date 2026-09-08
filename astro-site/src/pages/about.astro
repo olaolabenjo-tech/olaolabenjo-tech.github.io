@@ -1,0 +1,210 @@
+---
+/*
+  Ported from about.html. Body content is carried over verbatim; only internal
+  hrefs changed (root-absolute and extensionless).
+
+  about.html was the newest of the hand-written pages and had drifted from the
+  service baseline in a dozen small ways. Per DESIGN-DECISIONS.md those deltas
+  stay page-scoped rather than shifting the shared system under eleven other
+  pages.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import PolicyNotice from '../components/PolicyNotice.astro';
+---
+
+<ServiceLayout
+  title="About BSG DataWorks | African AI Training Data"
+  description="Learn about BSG DataWorks, a Nigerian AI-training data company providing ethically sourced African speech, text, image, and video data with consent, provenance, and licensing support."
+  canonicalPath="/about"
+  ogDescription="Learn how BSG DataWorks builds ethically sourced African AI-training data with consent, provenance, quality, and licensing support."
+  twitterTitle="About BSG DataWorks | African AI Training Data"
+  twitterDescription="African AI-training data with consent, provenance, quality, and licensing support."
+  footerVariant="corporate"
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">About BSG DataWorks</p>
+        <h1>Teaching AI to understand <em>African voices</em> — ethically, and from the ground up.</h1>
+        <p class="hero-copy">BSG DataWorks is committed to building ethically sourced, human-centred datasets for AI systems that need to work for African users. We collect, curate, and annotate human-sourced speech, text, image, and video in African-accented English and indigenous African languages—data that has often been under-represented in the material used to train and evaluate AI.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Start a dataset brief</a>
+          <a class="btn btn-secondary" href="/">Explore data and services</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="BSG DataWorks overview">
+        <p class="eyebrow">Our focus</p>
+        <h2>Responsible African AI-training data.</h2>
+        <p>From collection through licensing, BSG supports data routes that technical and legal teams can evaluate together.</p>
+        <ul class="panel-list">
+          <li>Human-sourced data</li>
+          <li>Documented contributor consent</li>
+          <li>Traceable provenance and practical quality workflows</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section aria-labelledby="gap-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">The gap we exist to close</p>
+        <h2 id="gap-heading">Data that better reflects African voices, languages, and contexts.</h2>
+      </div>
+      <div class="body-copy">
+        <p>Modern AI learns from examples. Yet many widely available datasets give greater weight to American and European varieties of speech and language, leaving African accents, languages, and everyday contexts under-represented. As a result, systems may not reliably reflect how Africans speak and communicate. African languages require deliberate, properly documented collection. That is the gap BSG DataWorks exists to help close.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="what-we-do" aria-labelledby="what-we-do-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What we do</p>
+        <h2 id="what-we-do-heading">Collection, preparation, and licensing support for African AI data.</h2>
+        <p>We provide African-language and African-accented datasets across four data types: speech and voice, text, image, and video. Our work is available through commissioned collection, annotation and labelling, and commercial dataset licensing. Nigerian-accented English and Yorùbá speech samples are available for evaluation; Igbo, Hausa, and Nigerian Pidgin are in the collection pipeline.</p>
+      </div>
+      <div class="data-grid" aria-label="Four data types">
+        <article class="data-card"><span class="icon">01 · Data type</span><h3>Speech and voice</h3><p>Human-sourced speech, voice, transcription, and related language-data work.</p></article>
+        <article class="data-card"><span class="icon">02 · Data type</span><h3>Text</h3><p>Language resources, transcripts, and text data for AI training and evaluation.</p></article>
+        <article class="data-card"><span class="icon">03 · Data type</span><h3>Image</h3><p>Human-generated image data collected and prepared to project requirements.</p></article>
+        <article class="data-card"><span class="icon">04 · Data type</span><h3>Video</h3><p>Real-world video data and client-specific collection projects for African languages and dialects.</p></article>
+      </div>
+      <div class="body-copy" style="margin-top:32px;color:#EAF2EC">
+        <p>We help organisations obtain African data that reflects real languages, markets, and user contexts, supported by documented contributor consent, traceable provenance, and practical quality workflows. Based in Nigeria and working across West Africa, BSG combines linguistic-network experience built since 2005 with focused data collection, preparation, and compliance support for technical and legal teams. Our initial specialization is Nigerian English and Yorùbá, with plans to expand into Nigerian Pidgin, Igbo, Hausa, Kanuri and other African languages.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="who-we-serve" aria-labelledby="who-we-serve-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Who we serve</p>
+        <h2 id="who-we-serve-heading">For teams building technology that needs to understand how Africans communicate.</h2>
+        <p>Our datasets support teams building technology that needs to understand how Africans actually speak and communicate, including the following applications:</p>
+      </div>
+      <div class="use-grid" style="color:var(--ink)">
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Speech recognition and voice AI</h3><p style="color:var(--slate)">Including language-specific transcription, annotation and linguistic QA, voice assistants, call-centre automation for African languages and accents, natural and structured conversations for conversational AI and speech technologies.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Text-to-speech and dubbing</h3><p style="color:var(--slate)">Including African-language voices for media, education, and accessibility.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Language models and translation</h3><p style="color:var(--slate)">Including training and evaluation data for systems serving African users and languages.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Research and academia</h3><p style="color:var(--slate)">Including documented data for African language-technology and NLP research.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">AI Training Dataset Collection</h3><p style="color:var(--slate)">Including custom collection of human-generated audio, video, image and language data.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Video Dataset Collection</h3><p style="color:var(--slate)">Client-specific collection projects for African languages and dialects including human activities, lifestyle scenarios and other real-world video data.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Dataset Quality Assurance</h3><p style="color:var(--slate)">Including technical, linguistic, content and metadata QA.</p></article>
+        <article class="use-card" style="border-color:var(--line);background:#fff"><h3 style="color:var(--ink)">Dataset Licensing</h3><p style="color:var(--slate)">Commercial licensing of BSG DataWorks datasets to AI and technology companies.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section style="background:#F4F8F4;border-top:1px solid var(--line);border-bottom:1px solid var(--line)" aria-labelledby="trust-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">What sets us apart</p>
+        <h2 id="trust-heading">A responsible route to African AI-training data.</h2>
+      </div>
+      <div class="trust-grid">
+        <article class="trust-card"><span class="marker">01 · Consent</span><h3>Consent-based, always.</h3><p>Every dataset is sourced from real, consenting contributors—never scraped from the internet or artificially generated.</p></article>
+        <article class="trust-card"><span class="marker">02 · Compliance</span><h3>Compliance-ready.</h3><p>BSG DataWorks is registered with the Nigeria Data Protection Commission (NDPC/DCP/13596), with data-protection practices designed to support serious buyer review.</p></article>
+        <article class="trust-card"><span class="marker">03 · Local depth</span><h3>Genuine local depth.</h3><p>We work through native-speaker and linguist networks to source data with the language, accent, and contextual detail a project requires.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" aria-labelledby="team-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Who you are dealing with</p>
+        <h2 id="team-heading">A language-services foundation with technical delivery support.</h2>
+      </div>
+      <div class="people">
+        <div class="people-mark" aria-hidden="true">OO</div>
+        <div class="people-copy">
+          <h3>Olayemi Olabenjo</h3>
+          <p class="role">Managing Consultant</p>
+          <ul class="capability-list" aria-label="BSG DataWorks execution capability">
+            <li>20+ years language operations</li>
+            <li>African-language expertise</li>
+            <li>Translation and localisation</li>
+            <li>Speech data and annotation</li>
+            <li>AI and data-science requirements</li>
+            <li>Linguist and contributor networks</li>
+          </ul>
+          <p>BSG DataWorks was founded by Olayemi Olabenjo, Managing Consultant. For more than two decades, he has led Nigerian language-operations work spanning translation, localisation, transcription, speech-data collection, and annotation. This gives BSG a practical foundation for organising the people, language expertise, consent records, and quality checks that an African data-collection project requires.</p>
+          <p>His experience connects African-language expertise and contributor-network coordination with the AI and data-science requirements behind training and evaluation data. The result is an operating approach that treats collection, annotation, documentation, and quality assurance as connected parts of one delivery process.</p>
+          <p>The founder is joined by four fellow directors, three of whom are software engineers. Together with a small technical team, they provide the operational and technical support behind collection, quality control, and delivery.</p>
+          <p>Together, the team is focused on doing this work properly: with genuine consent, careful curation, and compliance built in from the start.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-band">
+        <p class="eyebrow" style="color:#E6C98E">Work with us</p>
+        <h2>Start a dataset brief by email.</h2>
+        <p>Whether you need a commissioned collection, standalone annotation, or a licensed dataset, BSG DataWorks would be glad to help. The best place to begin is a short dataset brief.</p>
+        <div class="contact-direct" aria-label="Direct contact options">
+          <p><strong>Start a dataset brief by email:</strong> <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a></p>
+          <p><strong>WhatsApp only:</strong> <a href="https://wa.me/2348067904903" target="_blank" rel="noopener" aria-label="Message BSG DataWorks on WhatsApp — opens WhatsApp">+234 806 790 4903</a></p>
+        </div>
+        <a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=Dataset%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Dataset%20type%20and%20intended%20model%20use%3A%0A-%20Languages%2C%20markets%2C%20or%20participant%20profile%3A%0A-%20Target%20volume%20and%20preferred%20format%3A%0A-%20Desired%20delivery%20timeline%3A%0A-%20Rights%2C%20governance%2C%20or%20compliance%20requirements%3A%0A%0AThanks%2C%0A" aria-label="Start a dataset brief by email — opens your email application">Start a dataset brief by email</a>
+      </div>
+    </div>
+  </section>
+  
+
+  <PolicyNotice />
+</ServiceLayout>
+
+<style>
+  /* Typography deltas unique to this page. */
+  h1 { font-size: clamp(2.55rem, 5vw, 4.65rem); max-width: 770px; margin: 14px 0 22px }
+  h2 { font-size: clamp(1.8rem, 3.2vw, 3rem) }
+  h3 { font-size: 1.16rem }
+  .eyebrow { letter-spacing: .1em }
+
+  .hero { padding: 82px 0 58px; border-bottom: 1px solid var(--line) }
+  .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(275px, .75fr); gap: 52px }
+  .hero-copy { font-size: 1.1rem; max-width: 710px }
+  .hero-panel { padding: 28px }
+  .hero-panel h2 { font-size: 1.42rem; margin-top: 9px }
+  .panel-list li { font-size: .93rem }
+
+  .section-head { max-width: 760px }
+  .section-head > p:last-child { color: var(--slate); max-width: 720px }
+  .band .section-head > p:last-child { color: #EAF2EC }
+
+  .contact-band { padding: 44px }
+  .contact-band > p { max-width: 670px }
+
+  /* This page centres its contact block and words it differently from the
+     shared ContactDirect component, so the markup stays local. */
+  .contact-direct {
+    max-width: 680px;
+    margin: 0 auto 22px;
+    padding: 14px 16px;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, .42);
+    border-radius: 10px;
+    background: rgba(255, 255, 255, .08);
+  }
+  .contact-direct p { color: #fff; font-size: .95rem }
+  .contact-direct p + p { margin-top: 4px }
+  .contact-direct a {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 880px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 28px }
+  }
+
+  @media (max-width: 760px) {
+    .hero { padding: 58px 0 42px }
+    .contact-band { padding: 34px 22px }
+  }
+</style>

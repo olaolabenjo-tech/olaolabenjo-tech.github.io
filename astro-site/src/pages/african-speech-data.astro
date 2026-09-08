@@ -6,15 +6,6 @@
   internal hrefs changed (root-absolute and extensionless).
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
-import type { NavLink } from '../types';
-
-const navLinks: NavLink[] = [
-  { href: '#scope', label: 'What we collect' },
-  { href: '#process', label: 'How it works' },
-  { href: '#languages', label: 'Languages' },
-  { href: '#faq', label: 'FAQ' },
-  { href: '#contact', label: 'Start a brief' },
-];
 
 const schema = {
   '@context': 'https://schema.org',
@@ -38,7 +29,6 @@ const schema = {
   ogDescription="Commission rights-documented African speech data with collection, transcription, annotation, QA and licensing support."
   twitterTitle="African Speech Data for AI Training | BSG DataWorks"
   twitterDescription="Custom African speech collection, transcription, annotation and commercial licensing for AI training."
-  navLinks={navLinks}
   footerVariant="service"
   schema={schema}
 >

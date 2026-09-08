@@ -1,38 +1,211 @@
 ---
-import type { NavLink, SystemVariant } from '../types';
+import { SITE_NAV } from '../config/navigation';
+import type { NavLink } from '../types';
 
 interface Props {
-  /** Nav links differ per page; each page passes its own set. */
+  /** Defaults to the site-wide menu; pass only to override deliberately. */
   links?: NavLink[];
   homeHref?: string;
-  /** Each design system styles the nav differently. */
-  variant?: SystemVariant;
 }
 
-const { links = [], homeHref = '/', variant = 'service' } = Astro.props;
+const { links = SITE_NAV, homeHref = '/' } = Astro.props;
+
+// `trailingSlash: 'never'`, but normalise anyway so '/about/' still matches.
+const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+/**
+ * Section links like `/#services` point at part of a page, not a page, so they
+ * never count as the current page — otherwise every homepage anchor would
+ * light up at once.
+ */
+function isCurrent(href: string): boolean {
+  if (href.includes('#')) return false;
+  return href.replace(/\/+$/, '') === current || (href === '/' && current === '/');
+}
+
+const activeGroups = new Set(
+  links.filter((link) => link.children?.some((child) => isCurrent(child.href))).map((link) => link.label)
+);
 ---
 
-<nav class={variant} aria-label="Primary navigation">
-  <div class:list={['nav-inner', variant === 'service' && 'wrap']}>
-    <a class="logo" href={homeHref} aria-label="BSG DataWorks home">
+<nav aria-label="Primary navigation" data-collapsible>
+  <div class="nav-inner">
+    <a
+      class="logo"
+      href={homeHref}
+      aria-label="BSG DataWorks home"
+      aria-current={isCurrent(homeHref) ? 'page' : undefined}
+    >
       <img class="logo-image" src="/assets/images/bsg-dataworks-logo.png" alt="" />
     </a>
+
+    <button
+        class="nav-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+        aria-label="Menu"
+      >
+        <span class="bar bar-1"></span>
+        <span class="bar bar-2"></span>
+        <span class="bar bar-3"></span>
+    </button>
+
     {links.length > 0 && (
-      <div class={variant === 'policy' ? 'nav-actions' : 'nav-links'}>
-        {links.map((link) => <a href={link.href}>{link.label}</a>)}
+      <div class="nav-links" id="primary-nav">
+        {links.map((link, index) =>
+          link.children?.length ? (
+            <div class="nav-group">
+              <button
+                class="nav-group-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls={`nav-submenu-${index}`}
+                data-current={activeGroups.has(link.label) ? 'true' : undefined}
+              >
+                {link.label}
+                <span class="caret" aria-hidden="true"></span>
+              </button>
+              <div class="nav-submenu" id={`nav-submenu-${index}`}>
+                {link.children.map((child) => (
+                  <a href={child.href} aria-current={isCurrent(child.href) ? 'page' : undefined}>{child.label}</a>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>{link.label}</a>
+          )
+        )}
       </div>
     )}
   </div>
 </nav>
 
+<script is:inline>
+  /*
+    Mobile nav toggle. Kept inline and tiny so the pages stay effectively
+    script-free. Progressive enhancement: the `js` class is what enables the
+    collapsed state in CSS, so if this never runs the links stay visible
+    (stacked) rather than becoming unreachable — which is the bug this fixes.
+  */
+  (function () {
+    var navs = document.querySelectorAll('nav[data-collapsible]');
+    for (var i = 0; i < navs.length; i++) {
+      (function (nav) {
+        var button = nav.querySelector('.nav-toggle');
+        var list = nav.querySelector('.nav-links');
+        if (!button || !list) return;
+
+        nav.classList.add('js');
+
+        function setOpen(open) {
+          nav.setAttribute('data-open', open ? 'true' : 'false');
+          button.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        setOpen(false);
+
+        button.addEventListener('click', function () {
+          setOpen(nav.getAttribute('data-open') !== 'true');
+        });
+
+        // Jumping to an anchor should close the menu behind you.
+        list.addEventListener('click', function (event) {
+          if (event.target.closest('a')) setOpen(false);
+        });
+
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape' && nav.getAttribute('data-open') === 'true') {
+            setOpen(false);
+            button.focus();
+          }
+        });
+      }(navs[i]));
+    }
+
+    // Dropdown groups. Independent of the hamburger: they work the same way
+    // in the desktop bar and inside the open mobile panel.
+    var groups = document.querySelectorAll('.nav-group');
+    for (var g = 0; g < groups.length; g++) {
+      (function (group) {
+        var toggle = group.querySelector('.nav-group-toggle');
+        var menu = group.querySelector('.nav-submenu');
+        if (!toggle || !menu) return;
+
+        function setOpen(open) {
+          group.setAttribute('data-open', open ? 'true' : 'false');
+          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        }
+        setOpen(false);
+
+        toggle.addEventListener('click', function (event) {
+          event.stopPropagation();
+          var willOpen = group.getAttribute('data-open') !== 'true';
+          closeAllGroups();
+          setOpen(willOpen);
+        });
+
+        menu.addEventListener('click', function (event) {
+          if (event.target.closest('a')) setOpen(false);
+        });
+
+        document.addEventListener('keydown', function (event) {
+          if (event.key === 'Escape' && group.getAttribute('data-open') === 'true') {
+            setOpen(false);
+            toggle.focus();
+          }
+        });
+      }(groups[g]));
+    }
+
+    function closeAllGroups() {
+      for (var k = 0; k < groups.length; k++) {
+        groups[k].setAttribute('data-open', 'false');
+        var t = groups[k].querySelector('.nav-group-toggle');
+        if (t) t.setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // A click anywhere else dismisses an open dropdown.
+    document.addEventListener('click', function (event) {
+      if (!event.target.closest('.nav-group')) closeAllGroups();
+    });
+
+    (function () {
+    }());
+  }());
+</script>
+
 <style>
-  nav { position: sticky; top: 0; border-bottom: 1px solid var(--line) }
+  /*
+    One header for the whole site. The originals shipped three different navs
+    (home / service / policy); they are unified here at the majority
+    treatment — sticky, translucent, blurred — so the header never shifts
+    between pages. See DESIGN-DECISIONS.md § "Unified header".
+  */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(251, 250, 247, .96);
+    border-bottom: 1px solid var(--line);
+    backdrop-filter: blur(8px);
+  }
 
   /*
-    The approved logo lock-up. The originals kept a text fallback rule that
-    every page then overrode with `!important`; all 13 render the image, so
-    the dead rule is dropped rather than carried forward.
+    The header keeps its own measure rather than the page's `.wrap`, which
+    differs per design system (1080px vs the policy pages' 900px). Without
+    this the header width would change from page to page.
   */
+  .nav-inner {
+    width: min(1080px, calc(100% - 48px));
+    margin: 0 auto;
+    min-height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+  }
+
   .logo { display: inline-flex; align-items: center; line-height: 1; flex: 0 0 auto }
   .logo:hover { text-decoration: none }
   .logo-image {
@@ -43,56 +216,144 @@ const { links = [], homeHref = '/', variant = 'service' } = Astro.props;
     object-position: left center;
   }
 
-  .nav-inner { display: flex; align-items: center; justify-content: space-between }
-  .nav-links, .nav-actions { display: flex; align-items: center }
-  .nav-links a { color: var(--ink) }
+  .nav-links { display: flex; align-items: center; gap: 18px; font-size: .88rem; font-weight: 500 }
+  .nav-links > a { color: var(--ink) }
+  .nav-links > a:last-child { color: var(--green); font-weight: 700 }
 
-  /* ── Service pages ────────────────────────────────────────────────── */
-  nav.service {
-    z-index: 30;
-    background: rgba(251, 250, 247, .96);
-    backdrop-filter: blur(8px);
+  /* ── Current page ─────────────────────────────────────────────────── */
+  .nav-links > a[aria-current="page"],
+  .nav-group-toggle[data-current="true"] { color: var(--green-deep); font-weight: 700 }
+
+  /* ── Toggle button ────────────────────────────────────────────────── */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 44px;
+    height: 44px;
+    padding: 0 11px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
   }
-  nav.service .nav-inner { gap: 22px; min-height: 68px }
-  nav.service .nav-links { gap: 18px; font-size: .88rem; font-weight: 500 }
-  nav.service .nav-links a:last-child { color: var(--green); font-weight: 700 }
-
-  @media (max-width: 800px) {
-    nav.service .nav-links { display: none }
+  .bar {
+    display: block;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform .18s ease, opacity .18s ease;
   }
+  [aria-expanded="true"] .bar-1 { transform: translateY(7px) rotate(45deg) }
+  [aria-expanded="true"] .bar-2 { opacity: 0 }
+  [aria-expanded="true"] .bar-3 { transform: translateY(-7px) rotate(-45deg) }
 
-  /* ── Homepage ─────────────────────────────────────────────────────── */
-  nav.home { z-index: 50; background: var(--paper) }
-  nav.home .nav-inner { padding: 14px 24px; max-width: 1080px; margin: 0 auto }
-  nav.home .nav-links { gap: 20px; font-size: .9rem; font-weight: 500 }
-  nav.home .nav-links a:hover { color: var(--green); text-decoration: none }
+  /* ── Dropdown groups ──────────────────────────────────────────────── */
+  .nav-group { position: relative }
 
-  @media (max-width: 860px) {
-    nav.home .nav-links { display: none }
-  }
-
-  /* ── Policy pages ─────────────────────────────────────────────────── */
-  nav.policy {
-    z-index: 30;
-    background: rgba(251, 250, 247, .96);
-    backdrop-filter: blur(8px);
-  }
-  nav.policy .nav-inner { gap: 20px; min-height: 68px }
-  nav.policy .nav-actions { gap: 18px; font-weight: 600; font-size: .9rem }
-  nav.policy .nav-actions a:last-child {
+  .nav-group-toggle {
     display: inline-flex;
-    padding: 9px 13px;
-    border: 1px solid var(--green);
-    border-radius: 6px;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    background: none;
+    padding: 0;
+    color: var(--ink);
+    font: inherit;
+    cursor: pointer;
+  }
+  .nav-group-toggle:hover { color: var(--green) }
+
+  .caret {
+    width: 0;
+    height: 0;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    transition: transform .18s ease;
+  }
+  [aria-expanded="true"] .caret { transform: rotate(180deg) }
+
+  .nav-submenu { display: none; flex-direction: column }
+  [data-open="true"] > .nav-submenu { display: flex }
+
+  /* ── Desktop ──────────────────────────────────────────────────────── */
+  @media (min-width: 901px) {
+    .nav-submenu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      z-index: 40;
+      min-width: 240px;
+      padding: 8px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      box-shadow: 0 14px 34px rgba(20, 35, 28, .13);
+    }
+    .nav-submenu a {
+      padding: 9px 10px;
+      border-radius: 6px;
+      color: var(--ink);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .nav-submenu a:hover { background: var(--mist); color: var(--green-deep); text-decoration: none }
+    .nav-submenu a[aria-current="page"] { background: var(--mist); color: var(--green-deep); font-weight: 700 }
+
+    /* An underline reads as "you are here" without competing with the
+       green weight already used for the call to action. */
+    .nav-links > a[aria-current="page"],
+    .nav-group-toggle[data-current="true"] {
+      position: relative;
+    }
+    .nav-links > a[aria-current="page"]::after,
+    .nav-group-toggle[data-current="true"]::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      height: 3px;
+      background: var(--green);
+    }
+  }
+
+  /* ── Mobile ───────────────────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .nav-toggle { display: flex }
+    .nav-inner { flex-wrap: wrap }
+    nav.js .nav-links { display: none }
+    nav.js[data-open="true"] .nav-links { display: flex }
+    .nav-links {
+      flex-basis: 100%;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2px;
+      padding-bottom: 10px;
+    }
+    .nav-links > a { padding: 10px 0; font-size: .95rem }
+
+    .nav-group { width: 100%; position: static }
+    .nav-group-toggle { width: 100%; justify-content: space-between; padding: 10px 0; font-size: .95rem }
+    .nav-submenu { padding: 0 0 6px 14px; border-left: 2px solid var(--line); margin-bottom: 6px }
+    .nav-submenu a { padding: 8px 0; font-size: .92rem; color: var(--slate) }
+    .nav-submenu a[aria-current="page"] { color: var(--green-deep); font-weight: 700 }
+
+    /* On mobile the panel is a list, so mark the current row with a rule
+       rather than an underline that would collide with the next item. */
+    .nav-links > a[aria-current="page"],
+    .nav-group-toggle[data-current="true"] {
+      box-shadow: inset 3px 0 0 var(--green);
+      padding-left: 10px;
+    }
   }
 
   @media (max-width: 560px) {
-    nav.policy .nav-actions a:first-child { display: none }
-  }
-
-  /* ── Both ─────────────────────────────────────────────────────────── */
-  @media (max-width: 560px) {
-    .nav-inner { padding-top: 8px; padding-bottom: 8px }
+    .nav-inner { width: min(100% - 34px, 1080px); padding-top: 8px; padding-bottom: 8px }
     .logo-image { width: 158px; height: 52px }
   }
 </style>

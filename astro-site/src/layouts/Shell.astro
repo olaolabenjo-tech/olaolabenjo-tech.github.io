@@ -30,7 +30,7 @@ export interface ShellProps {
 }
 
 const {
-  navLinks = [],
+  navLinks,
   footerVariant = 'corporate',
   schema,
   variant = 'service',
@@ -48,7 +48,7 @@ const {
     <a class="skip-link" href="#main-content">Skip to main content</a>
 
     <CookieBanner />
-    <Nav links={navLinks} variant={variant} />
+    <Nav links={navLinks} />
 
     <slot name="hero" />
 

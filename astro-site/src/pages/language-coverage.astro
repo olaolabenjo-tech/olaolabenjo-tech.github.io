@@ -1,0 +1,232 @@
+---
+/*
+  Language coverage hub.
+
+  Consolidates the availability tiers that used to sit on the homepage (89
+  words, too thin for its own URL) and signposts the four existing
+  language pages. All claims are carried over from copy already published on
+  the site — the tiers verbatim from index.html, the page summaries from each
+  target page's own og:description.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+
+const TIERS = [
+  {
+    status: 'AVAILABLE FOR EVALUATION',
+    statusClass: 's-live',
+    langs: 'Nigerian-accented English · Yorùbá',
+    types: 'Scripted conversational-style & voice-over speech with transcripts; spontaneous speech via bespoke collection',
+    note: 'Samples ready to evaluate today',
+  },
+  {
+    status: 'IN PIPELINE',
+    statusClass: 's-pipe',
+    langs: 'Igbo · Hausa · Nigerian Pidgin',
+    types: 'Speech with time-aligned transcription; collection under way',
+    note: 'Early access & pre-orders welcome — shape the spec with us',
+  },
+  {
+    status: 'ON COMMISSION',
+    statusClass: 's-comm',
+    langs: 'Kanuri · Efik · other minority Nigerian languages',
+    types: 'Bespoke collection to your specification through our native-speaker networks',
+    note: 'Under-represented languages that require bespoke, consent-documented collection — our differentiator',
+  },
+];
+
+const PAGES = [
+  {
+    href: '/nigerian-english-speech-data',
+    title: 'Nigerian English speech data',
+    body: 'Nigerian-accented English speech data with consent documentation, transcription, QA and commercial licensing support.',
+  },
+  {
+    href: '/yoruba-speech-data',
+    title: 'Yorùbá speech data',
+    body: 'Yorùbá speech data with tonal orthography, native-speaker review, transcription and commercial licensing support.',
+  },
+  {
+    href: '/nigerian-language-data',
+    title: 'Nigerian language & text data',
+    body: 'Commission Nigerian language and text data for AI training, built around your model task, domain, linguistic conventions, and quality requirements.',
+  },
+  {
+    href: '/african-speech-data',
+    title: 'African speech data',
+    body: 'Commission rights-documented African speech data with collection, transcription, annotation, QA and licensing support.',
+  },
+];
+
+const MAILTO = 'mailto:dataservices@bsgdataworks.com?subject=Language%20coverage%20enquiry&body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Language%20or%20languages%20required%3A%0A-%20Intended%20model%20use%20and%20speech%20or%20text%20scenario%3A%0A-%20Target%20speaker%2C%20market%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20format%20and%20transcript%20requirements%3A%0A-%20Desired%20delivery%20timeline%20and%20governance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'African Language Coverage for AI Training Data',
+  description:
+    'Language coverage for commissioned African speech and language datasets: Nigerian-accented English, Yorùbá, Igbo, Hausa, Nigerian Pidgin, Kanuri, Efik and other Nigerian languages.',
+  provider: { '@type': 'Organization', name: 'BSG DataWorks', url: 'https://bsgdataworks.com/' },
+  areaServed: [
+    { '@type': 'Country', name: 'Nigeria' },
+    { '@type': 'Place', name: 'West Africa' },
+  ],
+  serviceType: 'African language dataset collection, transcription and annotation',
+};
+---
+
+<ServiceLayout
+  title="African Language Coverage | BSG DataWorks"
+  description="Which African languages BSG DataWorks ships today, which are in the pipeline, and which are collected on commission — Nigerian-accented English, Yorùbá, Igbo, Hausa, Nigerian Pidgin, Kanuri and Efik."
+  canonicalPath="/language-coverage"
+  ogDescription="Language coverage for African AI training data: what ships today, what is in the pipeline, and what we collect on commission."
+  twitterTitle="African Language Coverage | BSG DataWorks"
+  twitterDescription="What ships today, what is in the pipeline, and what we collect on commission across Nigerian and West African languages."
+  footerVariant="service"
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Language coverage · Nigeria &amp; West Africa</p>
+        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+        <h1>Three tiers. No ambiguity about <em>what ships today</em>.</h1>
+        <p class="hero-copy">
+          Language availability is the first question most teams ask, and the one most
+          vendors answer vaguely. Below is exactly what you can evaluate now, what is
+          being collected, and what we build to your specification.
+        </p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Start a language brief</a>
+          <a class="btn btn-secondary" href="#pages">Browse by language</a>
+        </div>
+      </div>
+      <aside class="hero-panel">
+        <p class="eyebrow">At a glance</p>
+        <h2>Where each language stands</h2>
+        <ul class="panel-list">
+          <li>Nigerian English &amp; Yorùbá — evaluate today</li>
+          <li>Igbo, Hausa &amp; Pidgin — collection under way</li>
+          <li>Kanuri, Efik &amp; minority languages — on commission</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="tiers">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Availability</p>
+        <h2>What ships today, and what does not.</h2>
+        <p>
+          Every tier is collected from consenting adult contributors under written,
+          informed consent covering the intended commercial use and AI-training scope.
+        </p>
+      </div>
+
+      {TIERS.map((tier) => (
+        <div class="track">
+          <div class:list={['status', tier.statusClass]}>{tier.status}</div>
+          <div>
+            <div class="langs">{tier.langs}</div>
+            <div class="types">{tier.types}</div>
+          </div>
+          <div class="types">{tier.note}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="pages" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">By language</p>
+        <h2>Go deeper on a specific language.</h2>
+        <p>Each page covers scope, delivery format, quality process, and licensing in detail.</p>
+      </div>
+      <div class="scope-grid">
+        {PAGES.map((page) => (
+          <article class="scope-card">
+            <h3><a href={page.href}>{page.title}</a></h3>
+            <p>{page.body}</p>
+            <p class="card-link"><a href={page.href}>Read more →</a></p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="commission">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Commissioning</p>
+        <h2>A language we do not list yet.</h2>
+      </div>
+      <div class="wrap evidence">
+        <p>
+          Under-represented languages are the work we are built for. If the language you
+          need is not above, it becomes a commissioned collection through our
+          native-speaker networks — scoped to your model task, domain, and quality
+          requirements.
+        </p>
+        <ul>
+          <li>Speaker recruitment and written, informed consent in the contributor's own language</li>
+          <li>Orthography, diacritic and code-switching conventions agreed before collection starts</li>
+          <li>Native-speaker transcription and review against your quality criteria</li>
+          <li>Full provenance and consent audit trail for your compliance team</li>
+        </ul>
+        <p class="trust-route">
+          See our <a href="/ai-training-data-compliance-nigeria">Compliance page</a> and
+          <a href="/privacy-policy">Privacy Policy</a> for how consent and provenance are documented.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-band">
+        <h2>Tell us which language you need.</h2>
+        <p>
+          Share the language, the model task, and your volume and format requirements. We
+          reply within 48 hours with scoping questions and a likely timeline.
+        </p>
+        <a class="btn" href={MAILTO} aria-label="Start a language brief by email — opens your email application">
+          Start a language brief by email
+        </a>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  /* Availability tiers — same treatment the homepage used before the move. */
+  .track {
+    display: grid;
+    grid-template-columns: 150px 1fr 230px;
+    gap: 18px;
+    align-items: center;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 20px 22px;
+    margin-bottom: 14px;
+    background: #fff;
+  }
+  .status { font-family: var(--mono); font-size: .76rem; letter-spacing: .06em; display: flex; align-items: center; gap: 8px }
+  .status::before { content: ""; width: 9px; height: 9px; border-radius: 50% }
+  .s-live::before { background: var(--green); box-shadow: 0 0 0 4px rgba(14, 107, 63, .15) }
+  .s-pipe::before { background: var(--amber) }
+  .s-comm::before { background: #8A9690 }
+  .langs { font-family: var(--display); font-weight: 700; font-size: 1.22rem }
+  .types { font-size: .87rem; color: var(--slate) }
+
+  .scope-card h3 a { color: #fff }
+  .card-link { margin-top: 12px }
+  .card-link a { color: #fff; font-weight: 700; text-decoration: underline; text-underline-offset: 3px }
+
+  .evidence p + ul { margin-top: 16px }
+  .evidence .trust-route { margin-top: 16px; margin-bottom: 0 }
+
+  @media (max-width: 760px) {
+    .track { grid-template-columns: 1fr; gap: 8px }
+  }
+</style>
