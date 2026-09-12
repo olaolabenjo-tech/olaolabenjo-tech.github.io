@@ -128,6 +128,158 @@ from body copy. The standalone "Speech data" nav item folded into it.
 `/language-coverage` is new, so it needs no redirect; it was added to
 `sitemap.xml` (now 14 URLs).
 
+## Information architecture — services
+
+Same treatment as the language hub, same reasoning.
+
+`#services` was 201 words on the homepage covering five services. Three had
+substantial dedicated pages (1015 / 965 / 1182 words); **two had no page
+anywhere on the site** — corpus licensing (18 words) and translation &
+localisation (20 words).
+
+`/services` is now a 517-word hub: the three linked services in a card grid,
+the two unlinked ones described at the length the homepage described them, and
+a short "which service do you need" mapping. All copy is carried over verbatim
+from `index.html` and the three target pages' own `og:description` values.
+
+The homepage keeps a 37-word teaser. **Its `id="services"` is deliberately
+preserved** — the header's Services item moved to `/services`, but the anchor
+is cheap to keep and any external link to `/#services` still lands.
+
+Still outstanding, and not something this migration can fix: corpus licensing
+and translation & localisation have 38 words between them across the whole
+site. Turning them into real pages needs facts — terms, formats, language
+pairs, turnaround — that only the owner has. Nothing was invented to fill
+the gap.
+
+## Homepage hero redesign — "Night Atlas"
+
+Chosen from four directions presented as mockups. The brief was a full-width
+hero; the deciding observation was that the commissioned illustration is a
+**dark** piece whose left 55% is deliberately empty. The previous hero faded
+it into light paper, which paid for artwork the page then hid.
+
+What changed:
+
+- The illustration is now the ground, edge to edge, with a left-to-right scrim
+  tuned to its composition so the empty region becomes the text well.
+- The hero's bottom edge carries the **three-tier language band**, as in the
+  approved mockup — availability is the first question buyers ask and no
+  competitor answers it above the fold. Each tier links to
+  `/language-coverage`.
+- The band runs edge to edge, but its inner grid sits on the shell measure, so
+  the first tier starts on the same line as the logo and headline. (An earlier
+  pass put the tiers in a separate row below the hero; reverted on request.)
+- **The three proof points were removed from the homepage** on request, to
+  avoid two consecutive three-item rows. The copy still exists in the
+  pre-Astro `index.html` at the repo root and in git history if it is ever
+  wanted back — most naturally as a band further down the page.
+- The headline is capped at 660px and sized below the global scale
+  (`clamp(2rem, 4.1vw, 3.05rem)`) so it stays inside the artwork's calm left
+  region rather than crossing the face.
+
+### Image pipeline — do not point the hero at the raw PNG
+
+The source artwork is 3.6 MB (2560×1440) and would have been the LCP element.
+It is now served as AVIF/WebP with a JPEG fallback, art-directed to the
+portrait crop below 760px. **38 KB at 1920px**, against 3.6 MB. Regenerate
+with:
+
+```sh
+for w in 1280 1920 2560; do
+  sips -Z $w bsg-home-hero-illustration.png --out r$w.png
+  cwebp  -q 74 r$w.png -o hero-$w.webp
+  avifenc -q 52 -s 6 r$w.png hero-$w.avif
+done
+sips -Z 1920 -s format jpeg -s formatOptions 76 bsg-home-hero-illustration.png --out hero-1920.jpg
+```
+
+The unused source PNGs were removed from `public/` (they still exist in the
+repo root). Total image payload is now 1.4 MB, most of it the JPEG fallback
+that modern browsers never download.
+
+### Nav tone — resolved: one light header everywhere
+
+The homepage briefly used a dark header so the bar read as part of the hero.
+That was reverted, because it required inverting the logo to a white
+silhouette, and the full-colour mark is wanted on every page.
+
+The driver is measurable: **72% of the logo's wordmark is dark** (mean
+luminance 59 of 255), so "BSG", "Data" and the tagline are near-black navy and
+cannot sit on `#04131F` unaided. Of the four treatments considered — a paper
+plate, a light bar, a full-height corner flag, and a frosted pill — the light
+bar was chosen: it needs no logo treatment at all, and it restores a genuinely
+identical header on all six pages (verified by hashing the rendered `<nav>`).
+
+`navTone`, the `tone` prop and the whole `nav.dark` block are gone. The
+accepted trade-off is a crisp light-to-dark seam directly beneath the bar, and
+a sticky light header travelling over the dark hero on scroll.
+
+### A scoped-style trap worth remembering
+
+`.hero-inner > *` compiled to the **invalid** selector `.hero-inner>{...}` —
+Astro's scoper drops the universal selector, and the whole rule with it. The
+text-well cap silently never applied. Use explicit class selectors inside
+scoped `<style>` blocks; do not rely on `*`.
+
+## One alignment line — `--shell-max` / `--shell-pad`
+
+The header and the page content used to be measured independently, so nothing
+lined up: the header sat on `min(1080px, 100% - 48px)` (no padding) while each
+design system's `.wrap` used `max-width: 1080px` plus 24px padding. Content
+started 24px inside the logo, and the hero was worse — see below.
+
+Both now hang off two tokens in `base.css`:
+
+```css
+--shell-max: 1240px;   /* widened from 1080 — moves the logo outward */
+--shell-pad: 24px;     /* 17px below 560px, matching the old narrow gutter */
+```
+
+`.nav-inner` and all three systems' `.wrap` use
+`width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2))` with auto
+inline margins. At 1440px every element on every page starts at **x = 100**.
+Widening the line is now a one-token change.
+
+### Optical alignment of the logo
+
+The logo PNG carries **43px of transparent padding** on its left edge (of
+1200px), so its visible mark sat ~6.7px inside the shell line while every
+other element sat on it. `.logo-image` now carries a matching negative
+`margin-left` (-6.7px at 188px wide, -5.7px at the 158px mobile size). If the
+logo asset is ever recropped, remove these.
+
+### Three traps this exposed
+
+1. **A flex item with `max-width` and auto margins shrinks to fit.**
+   `.hero-inner` was 708px wide, centred at 366px instead of spanning the
+   shell. Flex items need an explicit `width` here, not `max-width`.
+
+2. **A percentage inside a custom property resolves against the element that
+   *uses* it.** A `--gutter: max(24px, calc((100% - 1080px) / 2))` declared on
+   `.hero` computed against each 480px-wide `.tier`, yielding 24px instead of
+   180px. The ticker is now a full-bleed band with an inner grid on the shell
+   measure — no custom-property arithmetic.
+
+3. **A width cap on the same element as `.wrap` fights its auto margins and
+   self-centres.** `.wrap policy-content` (820px) sat at x=330. Fixes: the
+   policy page separates shell from reading measure in markup; `.faq` caps its
+   children (`.faq > *`) rather than itself.
+
+Also removed: three pages nested `.wrap` inside `.wrap`, double-insetting the
+content.
+
+### Knock-on worth knowing
+
+The policy pages' `.wrap` was deliberately 900px for readability. It is now the
+shared 1240px shell, with `.policy-content { max-width: 820px }` still capping
+the text — so the reading measure is unchanged, but it is now left-aligned to
+the shell rather than centred in the page.
+
+Two things stay deliberately off the line: the 2nd and 3rd columns of any grid
+(obviously), and `.policy-notice`, which is a centred callout (`text-align:
+center`) rather than a left-aligned section.
+
 ## Unified header
 
 The originals shipped **three different headers** — home (solid background, no
@@ -372,7 +524,8 @@ have fuller dedicated pages that they link to.
   measure, `.contact-band` padding, 880/760 breakpoints). All of it is
   page-scoped, exactly as the deferred-conflicts table prescribes.
 
-Ported: 5 of 13. Remaining: 8 service pages.
+Ported: 5 of 13, plus two new hub pages (`/language-coverage`, `/services`).
+Remaining: 8 service pages.
 
 All three layouts are now exercised by a real page, so the remaining ports are
 repetition rather than design work.

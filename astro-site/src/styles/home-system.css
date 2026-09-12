@@ -15,7 +15,10 @@ a:focus-visible,
 button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px }
 
 /* ── Layout ─────────────────────────────────────────────────────────── */
-.wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px }
+.wrap {
+  width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+  margin-inline: auto;
+}
 
 section { padding: 62px 0 }
 

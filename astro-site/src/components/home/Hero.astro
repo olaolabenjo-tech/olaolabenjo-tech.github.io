@@ -1,48 +1,157 @@
 ---
-/* Homepage hero: registration chip, headline, CTAs, and the proof strip. */
+/*
+  Full-bleed hero — "Night Atlas".
+
+  The commissioned illustration is a dark piece whose left 55% is deliberately
+  empty; this hero uses that empty region as the text well instead of fading
+  the artwork into paper. The three-tier language band is welded to the hero's
+  bottom edge, because availability is the first question buyers ask.
+
+  Image weight: the source PNG is 3.6 MB. The AVIF served here is 38 KB at
+  1920px. Regenerate with the commands in DESIGN-DECISIONS.md if the artwork
+  is ever replaced — do not point this at the raw PNG.
+*/
+
+const TIERS = [
+  {
+    status: 'Available now',
+    tone: 'live',
+    langs: 'Nigerian English · Yorùbá',
+    note: 'Samples ready to evaluate today',
+  },
+  {
+    status: 'In pipeline',
+    tone: 'pipe',
+    langs: 'Igbo · Hausa · Nigerian Pidgin',
+    note: 'Collection under way — shape the spec with us',
+  },
+  {
+    status: 'On commission',
+    tone: 'comm',
+    langs: 'Kanuri · Efik · minority languages',
+    note: 'Bespoke collection through native-speaker networks',
+  },
+];
+
+const HERO = '/assets/images/hero';
 ---
 
-<header class="wrap hero-visual-shell">
-  <div class="reg-chip">NDPC REGISTERED · NDPC/DCP/13596</div>
-  <h1>We build the <em>African datasets</em> your models are missing — to your specification.</h1>
-  <p class="hero-sub">
-    BSG DataWorks collects, annotates, and licenses human-sourced speech, image, video, and
-    language data across Nigeria and West Africa. Tell us what your model needs; we recruit
-    the speakers, run the collection, and deliver rights-cleared, consent-documented data
-    your legal team can sign off on.
-  </p>
-  <div class="cta-row">
-    <a class="btn btn-primary" href="#contact">Commission a dataset</a>
-    <a class="btn btn-ghost" href="#samples">Hear a sample first</a>
+<header class="hero">
+  <picture class="hero-media">
+    <source
+      media="(max-width: 760px)"
+      type="image/avif"
+      srcset={`${HERO}/hero-mobile-720.avif 720w, ${HERO}/hero-mobile-1080.avif 1080w`}
+      sizes="100vw"
+    />
+    <source
+      media="(max-width: 760px)"
+      type="image/webp"
+      srcset={`${HERO}/hero-mobile-720.webp 720w, ${HERO}/hero-mobile-1080.webp 1080w`}
+      sizes="100vw"
+    />
+    <source
+      type="image/avif"
+      srcset={`${HERO}/hero-1280.avif 1280w, ${HERO}/hero-1920.avif 1920w, ${HERO}/hero-2560.avif 2560w`}
+      sizes="100vw"
+    />
+    <source
+      type="image/webp"
+      srcset={`${HERO}/hero-1280.webp 1280w, ${HERO}/hero-1920.webp 1920w, ${HERO}/hero-2560.webp 2560w`}
+      sizes="100vw"
+    />
+    <img
+      src={`${HERO}/hero-1920.jpg`}
+      alt="Illustration representing African AI training data across speech, image, video, and language"
+      width="1920"
+      height="1080"
+      fetchpriority="high"
+      decoding="async"
+    />
+  </picture>
+
+  <div class="hero-inner">
+    <p class="reg-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+    <h1>We build the <em>African datasets</em> your models are missing — to your specification.</h1>
+    <p class="hero-sub">
+      BSG DataWorks collects, annotates, and licenses human-sourced speech, image, video, and
+      language data across Nigeria and West Africa. Tell us what your model needs; we recruit
+      the speakers, run the collection, and deliver rights-cleared, consent-documented data
+      your legal team can sign off on.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#contact">Commission a dataset</a>
+      <a class="btn btn-ghost" href="#samples">Hear a sample first</a>
+    </div>
   </div>
 
-  <div
-    class="hero-mobile-art"
-    role="img"
-    aria-label="Illustration representing African AI training data across speech, image, video, and language"
-  ></div>
-
-  <div class="hero-proof-grid" aria-label="BSG DataWorks dataset evidence">
-    <div class="proof-card proof-ready">
-      <span class="proof-kicker">Ready to evaluate</span>
-      <strong>Nigerian English and Yorùbá speech</strong>
-      <p>Representative samples and time-aligned transcripts available for technical review.</p>
-    </div>
-    <div class="proof-card proof-qa">
-      <span class="proof-kicker">Native-speaker QA</span>
-      <strong>Human review at every delivery stage</strong>
-      <p>Transcriptions, annotations, and metadata checked against agreed quality criteria.</p>
-    </div>
-    <div class="proof-card proof-rights">
-      <span class="proof-kicker">Rights-ready</span>
-      <strong>Consent-documented commercial data</strong>
-      <p>Built with contributor records and a clear audit trail for AI training use.</p>
+  <div class="hero-ticker">
+    <div class="ticker-inner">
+      {TIERS.map((tier) => (
+        <a class="tier" href="/language-coverage">
+          <span class:list={['tier-status', tier.tone]}>{tier.status}</span>
+          <strong>{tier.langs}</strong>
+          <span class="tier-note">{tier.note}</span>
+        </a>
+      ))}
     </div>
   </div>
 </header>
 
 <style>
-  .hero-visual-shell { padding: 70px 0 0; position: relative; overflow: hidden; isolation: isolate }
+  .hero {
+    position: relative;
+    isolation: isolate;
+    background: #04131F;
+    color: #EAF4F0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 560px;
+  }
+
+  /* Artwork as the ground, not a wash behind paper. */
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    object-fit: cover;
+    object-position: center right;
+    display: block;
+  }
+
+  /* Holds the left text well at full contrast while the artwork keeps
+     the right. Tuned to the illustration's own composition. */
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      rgba(4, 19, 31, 0.985) 0%,
+      rgba(4, 19, 31, 0.95) 36%,
+      rgba(4, 19, 31, 0.58) 60%,
+      rgba(4, 19, 31, 0.14) 85%
+    );
+    pointer-events: none;
+  }
+
+  /* Same measure as the header, so the chip, headline and CTAs all start
+     on the logo's left edge. An explicit width (not max-width) is required:
+     as a flex item with auto margins, a max-width alone makes it shrink to
+     fit its content and drift to the centre. */
+  .hero-inner {
+    width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+    margin-inline: auto;
+    padding-block: clamp(54px, 8vw, 104px) clamp(38px, 5vw, 58px);
+  }
 
   .reg-chip {
     display: inline-flex;
@@ -50,82 +159,144 @@
     gap: 8px;
     font-family: var(--mono);
     font-size: .78rem;
-    color: var(--green-deep);
-    background: var(--mist);
-    border: 1px solid var(--green);
+    font-weight: 600;
+    color: #4FD6B5;
+    background: rgba(79, 214, 181, 0.1);
+    border: 1px solid rgba(79, 214, 181, 0.45);
     border-radius: 100px;
     padding: 6px 14px;
     margin-bottom: 26px;
   }
-  .reg-chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green) }
 
-  .hero-sub { max-width: 680px; margin: 22px 0 32px; font-size: 1.12rem; color: #3C4A42 }
-
-  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 54px }
-
-  /* Brand illustration: desktop background wash, separate mobile panel. */
-  .hero-visual-shell::before {
+  .reg-chip::before {
     content: "";
-    position: absolute;
-    inset: -70px -80px -40px -80px;
-    background:
-      linear-gradient(90deg,
-        rgba(248, 247, 242, .985) 0%,
-        rgba(248, 247, 242, .94) 42%,
-        rgba(248, 247, 242, .30) 72%,
-        rgba(248, 247, 242, .02) 100%),
-      url("/assets/images/bsg-home-hero-illustration.png") center right/cover no-repeat;
-    z-index: -1;
-    pointer-events: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4FD6B5;
   }
 
-  .hero-mobile-art { display: none }
+  .hero h1 {
+    color: #FFFFFF;
+    /* Sized down from the global scale so the headline stays inside the
+       artwork's empty left region instead of crossing the face. */
+    font-size: clamp(2rem, 4.1vw, 3.05rem);
+    max-width: 660px;
+    text-wrap: balance;
+  }
 
-  /* Proof strip: visual evidence without changing the SEO hierarchy. */
-  .hero-proof-grid {
-    position: relative;
-    z-index: 1;
+  .hero h1 em { font-style: normal; color: #4FD6B5 }
+
+  .hero-sub {
+    margin: 22px 0 32px;
+    font-size: 1.08rem;
+    color: rgba(226, 240, 236, 0.82);
+    max-width: 560px;
+  }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; max-width: none }
+
+  .hero .btn-primary { background: #4FD6B5; color: #04131F }
+  .hero .btn-primary:hover { background: #6FE3C7 }
+
+  .btn-ghost { border: 1.5px solid rgba(255, 255, 255, 0.55); color: #FFFFFF }
+  .btn-ghost:hover { border-color: #FFFFFF; background: rgba(255, 255, 255, 0.08) }
+
+  /* ── Language availability, welded to the bottom edge ──────────────── */
+  .hero-ticker {
+    background: rgba(4, 19, 31, 0.62);
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(7px);
+  }
+
+  /* Band runs edge to edge; contents sit on the shell measure so the first
+     tier starts on the same line as the logo and headline. */
+  .ticker-inner {
+    width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+    margin-inline: auto;
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    margin: 0 0 42px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(255, 255, 255, 0.15);
   }
-  .proof-card {
-    min-height: 138px;
-    padding: 20px;
-    border-radius: 14px;
-    color: #fff;
-    box-shadow: 0 12px 26px rgba(20, 35, 28, .10);
-  }
-  .proof-card .proof-kicker {
+
+  .tier {
+    background: rgba(4, 19, 31, 0.62);
+    padding: 17px clamp(18px, 2.2vw, 26px) 19px;
+    text-decoration: none;
     display: block;
-    margin-bottom: 10px;
+    transition: background .18s ease;
+  }
+
+  .tier:hover,
+  .tier:focus-visible { background: rgba(4, 19, 31, 0.9); text-decoration: none }
+
+  .tier-status {
+    display: flex;
+    align-items: center;
+    gap: 7px;
     font-family: var(--mono);
-    font-size: .7rem;
-    font-weight: 500;
-    letter-spacing: .10em;
+    font-size: .68rem;
+    font-weight: 600;
+    letter-spacing: .1em;
     text-transform: uppercase;
-    opacity: .9;
+    margin-bottom: 7px;
   }
-  .proof-card strong { display: block; font-family: var(--display); font-size: 1.1rem; line-height: 1.16 }
-  .proof-card p { margin-top: 10px; font-size: .86rem; line-height: 1.45; opacity: .92 }
 
-  .proof-ready { background: linear-gradient(135deg, #0A4A2C, #0E6B3F) }
-  .proof-qa { background: linear-gradient(135deg, #155C79, #2C7FA3) }
-  .proof-rights { background: linear-gradient(135deg, #A66313, #C98A1B) }
+  .tier-status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: currentColor;
+    flex: 0 0 auto;
+  }
 
+  .live { color: #4FD69B }
+  .pipe { color: #E9B44C }
+  .comm { color: #9FB4AC }
+
+  .tier strong {
+    display: block;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.25;
+    color: #FFFFFF;
+  }
+
+  .tier-note {
+    display: block;
+    margin-top: 5px;
+    font-size: .82rem;
+    line-height: 1.45;
+    color: rgba(226, 240, 236, 0.62);
+  }
+
+  /* ── Responsive ────────────────────────────────────────────────────── */
   @media (max-width: 760px) {
-    .hero-visual-shell::before { display: none }
-    .hero-visual-shell { padding-bottom: 0 }
-    .hero-mobile-art {
-      display: block;
-      margin: 2px -24px 28px;
-      height: 330px;
-      overflow: hidden;
-      background: #031321 url("/assets/images/bsg-home-hero-mobile.png") center 64%/cover no-repeat;
-      border-radius: 12px;
-      box-shadow: 0 18px 36px rgba(9, 43, 76, .16);
+    .hero { min-height: 0 }
+
+    /* The mobile artwork is a portrait crop, so the scrim runs bottom-up
+       rather than left-to-right. */
+    .hero::before {
+      background: linear-gradient(
+        180deg,
+        rgba(4, 19, 31, 0.72) 0%,
+        rgba(4, 19, 31, 0.86) 42%,
+        rgba(4, 19, 31, 0.97) 78%
+      );
     }
-    .hero-proof-grid { grid-template-columns: 1fr; margin-bottom: 36px }
+
+    .ticker-inner { grid-template-columns: 1fr; gap: 0 }
+    .ticker-inner .tier { border-top: 1px solid rgba(255, 255, 255, 0.12); padding-inline: 0 }
+    .ticker-inner .tier:first-child { grid-column: auto; border-top: 0 }
+
+    .hero-media img { object-position: center 32% }
+    .hero-inner { padding-block: clamp(42px, 11vw, 64px) 32px }
+    .hero h1,
+    .hero-sub { max-width: none }
+    .hero-sub { font-size: 1rem }
   }
+
 </style>

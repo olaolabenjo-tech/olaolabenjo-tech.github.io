@@ -197,8 +197,8 @@ const activeGroups = new Set(
     this the header width would change from page to page.
   */
   .nav-inner {
-    width: min(1080px, calc(100% - 48px));
-    margin: 0 auto;
+    width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+    margin-inline: auto;
     min-height: 68px;
     display: flex;
     align-items: center;
@@ -214,6 +214,13 @@ const activeGroups = new Set(
     height: 61px;
     object-fit: contain;
     object-position: left center;
+    /*
+      The logo PNG carries 43px of transparent padding on its left edge
+      (of 1200px). Without this the visible mark sits ~6.7px inside the
+      shell line while every other element sits on it. Scale with the
+      rendered width: 43/1200 = 3.58%.
+    */
+    margin-left: -6.7px;
   }
 
   .nav-links { display: flex; align-items: center; gap: 18px; font-size: .88rem; font-weight: 500 }
@@ -353,7 +360,7 @@ const activeGroups = new Set(
   }
 
   @media (max-width: 560px) {
-    .nav-inner { width: min(100% - 34px, 1080px); padding-top: 8px; padding-bottom: 8px }
-    .logo-image { width: 158px; height: 52px }
+    .nav-inner { padding-top: 8px; padding-bottom: 8px }
+    .logo-image { width: 158px; height: 52px; margin-left: -5.7px }
   }
 </style>

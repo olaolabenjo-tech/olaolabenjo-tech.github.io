@@ -19,6 +19,14 @@
   --slate: #4A574F;
   --muted: #4C5A51;
 
+  /*
+    The single alignment line for the site. The header and every page's
+    `.wrap` hang off these two tokens, so content always starts where the
+    logo starts. Widen --shell-max to move that line outward.
+  */
+  --shell-max: 1240px;
+  --shell-pad: 24px;
+
   --sans: 'IBM Plex Sans', sans-serif;
   --display: 'Archivo', sans-serif;
   --mono: 'IBM Plex Mono', monospace;
@@ -53,4 +61,9 @@ a:hover { text-decoration: underline }
   background: #fff;
   border: 2px solid var(--green);
   border-radius: 6px;
+}
+
+/* Narrow screens get a tighter gutter. */
+@media (max-width: 560px) {
+  :root { --shell-pad: 17px }
 }

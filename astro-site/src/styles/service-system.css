@@ -31,7 +31,10 @@ h3 { font-size: 1.18rem; margin-bottom: 9px }
 .body-copy p + p { margin-top: 16px }
 
 /* ── Layout ───────────────────────────────────────────────────── */
-.wrap { width: min(1080px, calc(100% - 48px)); margin: 0 auto }
+.wrap {
+  width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+  margin-inline: auto;
+}
 
 section { padding: 74px 0 }
 .section-head { max-width: 730px; margin-bottom: 32px }
@@ -88,7 +91,6 @@ section { padding: 74px 0 }
 }
 
 @media (max-width: 560px) {
-  .wrap { width: min(100% - 34px, 1080px) }
   .hero-panel { padding: 22px }
 }
 
@@ -149,7 +151,9 @@ section { padding: 74px 0 }
 .process-card p { font-size: .91rem; color: var(--muted) }
 
 /* ── FAQ ────────────────────────────────────────────────────────────── */
-.faq { max-width: 820px }
+/* Capped on the children, not the element: .faq shares its element with
+   .wrap, and a cap here would fight .wrap's auto margins and self-centre. */
+.faq > * { max-width: 820px }
 .faq details { border-top: 1px solid var(--line); padding: 17px 0 }
 .faq summary { font-family: var(--display); font-weight: 700; cursor: pointer }
 .faq p { padding-top: 10px; color: var(--muted); max-width: 760px }

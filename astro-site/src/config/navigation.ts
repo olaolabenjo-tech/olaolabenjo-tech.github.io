@@ -21,7 +21,7 @@ export const SITE_NAV: NavLink[] = [
       { href: '/african-speech-data', label: 'African speech data' },
     ],
   },
-  { href: '/#services', label: 'Services' },
+  { href: '/services', label: 'Services' },
   { href: '/#contact', label: 'Start a brief' },
 ];
 
