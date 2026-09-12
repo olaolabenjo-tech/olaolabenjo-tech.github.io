@@ -12,7 +12,9 @@ import type { NavLink } from '../types';
  * any page. The last item is styled as the call to action — keep it last.
  */
 export const SITE_NAV: NavLink[] = [
+  { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
+  { href: '/services', label: 'Services' },
   {
     label: 'Languages',
     href: '/language-coverage',
@@ -21,7 +23,6 @@ export const SITE_NAV: NavLink[] = [
       { href: '/african-speech-data', label: 'African speech data' },
     ],
   },
-  { href: '/services', label: 'Services' },
   { href: '/#contact', label: 'Start a brief' },
 ];
 

@@ -299,4 +299,21 @@ const HERO = '/assets/images/hero';
     .hero-sub { font-size: 1rem }
   }
 
+  /* Phone: full-width stacked buttons, rather than two content-sized ones
+     wrapping to mismatched widths. Desktop is untouched. They stop fitting
+     side by side around 470px; 560px matches the narrow-gutter breakpoint. */
+  @media (max-width: 560px) {
+    .cta-row { flex-direction: column; gap: 12px; align-items: stretch }
+    .cta-row .btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  /* Restored: the tier hover transition lost its guard in an earlier edit. */
+  @media (prefers-reduced-motion: reduce) {
+    .tier { transition: none }
+  }
 </style>

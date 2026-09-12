@@ -222,6 +222,35 @@ Astro's scoper drops the universal selector, and the whole rule with it. The
 text-well cap silently never applied. Use explicit class selectors inside
 scoped `<style>` blocks; do not rely on `*`.
 
+## Mobile hero buttons
+
+The two hero CTAs were sized to their labels with `flex-wrap: wrap`. Below
+about 470px they no longer fit side by side, so the second dropped to its own
+line at a different width — reading as a mistake rather than a hierarchy.
+
+Chosen from four options (full-width stack, primary + text link, equal 50/50
+pair, primary only): **full-width stack**. It fixes the defect without
+touching copy, information architecture, or what a mobile visitor is offered
+versus a desktop one.
+
+Applied at `max-width: 560px`, matching the narrow-gutter breakpoint. Verified:
+
+| width | result |
+|---|---|
+| 560px | both buttons 526px wide, stacked, on the gutter |
+| 700px | side by side, content-sized — unchanged |
+| 1440px | side by side at x=100 — unchanged |
+
+`.btn` is `display: inline-block` globally, which would left-align the label
+once stretched to full width, so the mobile rule also switches it to a
+centred flex box.
+
+## Header menu order
+
+`Home · About · Services · Languages ▾ · Start a brief`. "Start a brief" stays
+last as the call to action. Adding "Home" means the homepage now carries an
+active marker in the menu, which previously only the logo did.
+
 ## One alignment line — `--shell-max` / `--shell-pad`
 
 The header and the page content used to be measured independently, so nothing
