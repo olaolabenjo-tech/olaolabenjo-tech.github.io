@@ -34,7 +34,7 @@ const STEPS = [
 </section>
 
 <style>
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; counter-reset: s }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--card-gap); counter-reset: s }
   .step { position: relative; padding-top: 38px }
   .step::before {
     counter-increment: s;

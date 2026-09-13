@@ -95,7 +95,7 @@ section { padding: 74px 0 }
 }
 
 /* ── Card grid (3-up) ───────────────────────────────────────────────── */
-.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px }
+.card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--card-gap) }
 .card { border: 1px solid var(--line); border-radius: 12px; padding: 24px; background: #fff }
 .card p { font-size: .94rem; color: var(--muted) }
 .card .icon {
@@ -107,7 +107,7 @@ section { padding: 74px 0 }
 }
 
 /* ── Scope grid (2-up, sits inside .band) ───────────────────────────── */
-.scope-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px }
+.scope-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--card-gap) }
 .scope-card {
   border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 12px;
@@ -118,7 +118,7 @@ section { padding: 74px 0 }
 .scope-card p { color: #EAF2EC; font-size: .94rem }
 
 /* ── Spec grid (2-up) ───────────────────────────────────────────────── */
-.spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px }
+.spec-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--card-gap) }
 .spec-card {
   border: 1px solid #BFD0C2;
   border-radius: 14px;
@@ -130,7 +130,7 @@ section { padding: 74px 0 }
 .spec-card li::marker { color: var(--green) }
 
 /* ── Numbered process (4-up) ────────────────────────────────────────── */
-.process { counter-reset: step; display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px }
+.process { counter-reset: step; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--card-gap) }
 .process-card {
   position: relative;
   padding: 20px 18px 18px;
@@ -249,7 +249,7 @@ section { padding: 74px 0 }
 
 
 /* ── Patterns introduced by about.html / index.html ─────────────────── */
-.data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px }
+.data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--card-gap) }
 .data-card { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 22px }
 .data-card .icon {
   display: block;
@@ -263,7 +263,7 @@ section { padding: 74px 0 }
 }
 .data-card p { color: var(--slate); font-size: .93rem }
 
-.use-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px }
+.use-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--card-gap) }
 .use-card {
   border: 1px solid rgba(255, 255, 255, .28);
   border-radius: 12px;
@@ -273,7 +273,7 @@ section { padding: 74px 0 }
 .use-card h3 { color: #fff }
 .use-card p { color: #EAF2EC; font-size: .94rem }
 
-.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px }
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--card-gap) }
 .trust-card {
   border: 1px solid #BFD0C2;
   border-radius: 14px;

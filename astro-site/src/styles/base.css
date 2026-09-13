@@ -24,6 +24,10 @@
     `.wrap` hang off these two tokens, so content always starts where the
     logo starts. Widen --shell-max to move that line outward.
   */
+  /* One gap for every card grid. The site previously carried 16/18/20/28
+     across its sections, inherited from the hand-written pages. */
+  --card-gap: 20px;
+
   --shell-max: 1240px;
   --shell-pad: 24px;
 

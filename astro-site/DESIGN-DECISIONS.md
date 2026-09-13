@@ -281,6 +281,29 @@ centred flex box.
 last as the call to action. Adding "Home" means the homepage now carries an
 active marker in the menu, which previously only the logo did.
 
+## Card spacing — one gap
+
+The site carried **four different card gaps** (16 / 18 / 20 / 28px), inherited
+from the hand-written pages where each section was styled independently. Within
+any one grid the spacing was already exact; the inconsistency was between
+grids, and 16 against 28 is a 75% difference on sections that sit close
+together.
+
+All card grids now use `--card-gap: 20px` from `base.css`:
+
+| Selector | Was |
+|---|---|
+| `.mod-grid`, `.data-grid`, `.use-grid`, `.process` | 16px |
+| `.card-grid`, `.scope-grid`, `.spec-grid`, `.trust-grid`, `.steps` | 18px |
+| `.compliance-grid` | 28px |
+
+Verified at 1440px across five pages: every grid measures exactly 20px on both
+axes.
+
+**Deliberately not included:** the footer's column gap (a fluid clamp — those
+are link lists, not cards) and the hero ticker's 1px, which is a divider
+hairline rather than spacing.
+
 ## One alignment line — `--shell-max` / `--shell-pad`
 
 The header and the page content used to be measured independently, so nothing
