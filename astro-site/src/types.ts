@@ -7,7 +7,5 @@ export interface NavLink {
   children?: NavLink[];
 }
 
-export type FooterVariant = 'corporate' | 'service';
-
 /** Which of the design systems a page belongs to. */
 export type SystemVariant = 'home' | 'service' | 'policy';

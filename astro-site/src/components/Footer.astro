@@ -1,73 +1,237 @@
 ---
-import type { FooterVariant } from '../types';
+/*
+  Site footer — "Waveform seam".
 
-interface Props {
-  /**
-   * "corporate" — the four-line legal footer used by index and about.
-   * "service"   — the single-row link footer used by the service pages.
-   */
-  variant?: FooterVariant;
-}
+  One footer on every page. The waveform motif carries the transition from the
+  light page into the dark block, which is the hardest part of a dark footer to
+  get right; it also gives that motif a job rather than leaving it floating
+  mid-page as decoration.
 
-const { variant = 'corporate' } = Astro.props;
+  Link columns live in config/footer.ts so unported pages stay out until they
+  resolve.
+*/
+import { FOOTER_COLUMNS } from '../config/footer';
 
-const EMAIL = 'mailto:dataservices@bsgdataworks.com';
+const EMAIL = 'dataservices@bsgdataworks.com';
+const WHATSAPP_NUMBER = '+234 806 790 4903';
 const WHATSAPP = 'https://wa.me/2348067904903';
 const WHATSAPP_LABEL = 'Message BSG DataWorks on WhatsApp — opens WhatsApp';
+const ADDRESS = 'Block 2C Plot 14 OGSHE, Ota, Nigeria';
+
+// Same bar pattern the homepage waveform uses.
+const BARS = [
+  36, 62, 88, 44, 96, 58, 33, 74, 51, 86, 41, 66, 93, 38, 71, 55, 83, 46, 97, 60,
+  34, 78, 49, 87, 43, 68, 91, 37, 75, 57, 82, 47, 94, 54, 32, 73, 50, 85, 42, 64,
+];
 ---
 
+<div class="wave-seam" aria-hidden="true">
+  {BARS.map((h) => <i style={`height:${h}%`}></i>)}
+</div>
+
 <footer>
-  {variant === 'corporate' ? (
-    <div class="wrap foot-inner">
-      <div class="footer-direct">
-        <a href={EMAIL}>Email BSG</a> ·
-        <a href={WHATSAPP} target="_blank" rel="noopener" aria-label={WHATSAPP_LABEL}>WhatsApp only</a>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <span class="mark" role="img" aria-label="BSG DataWorks"></span>
+        <p>
+          Consent-documented African speech, image, video and language data for AI training.
+        </p>
+        <div class="brand-contact">
+          <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <a href={WHATSAPP} target="_blank" rel="noopener" aria-label={WHATSAPP_LABEL}>
+            WhatsApp {WHATSAPP_NUMBER}
+          </a>
+        </div>
       </div>
-      <div>© 2026 BSG DataWorks (Private) Limited — AI Training Dataset Division. All rights reserved.</div>
-      <div>NDPC Reg. No. NDPC/DCP/13596 · NDPA 2023 compliant</div>
-      <div>
-        <a href="/privacy-policy">Privacy Policy</a> ·
-        <button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button>
-      </div>
+
+      {FOOTER_COLUMNS.map((column) => (
+        <nav class="foot-col" aria-label={column.title}>
+          <p class="col-title">{column.title}</p>
+          <ul>
+            {column.links.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </nav>
+      ))}
     </div>
-  ) : (
-    <div class="wrap footer-inner">
-      <p>© 2026 BSG DataWorks. African data collection for AI.</p>
-      <div class="footer-actions">
-        <a class="footer-contact" href={EMAIL}>Email BSG</a>
-        <a class="footer-contact" href={WHATSAPP} target="_blank" rel="noopener" aria-label={WHATSAPP_LABEL}>WhatsApp only</a>
+
+    <div class="foot-cred">
+      <p class="cred-k">NDPC registered</p>
+      <span class="cred-no">NDPC/DCP/13596</span>
+      <span>NDPA 2023 compliant · certificate on request · {ADDRESS}</span>
+    </div>
+
+    <div class="foot-legal">
+      <span>© 2026 BSG DataWorks (Private) Limited — AI Training Dataset Division.</span>
+      <span class="legal-links">
         <a href="/privacy-policy">Privacy Policy</a>
+        <span class="sep" aria-hidden="true">·</span>
         <button type="button" class="cookie-settings" onclick="bsgOpenCookieSettings()">Cookie settings</button>
-        <a href="/">Back to BSG DataWorks home</a>
-      </div>
+      </span>
     </div>
-  )}
+  </div>
 </footer>
 
 <style>
-  footer {
-    border-top: 1px solid var(--line);
-    padding: 30px 0 38px;
-    color: #5A675F;
-    font-size: .86rem;
+  /* ── The seam ──────────────────────────────────────────────────────── */
+  .wave-seam {
+    display: flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 40px;
+    background: var(--paper);
+    overflow: hidden;
   }
 
-  .footer-inner,
-  .foot-inner { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap }
+  .wave-seam i {
+    flex: 1 1 0;
+    min-width: 1px;
+    display: block;
+    background: var(--green);
+    border-radius: 2px 2px 0 0;
+  }
 
-  .footer-actions { display: flex; gap: 16px; flex-wrap: wrap }
-  .footer-actions .footer-contact { font-weight: 700 }
+  .wave-seam i:nth-child(4n) { background: var(--amber) }
+  .wave-seam i:nth-child(7n) { opacity: .4 }
 
-  .footer-direct { font-size: .85rem }
-  .footer-direct a { font-weight: 700 }
+  /* ── The block ─────────────────────────────────────────────────────── */
+  footer {
+    background: var(--ink);
+    color: rgba(226, 240, 236, .72);
+    font-size: .95rem;
+  }
 
+  .foot-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr 1fr;
+    gap: clamp(24px, 3.4vw, 44px);
+    padding-block: clamp(30px, 4vw, 44px) clamp(24px, 3vw, 32px);
+  }
+
+  .mark {
+    display: block;
+    width: 132px;
+    height: 43px;
+    background: url('/assets/images/bsg-dataworks-logo.png') left center / contain no-repeat;
+    /* The supplied mark is ~72% dark and cannot read on this ground. */
+    filter: brightness(0) invert(1);
+    opacity: .92;
+    /* Matches the header's optical alignment for the asset's transparent edge. */
+    margin-left: -4.7px;
+  }
+
+  .foot-brand p {
+    margin-top: 14px;
+    font-size: .88rem;
+    line-height: 1.55;
+    color: rgba(226, 240, 236, .58);
+    max-width: 34ch;
+  }
+
+  .col-title {
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    margin-bottom: 13px;
+  }
+
+  .foot-col ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px }
+  .foot-col a { color: rgba(226, 240, 236, .78); text-decoration: none; font-size: .9rem }
+  .foot-col a:hover { color: #fff; text-decoration: underline }
+
+  .brand-contact { margin-top: 14px; display: flex; flex-direction: column; gap: 5px }
+  .brand-contact a {
+    color: #fff;
+    font-weight: 700;
+    font-size: .89rem;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+  }
+  .brand-contact a:hover { text-decoration: underline; text-underline-offset: 3px }
+
+  /* ── Registration rule ─────────────────────────────────────────────── */
+  .foot-cred {
+    border-top: 1px solid rgba(255, 255, 255, .24);
+    border-bottom: 1px solid rgba(255, 255, 255, .24);
+    padding-block: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px clamp(18px, 2.6vw, 30px);
+  }
+
+  .cred-k {
+    font-family: var(--mono);
+    font-size: .7rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--amber);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .cred-k::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--amber);
+  }
+
+  .cred-no {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: .95rem;
+    color: #fff;
+  }
+
+  .foot-cred span { font-size: .86rem; color: rgba(226, 240, 236, .58) }
+
+  /* ── Legal ─────────────────────────────────────────────────────────── */
+  .foot-legal {
+    padding-block: 16px clamp(26px, 3.4vw, 34px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    justify-content: space-between;
+    font-size: .8rem;
+    color: rgba(226, 240, 236, .5);
+  }
+
+  .legal-links { display: flex; align-items: center; gap: 9px }
+  .sep { color: rgba(226, 240, 236, .38) }
+
+  /* One is an <a>, the other a <button>; they must be indistinguishable. */
+  .legal-links a,
   .cookie-settings {
+    color: rgba(226, 240, 236, .7);
+    font: inherit;
+    text-decoration: none;
     border: 0;
     background: none;
     padding: 0;
-    color: var(--green);
-    font: inherit;
     cursor: pointer;
-    text-decoration: underline;
+  }
+
+  .legal-links a:hover,
+  .cookie-settings:hover { color: #fff; text-decoration: underline }
+
+  /* ── Responsive ────────────────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .foot-grid { grid-template-columns: 1fr 1fr }
+    .foot-brand { grid-column: 1 / -1 }
+  }
+
+  @media (max-width: 560px) {
+    .wave-seam { height: 30px }
+    .foot-grid { grid-template-columns: 1fr; gap: 26px }
+    .foot-cred { flex-direction: column; align-items: flex-start; gap: 7px }
   }
 </style>

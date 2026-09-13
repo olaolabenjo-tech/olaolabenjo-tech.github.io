@@ -222,6 +222,36 @@ Astro's scoper drops the universal selector, and the whole rule with it. The
 text-well cap silently never applied. Use explicit class selectors inside
 scoped `<style>` blocks; do not rely on `*`.
 
+## Footer — "Waveform seam"
+
+Chosen from four dark directions. One footer on every page; the `corporate` /
+`service` variants and the `footerVariant` prop are gone, along with the
+`FooterVariant` type.
+
+- **The waveform carries the seam.** A light page stopping dead against a dark
+  block looks unfinished; the motif runs full-bleed between them. It also gives
+  that motif a job — it previously sat mid-page on the homepage as pure
+  decoration, and has been **removed from there** so it does not appear twice.
+- **Ground is `--ink`**, not the hero's navy, so the footer reads as its own
+  block rather than a second hero.
+- **The logo is the white silhouette** here. The mark is ~72% dark and cannot
+  sit on this ground — the same constraint that sent the header back to a light
+  bar. A footer is a lower-stakes place for a monochrome mark.
+- Link columns live in `config/footer.ts` with a PENDING block, same rule as
+  the header: **every target must resolve**. Verified zero dead links.
+- The full-width rule carries the **NDPC registration**: number, NDPA 2023
+  compliance, "certificate on request", and the registered address — which
+  previously appeared only inside the privacy policy body. This keeps
+  `NDPC/DCP/13596` on all six pages, including `/privacy-policy`, whose hero
+  has no trust chip.
+- Email and WhatsApp sit in the brand column.
+- Privacy Policy sits beside Cookie settings in the legal line. One is an
+  `<a>`, the other a `<button>`, so they share a single rule to stay
+  indistinguishable — no underline until hover on either.
+- Divider hairlines are `rgba(255,255,255,.24)`, not `.13`. At 13% they
+  measured **1.50:1** against the ink ground and read as absent on many
+  displays; 24% gives ~2.2:1 — a clear line that is still quiet.
+
 ## Mobile hero buttons
 
 The two hero CTAs were sized to their labels with `flex-wrap: wrap`. Below
