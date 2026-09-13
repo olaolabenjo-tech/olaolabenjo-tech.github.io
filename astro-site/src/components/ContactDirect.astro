@@ -4,11 +4,11 @@
 
 <div class="contact-direct" aria-label="Direct contact options">
   <p>
-    <strong>Prefer to write directly?</strong>
+    <strong>Prefer to write directly?</strong>{' '}
     <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a>
   </p>
   <p>
-    <strong>WhatsApp only:</strong>
+    <strong>WhatsApp only:</strong>{' '}
     <a
       href="https://wa.me/2348067904903"
       target="_blank"
@@ -19,13 +19,18 @@
 </div>
 
 <style>
+  /* Matches the brief card directly above it: same measure, same centring,
+     same left-aligned text. The measure differs per design system
+     (610px on the homepage, 640px on the service pages), so the containing
+     band sets --contact-measure. */
   .contact-direct {
-    margin: 18px 0;
+    max-width: var(--contact-measure, 610px);
+    margin: 0 auto 22px;
     padding: 14px 16px;
+    text-align: left;
     border: 1px solid rgba(255, 255, 255, .42);
     border-radius: 10px;
     background: rgba(255, 255, 255, .08);
-    max-width: 720px;
   }
   .contact-direct p { margin: 0; color: #fff; font-size: .95rem; line-height: 1.55 }
   .contact-direct p + p { margin-top: 4px }

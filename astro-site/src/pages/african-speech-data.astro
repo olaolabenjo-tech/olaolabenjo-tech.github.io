@@ -6,6 +6,10 @@
   internal hrefs changed (root-absolute and extensionless).
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
+import ContactDirect from '../components/ContactDirect.astro';
+
+// The same evaluation-pack request the homepage's Samples section sends.
+const SAMPLES_MAILTO = 'mailto:dataservices@bsgdataworks.com?subject=Evaluation%20pack%20request&body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20request%20the%20speech%20evaluation%20pack.%0A%0A-%20Organisation%20and%20role%3A%0A-%20Intended%20model%20use%3A%0A-%20Languages%20or%20data%20types%20of%20interest%3A%0A-%20Any%20technical%20or%20compliance%20questions%3A%0A%0AThanks%2C%0A';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -42,8 +46,11 @@ const schema = {
         <h1>African speech data for <em>AI training</em>, built to your specification.</h1>
         <p class="hero-copy">Commission human-sourced speech data for ASR, speech-to-text, voice assistants, TTS, call-centre intelligence, evaluation, and multilingual AI. BSG DataWorks plans the collection, recruits consenting contributors, runs quality checks, and delivers the documentation your technical and legal teams need.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#contact">Start a speech-data brief</a>
-          <a class="btn btn-secondary" href="/#samples">Review available samples</a>
+          <a
+            class="btn btn-primary"
+            href={SAMPLES_MAILTO}
+            aria-label="Review available samples by email — opens your email application"
+          >Review available samples</a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="Speech-data service overview">
@@ -149,10 +156,7 @@ const schema = {
           </ul>
           <p class="brief-note"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
         </div>
-                  <div class="contact-direct" aria-label="Direct contact options">
-          <p><strong>Prefer to write directly?</strong> <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a></p>
-          <p><strong>WhatsApp only:</strong> <a href="https://wa.me/2348067904903" target="_blank" rel="noopener" aria-label="Message BSG DataWorks on WhatsApp — opens WhatsApp">+234 806 790 4903</a></p>
-        </div>
+          <ContactDirect />
 <a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=African%20speech%20data%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20discuss%20an%20African%20speech-data%20project.%0A%0A-%20Intended%20model%20use%20and%20speech-data%20scenario%3A%0A-%20Languages%2C%20markets%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20format%20and%20transcript%20requirements%3A%0A-%20Desired%20delivery%20timeline%3A%0A-%20Rights%2C%20governance%20or%20compliance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A" aria-label="Start an African speech-data brief by email — opens your email application">Start a speech-data brief by email</a>
       </div>
     </div>
@@ -161,6 +165,9 @@ const schema = {
 </ServiceLayout>
 
 <style>
+  /* The brief card above is 640px here, so the contact card matches it. */
+  .contact-band { --contact-measure: 640px }
+
   /*
     Page-scoped overrides, per DESIGN-DECISIONS.md: the shared system holds the
     majority value and outliers override locally rather than shifting 12 pages.
