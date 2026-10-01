@@ -21,6 +21,7 @@ export const SITE_NAV: NavLink[] = [
     children: [
       { href: '/language-coverage', label: 'All language coverage' },
       { href: '/african-speech-data', label: 'African speech data' },
+      { href: '/yoruba-speech-data', label: 'Yorùbá speech data' },
     ],
   },
   { href: '/#contact', label: 'Start a brief' },
@@ -35,6 +36,5 @@ export const SITE_NAV: NavLink[] = [
  *
  *   inside the Languages dropdown:
  *     { href: '/nigerian-english-speech-data', label: 'Nigerian English speech' }
- *     { href: '/yoruba-speech-data',           label: 'Yorùbá speech data' }
  *     { href: '/nigerian-language-data',       label: 'Nigerian language data' }
  */

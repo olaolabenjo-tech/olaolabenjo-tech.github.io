@@ -1,0 +1,182 @@
+---
+/*
+  Ported from yoruba-speech-data.html through ServiceLayout.
+
+  Body content is carried over verbatim; internal hrefs are root-absolute and
+  extensionless. Three departures, all following earlier decisions:
+  - The FAQ section is gone; its four questions live on /faq.
+  - Links to unported pages (Compliance, Nigerian English speech data) are
+    out until those pages resolve; the text around them is kept.
+  - The contact block uses the shared ContactDirect component.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import ContactDirect from '../components/ContactDirect.astro';
+
+const BRIEF_MAILTO = 'mailto:dataservices@bsgdataworks.com?subject=Yor%C3%B9b%C3%A1%20speech%20data%20brief&body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20discuss%20a%20Yor%C3%B9b%C3%A1%20speech-data%20project.%0A%0A-%20Intended%20model%20use%20and%20Yor%C3%B9b%C3%A1%20speech%20scenario%3A%0A-%20Target%20speaker%2C%20market%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20audio%20format%20and%20transcript%20requirements%3A%0A-%20Tonal-orthography%2C%20annotation%20or%20metadata%20requirements%3A%0A-%20Desired%20delivery%20timeline%20and%20governance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Yorùbá Speech Data for AI Training',
+  description:
+    'Yorùbá speech-data evaluation, commissioned collection, transcription, time alignment, tonal orthography support, annotation and commercial licensing support for AI training.',
+  provider: { '@type': 'Organization', name: 'BSG DataWorks', url: 'https://bsgdataworks.com/' },
+  areaServed: { '@type': 'Country', name: 'Nigeria' },
+  serviceType: 'Yorùbá speech dataset collection, transcription and annotation',
+};
+---
+
+<ServiceLayout
+  title="Yorùbá Speech Data for AI Training | BSG DataWorks"
+  description="Evaluate or commission Yorùbá speech data for AI training. BSG DataWorks supports consent-documented collection, tonal orthography, transcription, time alignment, native-speaker QA and commercial licensing discussions."
+  canonicalPath="/yoruba-speech-data"
+  ogDescription="Yorùbá speech data with tonal orthography, native-speaker review, transcription and commercial licensing support."
+  twitterTitle="Yorùbá Speech Data for AI Training | BSG DataWorks"
+  twitterDescription="Evaluate or commission Yorùbá speech data for AI training with tonal orthography and native-speaker QA."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Available to evaluate · Yorùbá speech</p>
+        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+        <p class="trust-route">Registered with the Nigeria Data Protection Commission. Certificate available on request. See our <a href="/privacy-policy">Privacy Policy</a>.</p>
+        <p class="collection-consent">Data is collected only from adult contributors under written, informed consent covering the intended commercial use and AI-training scope.</p>
+
+        <h1>Yorùbá speech data for <em>AI training</em>, with tonal accuracy built in.</h1>
+        <p class="hero-copy">Evaluate representative Yorùbá speech samples with time-aligned transcripts, or commission a scope built around your model, speakers, scenarios and delivery requirements. BSG DataWorks combines native-speaker language oversight, full tonal orthography, consent documentation and commercial licensing support.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="#contact">Start a Yorùbá speech brief</a>
+          <a class="btn btn-secondary" href="/#samples">Review available samples</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Yorùbá speech-data overview">
+        <p class="eyebrow">What teams can evaluate</p>
+        <h2>More than an audio file.</h2>
+        <p>Review representative Yorùbá audio, transcripts and the language treatment behind the data before progressing to a commercial discussion or bespoke collection plan.</p>
+        <ul class="panel-list">
+          <li>Yorùbá speech samples with transcripts</li>
+          <li>Full tonal-diacritic and Unicode NFC treatment</li>
+          <li>Native-speaker review and documented rights route</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="availability">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Availability</p>
+        <h2>Start with representative Yorùbá speech, then scope what your model needs next.</h2>
+        <p>BSG DataWorks has Yorùbá speech and time-aligned transcription support available for technical evaluation. For production requirements, we will discuss the relevant usage rights, the current licensable scope and whether a commissioned collection or annotation extension is appropriate.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card"><p class="icon">01 · EVALUATE</p><h3>Representative speech materials</h3><p>Review Yorùbá audio and matching transcript materials before progressing to a commercial discussion.</p></article>
+        <article class="card"><p class="icon">02 · SPECIFY</p><h3>Language-aware scope</h3><p>Describe the intended model use, speaker profile, scenario, volume, format, tonal-orthography requirements and timeline.</p></article>
+        <article class="card"><p class="icon">03 · LICENSE</p><h3>Documented commercial use</h3><p>Discuss the required licence, consent documentation, delivery materials and permitted commercial use as part of the project scope.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="uses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">AI use cases</p>
+        <h2>Build for Yorùbá as it is written and spoken.</h2>
+        <p>For voice and language systems, the data brief should account for the target interaction, tonal orthography, speakers, recording environments, domains and evaluation criteria rather than treating Yorùbá as a generic-text or generic-speech case.</p>
+      </div>
+      <div class="scope-grid">
+        <article class="scope-card"><h3>ASR and speech-to-text</h3><p>Plan speech and time-aligned transcript requirements for systems that need Yorùbá language handling and appropriate written tone marks.</p></article>
+        <article class="scope-card"><h3>TTS and voice experiences</h3><p>Discuss voices, recording requirements and contributor-rights scope for speech synthesis or branded voice work, subject to the agreed consent and licence terms.</p></article>
+        <article class="scope-card"><h3>Voice assistants and localisation</h3><p>Define prompts, dialogue style, domains and speaker mix for Yorùbá-facing customer-service, information and voice-interface experiences.</p></article>
+        <article class="scope-card"><h3>Language-model evaluation</h3><p>Use a carefully scoped sample or commissioned dataset to assess transcript treatment, language coverage or model behaviour against relevant Yorùbá input.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="delivery">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Technical and language requirements</p>
+        <h2>Agree the language treatment and deliverables before collection starts.</h2>
+        <p>Each production scope is documented around audio format, transcript treatment, tonal orthography, metadata, quality checks and delivery method. The exact package is agreed in the project statement of work or licence.</p>
+      </div>
+      <div class="spec-grid">
+        <article class="spec-card">
+          <h3>Typical audio and transcript options</h3>
+          <ul>
+            <li>WAV audio, 16 kHz mono 16-bit PCM; 48 kHz studio option where agreed</li>
+            <li>Verbatim and time-aligned transcript options</li>
+            <li>Yorùbá transcripts with full tonal diacritics and Unicode NFC normalisation</li>
+            <li>JSON, TXT or CSV delivery formats to brief</li>
+          </ul>
+        </article>
+        <article class="spec-card">
+          <h3>Quality and documentation</h3>
+          <ul>
+            <li>Native-speaker review of 100% of Yorùbá transcriptions</li>
+            <li>Inter-annotator agreement of ≥ 80% (word-level or Cohen’s κ per project), measured on a 10% blind sample per batch and reported in the batch QC report</li>
+            <li>Free re-delivery on any batch failing agreed QA thresholds (up to two re-deliveries per batch)</li>
+            <li>Audio screening for signal quality, clipping and duplication where relevant to the agreed delivery</li>
+            <li>Data-card, licence and consent documentation materials for the delivery</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">From evaluation to delivery</p>
+        <h2>A clear route from first sample to language-aware production scope.</h2>
+        <p>Start with enough information for BSG DataWorks to assess fit, then agree the language, commercial and operational requirements before work begins.</p>
+      </div>
+      <div class="process">
+        <article class="process-card"><h3>Review</h3><p>Evaluate representative material and identify whether an existing licence, custom extension or new collection discussion is appropriate.</p></article>
+        <article class="process-card"><h3>Brief</h3><p>Share the model use, target speakers, speech scenario, technical format, transcript treatment, required volume, timeline and governance needs.</p></article>
+        <article class="process-card"><h3>Agree</h3><p>Confirm delivery criteria, tonal-orthography treatment, rights, documentation and the commercial route in the applicable proposal, statement of work or licence.</p></article>
+        <article class="process-card"><h3>Deliver</h3><p>Receive the agreed audio, transcripts, metadata and documentation through client-specified secure transfer or an agreed approved destination.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="related-speech" aria-labelledby="related-speech-heading">
+    <div class="wrap">
+      <div class="related-box">
+        <p class="eyebrow">Explore related Nigerian speech data</p>
+        <h2 id="related-speech-heading">Expand from Yorùbá to the wider speech route.</h2>
+        <p>Also from BSG DataWorks: Nigerian English speech data is available now. Igbo, Hausa, and Nigerian Pidgin are in pipeline. Kanuri, Efik, and minority languages are collected on commission. See the <a href="/african-speech-data">African Speech Data page</a> for the current language-coverage route, or the <a href="/faq#languages">FAQ</a> for common questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-band">
+        <p class="eyebrow" style="color:#E6C98E">Start a Yorùbá speech brief</p>
+        <h2>Tell us what your model needs.</h2>
+        <p>Share a few project details and we will reply within 48 hours with initial scoping questions, a likely timeline and the next step.</p>
+        <div class="brief">
+          <p class="brief-title">What helps us get started</p>
+          <ul>
+            <li>Intended model use and Yorùbá speech scenario</li>
+            <li>Target speaker, market or participant profile</li>
+            <li>Target volume, audio format and transcript requirements</li>
+            <li>Tonal-orthography, annotation or metadata requirements</li>
+            <li>Desired delivery timeline and governance requirements</li>
+            <li>Approximate pilot budget or licensing range, if known</li>
+          </ul>
+          <p class="brief-note"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
+        </div>
+        <ContactDirect />
+        <a class="btn" href={BRIEF_MAILTO} aria-label="Start a Yorùbá speech-data brief by email — opens your email application">Start a Yorùbá speech brief by email</a>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  /* The brief card above is 640px here, so the contact card matches it. */
+  .contact-band { --contact-measure: 640px }
+</style>

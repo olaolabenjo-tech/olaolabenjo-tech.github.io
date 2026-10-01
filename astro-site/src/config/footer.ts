@@ -12,6 +12,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/language-coverage', label: 'Language coverage' },
       { href: '/african-speech-data', label: 'African speech data' },
+      { href: '/yoruba-speech-data', label: 'Yorùbá speech data' },
     ],
   },
   {
@@ -19,6 +20,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     links: [
       { href: '/about', label: 'About' },
       { href: '/services', label: 'Services' },
+      { href: '/faq', label: 'FAQ' },
       { href: '/#contact', label: 'Start a brief' },
     ],
   },
@@ -28,7 +30,6 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
  * Not yet ported — add to the columns above as each page lands.
  *
  *   Data:    /african-ai-training-data-types       Data types
- *            /yoruba-speech-data                   Yorùbá speech data
  *            /nigerian-english-speech-data         Nigerian English speech
  *            /nigerian-language-data               Nigerian language data
  *   Company: /african-data-collection-services     Data collection

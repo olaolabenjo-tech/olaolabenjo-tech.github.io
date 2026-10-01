@@ -1,0 +1,226 @@
+---
+/*
+  Site-wide FAQ.
+
+  Collated from the FAQ sections of the pre-Astro pages (the root *.html
+  files). The same questions recurred page to page — "what should we send
+  first", "can you work with data we already have", "is there a ready-made
+  catalogue", "how do rights and consent work" — so each is answered once
+  here, merging the page-specific details into the single answer. Wording is
+  carried over from the originals; nothing was invented.
+
+  Links point only at ported pages, same rule as the header and footer.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+
+interface Faq { q: string; a: string }
+interface Group { id: string; title: string; items: Faq[] }
+
+const GROUPS: Group[] = [
+  {
+    id: 'start',
+    title: 'Getting started',
+    items: [
+      {
+        q: 'What should we send in the first email?',
+        a: 'Tell us the intended model use, data type, languages or markets, target participant or speaker profile, target volume, technical format, desired timeline, governance requirements and an approximate pilot budget or licensing range if known. If you are still scoping any item, say so; we can clarify the remaining questions on a call.',
+      },
+      {
+        q: 'Can we request pricing?',
+        a: 'Yes. Tell us the data type, model use, approximate volume, timing, and procurement or licensing context if known. We reply within 48 hours with initial scoping questions, a likely timeline and the next step.',
+      },
+    ],
+  },
+  {
+    id: 'scope',
+    title: 'Scope and commissioning',
+    items: [
+      {
+        q: 'Do you offer a ready-made data catalogue?',
+        a: 'No. Most BSG DataWorks projects are commissioned. The published pages show the areas you can explore now; a commission brief is the right route when your data needs to reflect a specific language, market, environment, contributor profile, model task, or delivery requirement. For image and video work that means the buyer’s object classes, actions, scenes, capture conditions, annotation requirements and delivery needs. We confirm the practical scope before committing to a project.',
+      },
+      {
+        q: 'Can you collect data to our custom specification?',
+        a: 'Yes. Start with the target model use, data type, language or market, participant profile, scenario, recording environment or device requirements, volume and timeline. A commissioned discussion can also cover transcript and metadata requirements, rights and quality criteria. BSG DataWorks will discuss the appropriate collection and commercial route.',
+      },
+      {
+        q: 'Which data types can you collect?',
+        a: 'Current collection scope includes human-sourced speech, text and language data, image data and scenario-based video capture. The final scope is agreed around the requested use case and collection specification.',
+      },
+      {
+        q: 'What if we need a data type that is not listed?',
+        a: 'Start a dataset brief with the closest data type and explain the intended model use. If the work is within our collection, annotation, or advisory scope, we will help identify the practical next questions.',
+      },
+      {
+        q: 'Can the collection cover a particular African market or setting?',
+        a: 'Tell us the market, setting, participants, objects or activities, capture conditions, and delivery requirement. We assess the brief and confirm what is practical before making a commitment; we do not claim universal market coverage.',
+      },
+      {
+        q: 'Can a project include identifiable people or children?',
+        a: 'Potentially, but this is a special project question. The brief should explain why identifiable participants are needed, their role, how the images or footage will be used, and what safeguards are required. We use written consent workflows where applicable and flag biometric, child-participant, sensitive-setting, and re-identification questions early; buyers should obtain independent professional advice for their own legal and governance obligations.',
+      },
+      {
+        q: 'Can a video project include speech or transcripts?',
+        a: 'Yes, where this is within the agreed scope and the participation, data-use, and quality requirements are clear. If the project needs dedicated voice data, see <a href="/african-speech-data">African speech data</a>.',
+      },
+    ],
+  },
+  {
+    id: 'languages',
+    title: 'Languages and speech data',
+    items: [
+      {
+        q: 'Which languages can you support?',
+        a: 'Nigerian-accented English and Yorùbá are available now; Igbo, Hausa and Nigerian Pidgin are in the pipeline; other languages are on commission. For a language not listed, send a brief with the language variety, written form, domain, task, intended use, target speakers, volume, timeline and required quality standard so we can assess a bespoke collection plan. See <a href="/language-coverage">language coverage</a>.',
+      },
+      {
+        q: 'Is Nigerian English or Yorùbá speech data available to evaluate now?',
+        a: 'Yes. BSG DataWorks has representative Nigerian-accented English speech samples, and Yorùbá speech with time-aligned transcription, available for technical evaluation. Contact us with your intended use so we can discuss the relevant materials and the appropriate commercial path.',
+      },
+      {
+        q: 'Can you provide transcripts and time alignment?',
+        a: 'Yes. Transcription and time-alignment requirements can be included in the scope. State the transcript format, orthography, annotation and metadata requirements in your initial brief; these are scoped against the intended model use and delivery format.',
+      },
+      {
+        q: 'Can Yorùbá transcripts include tonal diacritics?',
+        a: 'Yes. Yorùbá transcripts include full tonal diacritics and Unicode NFC normalisation by default. State any additional transcription, time-alignment, annotation and delivery-format requirements in your initial brief.',
+      },
+      {
+        q: 'Can a project include code-switching, diacritics, or local terminology?',
+        a: 'Yes — when these are included in the brief and reflected in the written guidance. The project should state how language variants, code-switching, orthography, diacritics, terminology, and exceptions are to be represented and reviewed.',
+      },
+      {
+        q: 'Can language and speech data be scoped together?',
+        a: 'Yes. Text and language data work can be scoped alongside voice recordings or speech transcripts when a project needs both.',
+      },
+    ],
+  },
+  {
+    id: 'annotation',
+    title: 'Annotation and existing data',
+    items: [
+      {
+        q: 'Can you work with data we already have?',
+        a: 'Yes. BSG DataWorks provides annotation support for existing client data — speech, text, images or footage — as well as for data collected through our networks. If you already hold source material, we can discuss a preparation, annotation, quality-assurance, and delivery scope around an agreed schema, guidelines and review process. Start with the data type, model use, task definition and expected output.',
+      },
+      {
+        q: 'Which annotation tasks can you support?',
+        a: 'Current service scope includes transcription and time alignment, classification and categorisation, segmentation and diarisation, entity and sentiment labelling, and image or video tagging to an agreed schema.',
+      },
+      {
+        q: 'Can you work to our label taxonomy?',
+        a: 'Yes. Share your existing schema, examples, definitions and delivery requirements in the initial brief. The annotation workflow and quality criteria will be agreed before production.',
+      },
+      {
+        q: 'How is annotation quality handled?',
+        a: 'Quality criteria and reporting are agreed for the project. For relevant language work, BSG DataWorks uses native-speaker support; transcriptions are reviewed by native-speaker linguists, and inter-annotator agreement is reported per batch where applicable.',
+      },
+    ],
+  },
+  {
+    id: 'rights',
+    title: 'Consent, rights and compliance',
+    items: [
+      {
+        q: 'How are contributor consent and commercial rights handled?',
+        a: 'BSG DataWorks obtains written, informed contributor consent covering the agreed commercial scope and maintains contributor and consent documentation as part of the collection and delivery process. Commercial use, permitted sublicensing and the documentation package are addressed in the applicable licence or project agreement.',
+      },
+      {
+        q: 'How do consent and provenance apply to language, image and video data?',
+        a: 'The right documentation depends on the actual source route and project facts. We can make source, consent, rights, provenance, buyer-diligence, data-flow and safeguard questions visible in the project scope; a buyer should obtain independent professional advice for its particular legal and governance obligations.',
+      },
+      {
+        q: 'Is BSG DataWorks registered with the NDPC?',
+        a: 'Yes. BSG DataWorks is registered with the Nigeria Data Protection Commission as NDPC/DCP/13596. That registration does not replace a buyer’s own compliance, governance, or legal-review responsibilities.',
+      },
+      {
+        q: 'Is this legal advice or a legal-compliance certification?',
+        a: 'No. BSG DataWorks provides operational support for AI training data projects and does not provide legal advice, act as a law firm, or issue a universal certification that a project or dataset is legally compliant. Your organisation should obtain independent advice for its particular obligations and risk decisions.',
+      },
+      {
+        q: 'What Nigerian regulatory context do you consider?',
+        a: 'Our operational planning takes account of the Nigeria Data Protection Act 2023 and relevant NDPC guidance, including the 2025 General Application and Implementation Directive. The legal obligations that apply depend on the facts of each project, including the parties, data, purpose, and data flows. Read the <a href="https://ndpc.gov.ng/wp-content/uploads/2025/07/NDP-ACT-GAID-2025-MARCH-20TH.pdf" target="_blank" rel="noopener">NDPC’s published GAID 2025</a>.',
+      },
+      {
+        q: 'How do you approach biometric or potentially sensitive data?',
+        a: 'We treat these as early project-risk questions rather than ordinary data points. We can help identify the relevant collection and documentation questions, apply a data-minimisation mindset, define a no-re-identification boundary for the project, and flag issues that require assessment by the responsible data-protection and legal professionals.',
+      },
+      {
+        q: 'Can a buyer receive contributor identity information?',
+        a: 'Not as a default. The project should be designed around a no-re-identification principle: the buyer’s permitted use should not ask or allow contributors to be re-identified from the dataset or linked records. Any exception would need a clearly defined lawful and operational basis and appropriate professional review.',
+      },
+      {
+        q: 'Can you support cross-border delivery or international buyers?',
+        a: 'We can map the intended parties, delivery route, and questions about onward handling so they are visible in the project record. The applicable legal requirements and transfer mechanisms must be determined by the responsible organisations and their legal advisers.',
+      },
+    ],
+  },
+];
+
+const strip = (html: string) => html.replace(/<[^>]+>/g, '');
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: GROUPS.flatMap((g) =>
+    g.items.map(({ q, a }) => ({
+      '@type': 'Question',
+      name: q,
+      acceptedAnswer: { '@type': 'Answer', text: strip(a) },
+    })),
+  ),
+};
+---
+
+<ServiceLayout
+  title="FAQ | BSG DataWorks"
+  description="Answers to common questions about commissioning African AI training data from BSG DataWorks: scope, languages, transcripts, annotation, contributor consent, licensing and NDPC registration."
+  canonicalPath="/faq"
+  ogDescription="Common questions about commissioning African speech, language, image and video data: scope, annotation, consent, licensing and compliance."
+  twitterTitle="FAQ | BSG DataWorks"
+  twitterDescription="Common questions about commissioning African AI training data."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Frequently asked questions</p>
+        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+        <h1>Questions teams ask <em>before commissioning</em>.</h1>
+        <p class="hero-copy">
+          Scope, languages, annotation, contributor consent and compliance — answered once, in
+          one place. If your question is not here, send it with your brief.
+        </p>
+      </div>
+      <aside class="hero-panel">
+        <p class="eyebrow">Jump to</p>
+        <h2>Topics</h2>
+        <ul class="panel-list">
+          {GROUPS.map((g) => <li><a href={`#${g.id}`}>{g.title}</a></li>)}
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  {GROUPS.map((g) => (
+    <section id={g.id}>
+      <div class="wrap faq">
+        <h2>{g.title}</h2>
+        {g.items.map(({ q, a }) => (
+          <details><summary>{q}</summary><p set:html={a} /></details>
+        ))}
+      </div>
+    </section>
+  ))}
+
+</ServiceLayout>
+
+<style>
+  /* The topic sections run back to back; the shared 74px reads as page breaks. */
+  section { padding-block: 26px }
+  section:first-of-type { padding-top: 60px }
+  section:last-of-type { padding-bottom: 74px }
+
+  .panel-list a { color: inherit; text-decoration: none }
+  .panel-list a:hover { text-decoration: underline; text-underline-offset: 3px }
+</style>

@@ -497,7 +497,8 @@ where Astro scopes it automatically.
 
 Blocks genuinely shared by both systems — `ContactDirect`, `PolicyNotice` —
 became components with their own scoped styles rather than being duplicated
-into each sheet.
+into each sheet. (`PolicyNotice` has since been narrowed to the homepage; the
+footer's Privacy Policy link covers every other page.)
 
 **Do not "unify" these systems as a cleanup.** They are three deliberate
 designs. Merging them is a design decision for a human, taken after cutover.
@@ -529,7 +530,7 @@ src/
 │   ├── Footer.astro             corporate | service variants
 │   ├── JsonLd.astro             schema.org blocks
 │   ├── ContactDirect.astro      email + WhatsApp route (both systems)
-│   ├── PolicyNotice.astro       closing privacy teaser (both systems)
+│   ├── PolicyNotice.astro       closing privacy teaser (homepage only)
 │   └── home/                    one component per homepage section
 │       ├── Hero.astro           reg chip, headline, CTAs, proof strip
 │       ├── Waveform.astro       decorative separator
@@ -540,7 +541,6 @@ src/
 │       ├── Standards.astro      #specs
 │       ├── Compliance.astro     #compliance
 │       ├── Samples.astro        #samples
-│       ├── AboutTeaser.astro    #about
 │       └── ContactBand.astro    #contact
 └── layouts/
     ├── Shell.astro              chrome, head, nav, footer — not used directly
