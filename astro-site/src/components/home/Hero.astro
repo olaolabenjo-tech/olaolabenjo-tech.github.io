@@ -11,6 +11,7 @@
   1920px. Regenerate with the commands in DESIGN-DECISIONS.md if the artwork
   is ever replaced — do not point this at the raw PNG.
 */
+import { CALL_REQUEST_MAILTO, EVALUATION_PACK_MAILTO } from '../../config/contact';
 
 const TIERS = [
   {
@@ -80,8 +81,16 @@ const HERO = '/assets/images/hero';
       your legal team can sign off on.
     </p>
     <div class="cta-row">
-      <a class="btn btn-primary" href="#contact">Commission a dataset</a>
-      <a class="btn btn-ghost" href="#samples">Hear a sample first</a>
+      <a
+        class="btn btn-primary"
+        href={EVALUATION_PACK_MAILTO}
+        aria-label="Request an evaluation pack by email — opens your email application"
+      >Request an evaluation pack</a>
+      <a
+        class="btn btn-ghost"
+        href={CALL_REQUEST_MAILTO}
+        aria-label="Schedule a call by email — opens your email application"
+      >Schedule a call</a>
     </div>
   </div>
 
