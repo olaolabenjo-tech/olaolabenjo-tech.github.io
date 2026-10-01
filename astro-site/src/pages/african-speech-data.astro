@@ -1,0 +1,184 @@
+---
+/*
+  First page through ServiceLayout.
+
+  Body content is carried over verbatim from african-speech-data.html; only
+  internal hrefs changed (root-absolute and extensionless).
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import ContactDirect from '../components/ContactDirect.astro';
+import { EVALUATION_PACK_MAILTO } from '../config/contact';
+
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'African Speech Data for AI Training',
+  description:
+    'Commissioned collection, transcription, annotation and commercial licensing of human-sourced African speech data for AI training.',
+  provider: { '@type': 'Organization', name: 'BSG DataWorks', url: 'https://bsgdataworks.com/' },
+  areaServed: [
+    { '@type': 'Country', name: 'Nigeria' },
+    { '@type': 'Place', name: 'West Africa' },
+  ],
+  serviceType: 'Speech dataset collection, transcription and annotation',
+};
+---
+
+<ServiceLayout
+  title="African Speech Data for AI Training | BSG DataWorks"
+  description="Commission African speech data for AI training: Nigerian-accented English, Yorùbá and custom African-language speech collection, transcription, annotation, consent documentation and commercial licensing."
+  canonicalPath="/african-speech-data"
+  ogDescription="Commission rights-documented African speech data with collection, transcription, annotation, QA and licensing support."
+  twitterTitle="African Speech Data for AI Training | BSG DataWorks"
+  twitterDescription="Custom African speech collection, transcription, annotation and commercial licensing for AI training."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Commissioned speech datasets · Nigeria & West Africa</p>
+        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+        <p class="trust-route">Registered with the Nigeria Data Protection Commission. Certificate available on request. See our <a href="/privacy-policy">Privacy Policy</a>.</p>
+        <p class="collection-consent">Data is collected only from adult contributors under written, informed consent covering the intended commercial use and AI-training scope.</p>
+
+        <h1>African speech data for <em>AI training</em>, built to your specification.</h1>
+        <p class="hero-copy">Commission human-sourced speech data for ASR, speech-to-text, voice assistants, TTS, call-centre intelligence, evaluation, and multilingual AI. BSG DataWorks plans the collection, recruits consenting contributors, runs quality checks, and delivers the documentation your technical and legal teams need.</p>
+        <div class="cta-row">
+          <a
+            class="btn btn-primary"
+            href={EVALUATION_PACK_MAILTO}
+            aria-label="Review available samples by email — opens your email application"
+          >Review available samples</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Speech-data service overview">
+        <p class="eyebrow">Built for real deployment</p>
+        <h2>From speaker brief to documented delivery.</h2>
+        <p>Use a collection partner that understands language, field operations, consent records, and the quality controls that make speech data commercially usable.</p>
+        <ul class="panel-list">
+          <li>Custom speaker, language and domain specifications</li>
+          <li>Transcription, time alignment and annotation options</li>
+          <li>Rights documentation and consent audit trail</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="scope">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Collection scope</p>
+        <h2>Specify the speech data your product actually needs.</h2>
+        <p>Most projects are commissioned. You define the target use case, voices, languages, environments, recordings, metadata and delivery format; we turn that brief into an operational collection plan.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card"><p class="icon">01 · USE CASE</p><h3>Model-relevant recordings</h3><p>Plan scripted prompts, conversational-style speech, dialogue, voice-over, customer-service scenarios, or domain-specific collection around the task your model must perform.</p></article>
+        <article class="card"><p class="icon">02 · SPEAKER MIX</p><h3>Brief the right voices</h3><p>Set languages, regions, age bands, gender balance, first-language profile, recording environment, device and demographic constraints appropriate to the project.</p></article>
+        <article class="card"><p class="icon">03 · DELIVERY</p><h3>Choose usable outputs</h3><p>Receive agreed audio specifications with structured transcripts, time alignment, metadata and a delivery format designed around your pipeline.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="languages">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Language coverage</p>
+        <h2>Start with Nigerian English and Yorùbá. Commission the next language to your brief.</h2>
+        <p>BSG DataWorks supports African-language speech work through native-speaker networks and commissioned collection. Availability depends on the language, scope and collection plan.</p>
+      </div>
+      <div class="scope-grid">
+        <article class="scope-card"><p class="language-status status-available">Available now</p><h3>Nigerian-accented English</h3><p>Speech samples and commissioned collection for voice, transcription and conversational AI work that needs Nigerian English rather than a generic English proxy.</p></article>
+        <article class="scope-card"><p class="language-status status-available">Available now</p><h3>Yorùbá</h3><p>Speech and time-aligned transcription support for projects that require proper tonal orthography and native-speaker language oversight.</p></article>
+        <article class="scope-card"><p class="language-status status-pipeline">In pipeline</p><h3>Igbo, Hausa & Nigerian Pidgin</h3><p>Collection is being developed for these language needs. Early project conversations can shape the brief and priority requirements.</p></article>
+        <article class="scope-card"><p class="language-status status-commission">On commission</p><h3>Kanuri, Efik & minority languages</h3><p>For languages missing from major open datasets, commission a bespoke scope through an appropriate native-speaker collection plan.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How commissioning works</p>
+        <h2>A speech-data project with clear operational stages.</h2>
+        <p>We use an explicit process so your team can evaluate scope, evidence and delivery before committing to a full collection.</p>
+      </div>
+      <div class="process">
+        <article class="process-card"><h3>Brief</h3><p>Share the intended model use, languages, target volume, speaker requirements and delivery deadline.</p></article>
+        <article class="process-card"><h3>Scope</h3><p>We return initial questions, a likely plan, quality criteria and a commercial path for the work.</p></article>
+        <article class="process-card"><h3>Collect & QA</h3><p>We recruit and consent contributors, collect to the agreed specification, and run the required language and technical checks.</p></article>
+        <article class="process-card"><h3>Deliver</h3><p>You receive the agreed files, metadata, documentation and licensing materials through secure transfer.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap evidence">
+      <p class="eyebrow">What to ask a speech-data supplier</p>
+      <h2>Evaluate more than the audio.</h2>
+      <p>A useful speech-data conversation should include the collection plan and the records behind it, not only a sample file.</p>
+      <ul>
+        <li>How will speakers, languages and scenarios be selected against the brief?</li>
+        <li>Which transcription, time-alignment and metadata fields will be delivered?</li>
+        <li>What native-speaker and technical quality checks will be applied?</li>
+        <li>How will contributor consent, commercial rights and delivery records be documented?</li>
+      </ul>
+      <p>Answers on transcripts, language coverage, licensing and what to send first are in the <a href="/faq#languages">FAQ</a>.</p>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-band">
+        <p class="eyebrow" style="color:#E6C98E">Start a speech-data brief</p>
+        <h2>Tell us what your model needs.</h2>
+        <p>Share a few project details and we will reply within 48 hours with initial scoping questions, a likely timeline and the next step.</p>
+        <div class="brief">
+          <p class="brief-title">What helps us get started</p>
+          <ul>
+            <li>Intended model use and speech-data scenario</li>
+            <li>Languages, markets or participant profile</li>
+            <li>Target volume, format and transcript requirements</li>
+            <li>Desired delivery timeline</li>
+            <li>Rights, governance or compliance requirements</li>
+            <li>Approximate pilot budget or licensing range, if known</li>
+          </ul>
+          <p class="brief-note"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
+        </div>
+          <ContactDirect />
+<a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=African%20speech%20data%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20discuss%20an%20African%20speech-data%20project.%0A%0A-%20Intended%20model%20use%20and%20speech-data%20scenario%3A%0A-%20Languages%2C%20markets%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20format%20and%20transcript%20requirements%3A%0A-%20Desired%20delivery%20timeline%3A%0A-%20Rights%2C%20governance%20or%20compliance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A" aria-label="Start an African speech-data brief by email — opens your email application">Start a speech-data brief by email</a>
+      </div>
+    </div>
+  </section>
+  
+</ServiceLayout>
+
+<style>
+  /* The brief card above is 640px here, so the contact card matches it. */
+  .contact-band { --contact-measure: 640px }
+
+  /*
+    Page-scoped overrides, per DESIGN-DECISIONS.md: the shared system holds the
+    majority value and outliers override locally rather than shifting 12 pages.
+  */
+  h1 { font-size: clamp(2.45rem, 5vw, 4.75rem); max-width: 750px }
+
+  /* Availability pills on the language cards; unique to this page. */
+  .language-status {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 14px;
+    padding: 5px 8px;
+    border: 1px solid rgba(255, 255, 255, .32);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .08);
+    font-family: var(--mono);
+    font-size: .7rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .status-available { color: #D9F5E1 }
+  .status-pipeline { color: #F8E2B5 }
+  .status-commission { color: #CFEAF6 }
+</style>

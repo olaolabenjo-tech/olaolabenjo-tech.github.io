@@ -1,0 +1,85 @@
+/*
+  The homepage design system.
+
+  index.html always had its own vocabulary and its own values for the shared
+  selectors — smaller headings, tighter sections, borderless buttons, a wider
+  `.wrap` gutter. Carried over as-is; loaded only by HomeLayout so it can
+  never collide with service-system.css.
+
+  Section-specific rules (mod, svc, steps, track, spec, compliance, proof)
+  live in the components that own them.
+*/
+
+/* ── Focus ──────────────────────────────────────────────────────────── */
+a:focus-visible,
+button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px }
+
+/* ── Layout ─────────────────────────────────────────────────────────── */
+.wrap {
+  width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+  margin-inline: auto;
+}
+
+section { padding: 62px 0 }
+
+/* ── Typography ─────────────────────────────────────────────────────── */
+h1 {
+  font-family: var(--display);
+  font-weight: 900;
+  font-stretch: 105%;
+  font-size: clamp(2.05rem, 5vw, 3.5rem);
+  line-height: 1.07;
+  letter-spacing: -.01em;
+  max-width: 880px;
+}
+h1 em { font-style: normal; color: var(--green) }
+
+h2 {
+  font-family: var(--display);
+  font-weight: 800;
+  font-stretch: 105%;
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  margin-bottom: 12px;
+  letter-spacing: -.01em;
+}
+
+h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin-bottom: 8px }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .78rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+
+.lede { max-width: 720px; margin-bottom: 28px; color: #3C4A42 }
+
+/* ── Buttons ────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-block;
+  padding: 13px 26px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: .98rem;
+  transition: transform .15s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-1px) }
+.btn-primary { background: var(--green); color: #fff }
+.btn-primary:hover { background: var(--green-deep) }
+.btn-ghost { border: 1.5px solid var(--ink); color: var(--ink) }
+
+/* ── Shared box used by the samples and about teasers ───────────────── */
+.sample-box {
+  background: var(--mist);
+  border: 1px solid var(--green);
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.sample-box p { max-width: 580px }

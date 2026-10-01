@@ -1,0 +1,14 @@
+---
+/* Layout for the service and policy pages. */
+import Shell from './Shell.astro';
+import type { ShellProps } from './Shell.astro';
+
+import '../styles/service-system.css';
+
+const props = Astro.props as Omit<ShellProps, 'variant'>;
+---
+
+<Shell {...props} variant="service">
+  <slot name="hero" slot="hero" />
+  <slot />
+</Shell>

@@ -1,0 +1,197 @@
+---
+/*
+  Services hub.
+
+  Consolidates the five services that used to sit on the homepage (201 words,
+  too thin for its own URL) and signposts the three that have dedicated pages.
+  All copy is carried over from what the site already published — the service
+  descriptions verbatim from index.html, the page summaries from each target
+  page's own og:description. Nothing was invented.
+
+  Corpus licensing and translation & localisation have no page of their own
+  yet; they are described here at the length the homepage described them.
+
+  The collection, annotation and compliance cards carried "Explore … →" links
+  to their dedicated pages. Those pages are not ported yet, so the links are
+  out until they resolve (see config/footer.ts PENDING).
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+
+const MAILTO = 'mailto:dataservices@bsgdataworks.com?subject=Services%20enquiry&body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Service%20required%20(collection%2C%20annotation%2C%20consultancy%2C%20licensing%2C%20translation)%3A%0A-%20Intended%20model%20use%20or%20business%20context%3A%0A-%20Languages%2C%20markets%20or%20data%20types%20involved%3A%0A-%20Whether%20you%20have%20existing%20data%20or%20need%20it%20built%3A%0A-%20Target%20volume%2C%20format%20and%20timeline%3A%0A-%20Rights%2C%20governance%20or%20compliance%20requirements%3A%0A%0AThanks%2C%0A';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'African AI Training Data Services',
+  description:
+    'Commissioned African data collection, annotation and labelling, data strategy and compliance consultancy, corpus licensing, and translation and localisation for AI training data projects.',
+  provider: { '@type': 'Organization', name: 'BSG DataWorks', url: 'https://bsgdataworks.com/' },
+  areaServed: [
+    { '@type': 'Country', name: 'Nigeria' },
+    { '@type': 'Place', name: 'West Africa' },
+  ],
+  serviceType: 'AI training data collection, annotation, licensing and consultancy',
+};
+---
+
+<ServiceLayout
+  title="Services | BSG DataWorks"
+  description="African AI training data services: commissioned data collection, annotation and labelling, data strategy and compliance consultancy, corpus licensing, and translation and localisation."
+  canonicalPath="/services"
+  ogDescription="Commissioned collection, annotation and labelling, compliance consultancy, corpus licensing, and translation across Nigerian and West African languages."
+  twitterTitle="Services | BSG DataWorks"
+  twitterDescription="Data collection, annotation, compliance consultancy, licensing and translation for African AI training data."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Services · Nigeria &amp; West Africa</p>
+        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
+        <h1>Data built, made usable, or <em>cleared for use</em>.</h1>
+        <p class="hero-copy">
+          We work with teams at every stage: those who need data built from scratch, those who
+          already have data and need it made usable, and those who need to know whether their
+          African data strategy will survive a compliance review.
+        </p>
+      </div>
+      <aside class="hero-panel">
+        <p class="eyebrow">Five services</p>
+        <h2>Where teams usually start</h2>
+        <ul class="panel-list">
+          <li>Commissioned data collection</li>
+          <li>Annotation &amp; labelling</li>
+          <li>Data strategy &amp; compliance</li>
+          <li>Corpus licensing</li>
+          <li>Translation &amp; localisation</li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="build">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Build and improve</p>
+        <h2>Data built to your specification, or made usable.</h2>
+        <p>
+          Everything is collected from consenting adult contributors under written, informed
+          consent covering the intended commercial use and AI-training scope.
+        </p>
+      </div>
+
+      <div class="card-grid">
+        <article class="card">
+          <div class="icon">01</div>
+          <h3>Commissioned data collection</h3>
+          <p>
+            You specify languages, domains, demographics, devices, and volume. We recruit,
+            obtain consent, collect, and QA — then deliver to your format.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">02</div>
+          <h3>Annotation &amp; labelling</h3>
+          <p>Full-service annotation on your existing data or ours, by trained native speakers:</p>
+          <ul class="card-list">
+            <li>Transcription and time-alignment</li>
+            <li>Classification and categorisation</li>
+            <li>Segmentation and diarisation</li>
+            <li>Entity and sentiment labeling</li>
+            <li>Image and video tagging to your schema</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <div class="icon">03</div>
+          <h3>Data strategy &amp; compliance consultancy</h3>
+          <p>Advisory from a practitioner who runs collection operations daily:</p>
+          <ul class="card-list">
+            <li>Data acquisition strategy for African markets</li>
+            <li>NDPA 2023 / NDPC compliance for data collection</li>
+            <li>Consent framework and documentation design</li>
+            <li>Vendor and dataset due diligence</li>
+            <li>African language technology advisory</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="license" class="band">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">License and translate</p>
+        <h2>Ready-built data, and language services.</h2>
+        <p>Two routes that do not require a new collection project.</p>
+      </div>
+      <div class="scope-grid">
+        <article class="scope-card">
+          <h3>Corpus licensing</h3>
+          <p>
+            Ready-built datasets licensed commercially — exclusive or non-exclusive — with
+            full documentation and consent audit trail.
+          </p>
+        </article>
+        <article class="scope-card">
+          <h3>Translation &amp; localisation</h3>
+          <p>
+            Professional language services across Nigerian languages, English, French, and
+            German, backed by two decades of linguist-network management.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="which">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Choosing</p>
+        <h2>Not sure which one you need?</h2>
+      </div>
+      <div class="evidence">
+        <ul>
+          <li><strong>No data yet</strong> — commissioned collection, scoped to your model task.</li>
+          <li><strong>Data you cannot use</strong> — annotation and labelling to your schema.</li>
+          <li><strong>Data whose provenance you cannot evidence</strong> — strategy and compliance consultancy.</li>
+          <li><strong>A deadline before a collection could finish</strong> — corpus licensing from ready-built data.</li>
+          <li><strong>Existing content for a new market</strong> — translation and localisation.</li>
+        </ul>
+        <p class="trust-route">
+          Coverage by language is set out on the
+          <a href="/language-coverage">language coverage page</a>. Consent and provenance
+          practice is documented in our <a href="/privacy-policy">Privacy Policy</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-band">
+        <h2>Tell us what you need built.</h2>
+        <p>
+          Share the service, the data involved, and your timeline. We reply within 48 hours
+          with scoping questions and a likely route.
+        </p>
+        <a class="btn" href={MAILTO} aria-label="Start a services brief by email — opens your email application">
+          Start a brief by email
+        </a>
+      </div>
+    </div>
+  </section>
+</ServiceLayout>
+
+<style>
+  .card-list { margin: 10px 0 0; padding-left: 18px; font-size: .9rem; color: var(--muted) }
+  .card-list li { margin: 4px 0 }
+  .card-list li::marker { color: var(--green) }
+  .card-link { margin-top: 14px }
+
+  .evidence ul { margin: 0; padding-left: 20px }
+  .evidence li { margin: 10px 0 }
+  .evidence li::marker { color: var(--green) }
+  .evidence .trust-route { margin: 18px 0 0 }
+</style>

@@ -1,0 +1,52 @@
+---
+/* #compliance — the dark panel aimed at legal reviewers. */
+---
+
+<section class="wrap" id="compliance">
+  <div class="compliance">
+    <div class="eyebrow">Compliance</div>
+    <h2>Built for your legal team, not just your ML team.</h2>
+    <div class="compliance-grid">
+      <ul>
+        <li>Registered with the Nigeria Data Protection Commission (NDPC)</li>
+        <li>Compliant with the Nigeria Data Protection Act 2023 and NDPC GAID 2025</li>
+        <li>Written, informed contributor consent covering commercial use, sublicensing, and AI training</li>
+      </ul>
+      <ul>
+        <li>Full data-provenance and consent audit trail available to client compliance teams</li>
+        <li>Voice recordings handled as biometric data with corresponding safeguards</li>
+        <li>Contractual prohibition on contributor re-identification by buyers</li>
+      </ul>
+    </div>
+    <div class="reg-big">NDPC Registration No. NDPC/DCP/13596 — certificate available on request</div>
+  </div>
+</section>
+
+<style>
+  .compliance { background: var(--ink); color: #EAF2EC; border-radius: 14px; padding: 44px 40px }
+  .compliance .eyebrow { color: var(--amber) }
+  .compliance h2 { color: #fff }
+  .compliance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--card-gap); margin-top: 8px }
+  .compliance li {
+    margin: 0 0 12px 0;
+    list-style: none;
+    padding-left: 26px;
+    position: relative;
+    font-size: .94rem;
+  }
+  .compliance li::before { content: "✓"; position: absolute; left: 0; color: var(--amber); font-weight: 700 }
+  .reg-big {
+    font-family: var(--mono);
+    background: rgba(255, 255, 255, .08);
+    border: 1px solid rgba(255, 255, 255, .25);
+    border-radius: 8px;
+    padding: 14px 18px;
+    display: inline-block;
+    margin-top: 6px;
+    font-size: .92rem;
+  }
+
+  @media (max-width: 760px) {
+    .compliance-grid { grid-template-columns: 1fr }
+  }
+</style>

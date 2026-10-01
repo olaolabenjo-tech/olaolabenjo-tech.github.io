@@ -1,0 +1,14 @@
+---
+/* Layout for the homepage, which has its own design system. */
+import Shell from './Shell.astro';
+import type { ShellProps } from './Shell.astro';
+
+import '../styles/home-system.css';
+
+const props = Astro.props as Omit<ShellProps, 'variant'>;
+---
+
+<Shell {...props} variant="home">
+  <slot name="hero" slot="hero" />
+  <slot />
+</Shell>

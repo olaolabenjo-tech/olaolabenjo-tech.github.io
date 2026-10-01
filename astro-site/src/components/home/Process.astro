@@ -1,0 +1,58 @@
+---
+/* How commissioning works — four auto-numbered steps. */
+const STEPS = [
+  {
+    title: 'Brief',
+    body: 'Tell us the languages, data type, domain, volume, and any demographic or device requirements.',
+  },
+  {
+    title: 'Quote',
+    body: 'You receive scope, timeline, and pricing within 48 hours, with a sample plan and QA criteria.',
+  },
+  {
+    title: 'Collect',
+    body: 'We recruit and consent contributors, collect to spec, and report progress weekly.',
+  },
+  {
+    title: 'Deliver',
+    body: "QA'd data arrives with metadata, data card, and licence. Free re-delivery on any batch failing agreed QA thresholds (up to two re-deliveries per batch).",
+  },
+];
+---
+
+<section class="wrap">
+  <div class="eyebrow">How commissioning works</div>
+  <h2>From brief to delivery.</h2>
+  <div class="steps">
+    {STEPS.map((step) => (
+      <div class="step">
+        <h3>{step.title}</h3>
+        <p>{step.body}</p>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--card-gap); counter-reset: s }
+  .step { position: relative; padding-top: 38px }
+  .step::before {
+    counter-increment: s;
+    content: counter(s);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step p { font-size: .9rem; color: var(--slate) }
+</style>

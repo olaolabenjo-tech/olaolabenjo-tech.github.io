@@ -1,0 +1,68 @@
+/*
+  The policy-document design system.
+
+  privacy-policy.html was never styled like the service pages: a narrower
+  900px measure, smaller body text on a looser line-height, and heading sizes
+  tuned for long-form reading rather than marketing. Kept separate for the
+  same reason home-system.css is — see DESIGN-DECISIONS.md § "Two systems,
+  not one", which is now three.
+*/
+
+a:focus-visible,
+button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px }
+
+body { line-height: 1.65; font-size: 16px }
+
+.wrap {
+  width: min(var(--shell-max), calc(100% - var(--shell-pad) * 2));
+  margin-inline: auto;
+}
+
+h1, h2 { font-family: var(--display); line-height: 1.1; letter-spacing: -.02em }
+h1 { font-size: clamp(2.3rem, 5vw, 4rem); margin: 12px 0 14px }
+h2 { font-size: 1.35rem; margin: 34px 0 9px }
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: .76rem;
+  font-weight: 600;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.page-hero {
+  padding: 74px 0 52px;
+  background: linear-gradient(135deg, #F4F8F4 0%, #FBFAF7 60%, #F8F0DF 100%);
+  border-bottom: 1px solid var(--line);
+}
+.intro { max-width: 690px; color: var(--muted); font-size: 1.08rem }
+.last-updated {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 7px 11px;
+  border: 1px solid #BFD0C2;
+  border-radius: 999px;
+  background: #fff;
+  font-size: .87rem;
+  color: #3E5045;
+}
+
+main { padding: 50px 0 72px }
+
+.policy-content { max-width: 820px }
+.policy-content p { margin: 0 0 14px }
+.policy-content h2:first-child { margin-top: 0 }
+
+.contact-card {
+  margin-top: 42px;
+  border: 1px solid #BFD0C2;
+  border-radius: 12px;
+  padding: 24px;
+  background: linear-gradient(135deg, #EFF6F0, #fff);
+}
+.contact-card h2 { margin-top: 0 }
+.contact-card p { margin-bottom: 0 }
+.contact-card a { font-weight: 700 }
+
+

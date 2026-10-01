@@ -1,0 +1,61 @@
+---
+import ConsentScript from './ConsentScript.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  /** Path including the .html extension, e.g. "/about.html". "/" for the homepage. */
+  canonicalPath: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogType?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterCard?: string;
+  googleSiteVerification?: string;
+}
+
+const {
+  title,
+  description,
+  canonicalPath,
+  ogTitle = title,
+  ogDescription = description,
+  ogType = 'website',
+  twitterTitle,
+  twitterDescription,
+  twitterCard = 'summary',
+  googleSiteVerification,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, Astro.site).href;
+---
+
+<!--
+  charset must land inside the first 1024 bytes of the document. The original
+  pages put the consent script ahead of it and pushed it to byte ~4300; these
+  two inert meta tags come first so it stays in range. The gate still runs
+  before every other script and before the body, which is all it requires.
+-->
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<ConsentScript />
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+{googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
+
+<meta property="og:type" content={ogType} />
+<meta property="og:site_name" content="BSG DataWorks" />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:url" content={canonical} />
+
+<meta name="twitter:card" content={twitterCard} />
+{twitterTitle && <meta name="twitter:title" content={twitterTitle} />}
+{twitterDescription && <meta name="twitter:description" content={twitterDescription} />}
+
+<link rel="stylesheet" href="/assets/fonts/fonts.css" />
+<link rel="icon" type="image/png" href="/assets/images/bsg-dataworks-favicon.png" />

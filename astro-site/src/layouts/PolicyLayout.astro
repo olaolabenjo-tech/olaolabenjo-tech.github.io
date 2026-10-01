@@ -1,0 +1,14 @@
+---
+/* Layout for long-form policy documents. */
+import Shell from './Shell.astro';
+import type { ShellProps } from './Shell.astro';
+
+import '../styles/policy-system.css';
+
+const props = Astro.props as Omit<ShellProps, 'variant'>;
+---
+
+<Shell {...props} variant="policy">
+  <slot name="hero" slot="hero" />
+  <slot />
+</Shell>
