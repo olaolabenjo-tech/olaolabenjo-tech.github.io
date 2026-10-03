@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "bsgdataworks",
+  "compatibility_date": "2026-10-03",
+  // The site is fully static, so there is no Worker script: Cloudflare serves
+  // the Astro build output straight from the assets binding. public/_redirects
+  // is copied into dist/ and honoured here, which keeps the 301s from the old
+  // .html URLs working (see DESIGN-DECISIONS.md).
+  "assets": {
+    "directory": "./dist",
+    // Matches `build.format: 'directory'` + `trailingSlash: 'never'` in
+    // astro.config.mjs: /about serves about/index.html, /about/ 307s to /about.
+    "html_handling": "drop-trailing-slash",
+    // Serves the nearest 404.html once src/pages/404.astro exists; until then
+    // unknown paths get a plain 404.
+    "not_found_handling": "404-page"
+  }
+}
