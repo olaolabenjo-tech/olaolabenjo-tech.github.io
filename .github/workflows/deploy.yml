@@ -1,0 +1,38 @@
+name: Deploy to Cloudflare Workers
+
+# A merged PR lands on redesign-website as a push, so this fires on every merge
+# (and on direct pushes to the branch).
+on:
+  push:
+    branches: [redesign-website]
+  workflow_dispatch:
+
+# Never run two deploys at once; a newer merge supersedes one still in flight.
+concurrency:
+  group: deploy-redesign-website
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: astro-site
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: astro-site/package-lock.json
+
+      - run: npm ci
+
+      - run: npm run deploy
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
