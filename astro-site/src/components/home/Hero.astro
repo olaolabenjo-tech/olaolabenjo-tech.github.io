@@ -11,7 +11,8 @@
   1920px. Regenerate with the commands in DESIGN-DECISIONS.md if the artwork
   is ever replaced — do not point this at the raw PNG.
 */
-import { CALL_REQUEST_MAILTO, EVALUATION_PACK_MAILTO } from '../../config/contact';
+import ScheduleCallButton from '../ScheduleCallButton.astro';
+import { EVALUATION_PACK_MAILTO } from '../../config/contact';
 
 const TIERS = [
   {
@@ -86,11 +87,7 @@ const HERO = '/assets/images/hero';
         href={EVALUATION_PACK_MAILTO}
         aria-label="Request an evaluation pack by email — opens your email application"
       >Request an evaluation pack</a>
-      <a
-        class="btn btn-ghost"
-        href={CALL_REQUEST_MAILTO}
-        aria-label="Schedule a call by email — opens your email application"
-      >Schedule a call</a>
+      <ScheduleCallButton class="btn btn-ghost" />
     </div>
   </div>
 
@@ -208,8 +205,10 @@ const HERO = '/assets/images/hero';
   .hero .btn-primary { background: #4FD6B5; color: #04131F }
   .hero .btn-primary:hover { background: #6FE3C7 }
 
-  .btn-ghost { border: 1.5px solid rgba(255, 255, 255, 0.55); color: #FFFFFF }
-  .btn-ghost:hover { border-color: #FFFFFF; background: rgba(255, 255, 255, 0.08) }
+  /* :global because "Schedule a call" is rendered by ScheduleCallButton, which
+     does not carry this component's scope attribute. */
+  .cta-row :global(.btn-ghost) { border: 1.5px solid rgba(255, 255, 255, 0.55); color: #FFFFFF }
+  .cta-row :global(.btn-ghost:hover) { border-color: #FFFFFF; background: rgba(255, 255, 255, 0.08) }
 
   /* ── Language availability, welded to the bottom edge ──────────────── */
   .hero-ticker {
@@ -313,7 +312,7 @@ const HERO = '/assets/images/hero';
      side by side around 470px; 560px matches the narrow-gutter breakpoint. */
   @media (max-width: 560px) {
     .cta-row { flex-direction: column; gap: 12px; align-items: stretch }
-    .cta-row .btn {
+    .cta-row :global(.btn) {
       width: 100%;
       display: flex;
       align-items: center;

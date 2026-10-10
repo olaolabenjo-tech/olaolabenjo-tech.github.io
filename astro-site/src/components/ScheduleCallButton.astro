@@ -1,0 +1,90 @@
+---
+/*
+  "Schedule a call" — opens the Calendly booking calendar in a pop-up.
+
+  The link is the call-request email, so the button still works with no
+  JavaScript, before CALENDLY_URL is set, and if Calendly fails to load. When
+  CALENDLY_URL is set, the script below takes over the click and opens the
+  pop-up instead.
+
+  Calendly's script is loaded only when someone hovers, focuses or taps the
+  button — never on a plain page view — so visitors who do not book send
+  nothing to Calendly.
+*/
+import { CALENDLY_URL, CALL_REQUEST_MAILTO } from '../config/contact';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<a
+  class={className}
+  href={CALL_REQUEST_MAILTO}
+  data-calendly-url={CALENDLY_URL || undefined}
+  aria-label={CALENDLY_URL
+    ? 'Schedule a call — opens a booking calendar'
+    : 'Schedule a call by email — opens your email application'}
+>Schedule a call</a>
+
+<script>
+  const CALENDLY_ASSETS = 'https://assets.calendly.com/assets/external';
+
+  type CalendlyWindow = Window & { Calendly?: { initPopupWidget(o: { url: string }): void } };
+
+  let loadFailed = false;
+  // The email link of a click made before widget.js failed, so that click
+  // still goes somewhere.
+  let pendingFallback: string | null = null;
+  let calendlyReady: Promise<void> | null = null;
+
+  function loadCalendly(): Promise<void> {
+    if (!calendlyReady) {
+      const css = document.createElement('link');
+      css.rel = 'stylesheet';
+      css.href = `${CALENDLY_ASSETS}/widget.css`;
+      document.head.appendChild(css);
+
+      const script = document.createElement('script');
+      script.src = `${CALENDLY_ASSETS}/widget.js`;
+      script.async = true;
+      script.addEventListener('error', () => {
+        loadFailed = true;
+        if (pendingFallback) window.location.href = pendingFallback;
+      });
+      calendlyReady = new Promise((resolve) => script.addEventListener('load', () => resolve()));
+      document.head.appendChild(script);
+    }
+    return calendlyReady;
+  }
+
+  function openCalendly(url: string) {
+    loadCalendly().then(() => {
+      const booking = new URL(url);
+      // Calendly's own cookie notice: the site's banner and privacy policy
+      // cover this. primary_color is the site green.
+      booking.searchParams.set('hide_gdpr_banner', '1');
+      booking.searchParams.set('primary_color', '0e6b3f');
+      (window as CalendlyWindow).Calendly!.initPopupWidget({ url: booking.toString() });
+    });
+  }
+
+  document.querySelectorAll<HTMLAnchorElement>('a[data-calendly-url]').forEach((button) => {
+    const url = button.dataset.calendlyUrl!;
+
+    const warm = () => { loadCalendly(); };
+    button.addEventListener('pointerenter', warm, { once: true });
+    button.addEventListener('focus', warm, { once: true });
+    button.addEventListener('touchstart', warm, { once: true, passive: true });
+
+    button.addEventListener('click', (event) => {
+      // Blocked or offline: let the email link do its job.
+      if (loadFailed) return;
+      event.preventDefault();
+      pendingFallback = button.href;
+      openCalendly(url);
+    });
+  });
+</script>
