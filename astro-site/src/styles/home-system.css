@@ -51,7 +51,7 @@ h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin-b
   font-size: .78rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-text);
   margin-bottom: 10px;
 }
 

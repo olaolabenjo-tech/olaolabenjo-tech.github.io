@@ -28,7 +28,7 @@ h2 { font-size: 1.35rem; margin: 34px 0 9px }
   font-weight: 600;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-text);
 }
 
 .page-hero {
