@@ -7,12 +7,12 @@
   - The FAQ section is gone; its four questions live on /faq.
   - Links to unported pages (Compliance, Nigerian English speech data) are
     out until those pages resolve; the text around them is kept.
-  - The contact block uses the shared ContactDirect component.
+  - No closing brief section: "Start a brief" in the header and the hero
+    button send the one site-wide dataset brief email.
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
-import ContactDirect from '../components/ContactDirect.astro';
+import { DATASET_BRIEF_MAILTO } from '../config/contact';
 
-const BRIEF_MAILTO = 'mailto:dataservices@bsgdataworks.com?subject=Yor%C3%B9b%C3%A1%20speech%20data%20brief&body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20discuss%20a%20Yor%C3%B9b%C3%A1%20speech-data%20project.%0A%0A-%20Intended%20model%20use%20and%20Yor%C3%B9b%C3%A1%20speech%20scenario%3A%0A-%20Target%20speaker%2C%20market%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20audio%20format%20and%20transcript%20requirements%3A%0A-%20Tonal-orthography%2C%20annotation%20or%20metadata%20requirements%3A%0A-%20Desired%20delivery%20timeline%20and%20governance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -46,7 +46,7 @@ const schema = {
         <h1>Yorùbá speech data for <em>AI training</em>, with tonal accuracy built in.</h1>
         <p class="hero-copy">Evaluate representative Yorùbá speech samples with time-aligned transcripts, or commission a scope built around your model, speakers, scenarios and delivery requirements. BSG DataWorks combines native-speaker language oversight, full tonal orthography, consent documentation and commercial licensing support.</p>
         <div class="cta-row">
-          <a class="btn btn-primary" href="#contact">Start a Yorùbá speech brief</a>
+          <a class="btn btn-primary" href={DATASET_BRIEF_MAILTO} aria-label="Start a brief by email — opens your email application">Start a brief</a>
           <a class="btn btn-secondary" href="/#samples">Review available samples</a>
         </div>
       </div>
@@ -150,33 +150,4 @@ const schema = {
       </div>
     </div>
   </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-band">
-        <p class="eyebrow" style="color:#E6C98E">Start a Yorùbá speech brief</p>
-        <h2>Tell us what your model needs.</h2>
-        <p>Share a few project details and we will reply within 48 hours with initial scoping questions, a likely timeline and the next step.</p>
-        <div class="brief">
-          <p class="brief-title">What helps us get started</p>
-          <ul>
-            <li>Intended model use and Yorùbá speech scenario</li>
-            <li>Target speaker, market or participant profile</li>
-            <li>Target volume, audio format and transcript requirements</li>
-            <li>Tonal-orthography, annotation or metadata requirements</li>
-            <li>Desired delivery timeline and governance requirements</li>
-            <li>Approximate pilot budget or licensing range, if known</li>
-          </ul>
-          <p class="brief-note"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
-        </div>
-        <ContactDirect />
-        <a class="btn" href={BRIEF_MAILTO} aria-label="Start a Yorùbá speech-data brief by email — opens your email application">Start a Yorùbá speech brief by email</a>
-      </div>
-    </div>
-  </section>
 </ServiceLayout>
-
-<style>
-  /* The brief card above is 640px here, so the contact card matches it. */
-  .contact-band { --contact-measure: 640px }
-</style>

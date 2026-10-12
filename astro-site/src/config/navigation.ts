@@ -1,4 +1,5 @@
 import type { NavLink } from '../types';
+import { DATASET_BRIEF_MAILTO } from './contact';
 
 /**
  * The site-wide header menu. One menu on every page.
@@ -8,8 +9,9 @@ import type { NavLink } from '../types';
  * and moved up as each one lands.
  *
  * Targets are real URLs rather than in-page anchors, because the same menu
- * renders everywhere; the two homepage anchors are absolute so they work from
- * any page. The last item is styled as the call to action — keep it last.
+ * renders everywhere. "Start a brief" opens the dataset brief email (the
+ * homepage #contact section it used to point at is gone). The last item is
+ * styled as the call to action — keep it last.
  */
 export const SITE_NAV: NavLink[] = [
   { href: '/', label: 'Home' },
@@ -24,7 +26,7 @@ export const SITE_NAV: NavLink[] = [
       { href: '/yoruba-speech-data', label: 'Yorùbá speech data' },
     ],
   },
-  { href: '/#contact', label: 'Start a brief' },
+  { href: DATASET_BRIEF_MAILTO, label: 'Start a brief' },
 ];
 
 /**

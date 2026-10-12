@@ -132,20 +132,6 @@ import ServiceLayout from '../layouts/ServiceLayout.astro';
     </div>
   </section>
 
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-band">
-        <p class="eyebrow" style="color:#E6C98E">Work with us</p>
-        <h2>Start a dataset brief by email.</h2>
-        <p>Whether you need a commissioned collection, standalone annotation, or a licensed dataset, BSG DataWorks would be glad to help. The best place to begin is a short dataset brief.</p>
-        <div class="contact-direct" aria-label="Direct contact options">
-          <p><strong>Start a dataset brief by email:</strong> <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a></p>
-          <p><strong>WhatsApp only:</strong> <a href="https://wa.me/2348067904903" target="_blank" rel="noopener" aria-label="Message BSG DataWorks on WhatsApp — opens WhatsApp">+234 806 790 4903</a></p>
-        </div>
-        <a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=Dataset%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Dataset%20type%20and%20intended%20model%20use%3A%0A-%20Languages%2C%20markets%2C%20or%20participant%20profile%3A%0A-%20Target%20volume%20and%20preferred%20format%3A%0A-%20Desired%20delivery%20timeline%3A%0A-%20Rights%2C%20governance%2C%20or%20compliance%20requirements%3A%0A%0AThanks%2C%0A" aria-label="Start a dataset brief by email — opens your email application">Start a dataset brief by email</a>
-      </div>
-    </div>
-  </section>
 </ServiceLayout>
 
 <style>
@@ -166,36 +152,11 @@ import ServiceLayout from '../layouts/ServiceLayout.astro';
   .section-head > p:last-child { color: var(--slate); max-width: 720px }
   .band .section-head > p:last-child { color: #EAF2EC }
 
-  .contact-band { padding: 44px }
-  .contact-band > p { max-width: 670px }
-
-  /* This page centres its contact block and words it differently from the
-     shared ContactDirect component, so the markup stays local. */
-  .contact-direct {
-    max-width: 680px;
-    margin: 0 auto 22px;
-    padding: 14px 16px;
-    text-align: left;
-    border: 1px solid rgba(255, 255, 255, .42);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, .08);
-  }
-  .contact-direct p { color: #fff; font-size: .95rem }
-  .contact-direct p + p { margin-top: 4px }
-  .contact-direct a {
-    color: #fff;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    font-weight: 700;
-    overflow-wrap: anywhere;
-  }
-
   @media (max-width: 880px) {
     .hero-grid { grid-template-columns: 1fr; gap: 28px }
   }
 
   @media (max-width: 760px) {
     .hero { padding: 58px 0 42px }
-    .contact-band { padding: 34px 22px }
   }
 </style>

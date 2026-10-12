@@ -17,7 +17,6 @@
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 
-const MAILTO = 'mailto:dataservices@bsgdataworks.com?subject=Services%20enquiry&body=Hello%20BSG%20DataWorks%2C%0A%0A-%20Service%20required%20(collection%2C%20annotation%2C%20consultancy%2C%20licensing%2C%20translation)%3A%0A-%20Intended%20model%20use%20or%20business%20context%3A%0A-%20Languages%2C%20markets%20or%20data%20types%20involved%3A%0A-%20Whether%20you%20have%20existing%20data%20or%20need%20it%20built%3A%0A-%20Target%20volume%2C%20format%20and%20timeline%3A%0A-%20Rights%2C%20governance%20or%20compliance%20requirements%3A%0A%0AThanks%2C%0A';
 
 const schema = {
   '@context': 'https://schema.org',
@@ -168,20 +167,6 @@ const schema = {
     </div>
   </section>
 
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-band">
-        <h2>Tell us what you need built.</h2>
-        <p>
-          Share the service, the data involved, and your timeline. We reply within 48 hours
-          with scoping questions and a likely route.
-        </p>
-        <a class="btn" href={MAILTO} aria-label="Start a services brief by email — opens your email application">
-          Start a brief by email
-        </a>
-      </div>
-    </div>
-  </section>
 </ServiceLayout>
 
 <style>

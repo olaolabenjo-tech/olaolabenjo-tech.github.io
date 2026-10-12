@@ -20,7 +20,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px }
   margin-inline: auto;
 }
 
-section { padding: 62px 0 }
+/* 40px a side: an 80px gap between sections, down from 124px. */
+section { padding: 40px 0 }
 
 /* ── Typography ─────────────────────────────────────────────────────── */
 h1 {

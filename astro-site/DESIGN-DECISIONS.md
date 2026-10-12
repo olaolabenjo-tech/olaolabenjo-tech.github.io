@@ -378,6 +378,8 @@ hashing the rendered `<nav>`):
 - **One menu**, `src/config/navigation.ts`. Every target is a real URL, since
   the same menu renders on every page — `#faq` would be dead everywhere but
   one. The two homepage anchors are absolute (`/#services`, `/#contact`).
+  (Later: the `#contact` section was removed and "Start a brief" now opens
+  the dataset brief email.)
 - **One breakpoint**, 900px, raised from 800/860 because the shared menu is
   wider than any single page's used to be.
 - `.nav-inner` carries **its own measure** (`min(1080px, 100% - 48px)`)
@@ -498,7 +500,9 @@ where Astro scopes it automatically.
 Blocks genuinely shared by both systems — `ContactDirect`, `PolicyNotice` —
 became components with their own scoped styles rather than being duplicated
 into each sheet. (`PolicyNotice` has since been narrowed to the homepage; the
-footer's Privacy Policy link covers every other page.)
+footer's Privacy Policy link covers every other page. `ContactDirect` was
+removed with the per-page brief sections: "Start a brief" in the header and
+footer is now the one brief, sending a single dataset brief email.)
 
 **Do not "unify" these systems as a cleanup.** They are three deliberate
 designs. Merging them is a design decision for a human, taken after cutover.
@@ -529,7 +533,6 @@ src/
 │   ├── Nav.astro                sticky nav — home | service variants
 │   ├── Footer.astro             corporate | service variants
 │   ├── JsonLd.astro             schema.org blocks
-│   ├── ContactDirect.astro      email + WhatsApp route (both systems)
 │   ├── PolicyNotice.astro       closing privacy teaser (homepage only)
 │   └── home/                    one component per homepage section
 │       ├── Hero.astro           reg chip, headline, CTAs, proof strip
@@ -540,8 +543,7 @@ src/
 │       ├── Languages.astro      #languages
 │       ├── Standards.astro      #specs
 │       ├── Compliance.astro     #compliance
-│       ├── Samples.astro        #samples
-│       └── ContactBand.astro    #contact
+│       └── Samples.astro        #samples
 └── layouts/
     ├── Shell.astro              chrome, head, nav, footer — not used directly
     ├── ServiceLayout.astro      Shell + service-system.css
@@ -599,7 +601,8 @@ have fuller dedicated pages that they link to.
 - Its contact block is worded differently from the shared `ContactDirect`
   component ("Start a dataset brief by email" vs "Prefer to write directly?"),
   so that markup stays local to the page rather than being forced into the
-  component.
+  component. (Both have since been removed with the per-page brief
+  sections.)
 - `about.html` was the newest hand-written page and had drifted from the
   service baseline in a dozen small ways (`h1` 2.55/4.65/770, `h2` 1.8,
   `h3` 1.16, `.eyebrow` tracking, hero padding and grid, `.section-head`

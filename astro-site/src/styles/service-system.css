@@ -4,7 +4,7 @@
 
   Loaded by ServiceLayout only. The homepage uses home-system.css instead —
   several selectors here (`section`, `h1`-`h3`, `.btn`, `.eyebrow`, `.wrap`,
-  `.spec-card`, `.contact-band`) carry different values on the homepage.
+  `.spec-card`) carry different values on the homepage.
 */
 
 /* ── Focus ───────────────────────────────────────────────────────── */
@@ -215,38 +215,6 @@ section { padding: 74px 0 }
 .related-speech h2 { margin: 5px 0 10px; font-size: clamp(1.35rem, 2.5vw, 1.8rem) }
 .related-speech p:last-child { margin: 0; color: #3C4A42 }
 
-/* ── Contact band ───────────────────────────────────────────────────── */
-.contact-band {
-  border-radius: 16px;
-  background: linear-gradient(135deg, #0A4A2C, #0E6B3F);
-  color: #fff;
-  padding: 42px;
-  text-align: center;
-}
-.contact-band h2 { color: #fff }
-.contact-band > p { color: #EAF2EC; max-width: 680px; margin: 12px auto 20px }
-.contact-band .btn { background: #fff; border-color: #fff; color: var(--green-deep) }
-
-.brief {
-  max-width: 640px;
-  margin: 0 auto 22px;
-  padding: 17px 20px;
-  text-align: left;
-  background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 10px;
-}
-.brief-title {
-  font-family: var(--mono);
-  font-size: .76rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-weight: 600;
-}
-.brief ul { padding-left: 20px; margin: 8px 0 0 }
-.brief li { font-size: .92rem; margin: 4px 0 }
-.brief-note { font-size: .88rem; margin-top: 12px; color: #EAF2EC }
-
 
 /* ── Patterns introduced by about.html / index.html ─────────────────── */
 .data-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--card-gap) }
@@ -344,7 +312,6 @@ section { padding: 74px 0 }
 
 @media (max-width: 800px) {
   .card-grid, .scope-grid, .spec-grid, .process { grid-template-columns: 1fr 1fr }
-  .contact-band { padding: 32px 22px }
 }
 
 @media (max-width: 760px) {
