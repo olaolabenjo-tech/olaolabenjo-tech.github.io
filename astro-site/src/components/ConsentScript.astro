@@ -40,7 +40,10 @@
     }));
   }
 
-  function updateConsentDisplay(choice) {
+  // `fromSettings` is true only when the visitor reopens the banner through
+  // Cookie settings. The automatic first-visit banner skips the "no choice
+  // yet" line: it tells a first-time visitor nothing.
+  function updateConsentDisplay(choice, fromSettings) {
     const status = document.getElementById('cookie-current-choice');
     const accept = document.getElementById('cookie-accept');
     const decline = document.getElementById('cookie-decline');
@@ -50,7 +53,10 @@
         ? 'Current setting: Analytics is enabled.'
         : choice === 'denied'
           ? 'Current setting: Analytics is disabled.'
-          : 'Current setting: No choice has been saved yet.';
+          : fromSettings
+            ? 'Current setting: No choice has been saved yet.'
+            // First visit: an empty line, hidden by CookieBanner's :empty rule.
+            : '';
     }
 
     if (accept) accept.setAttribute('aria-pressed', choice === 'granted' ? 'true' : 'false');
@@ -106,7 +112,7 @@
 
   window.bsgOpenCookieSettings = function () {
     const choice = savedConsent();
-    updateConsentDisplay(choice);
+    updateConsentDisplay(choice, true);
     const banner = document.getElementById('cookie-banner');
     if (banner) {
       banner.removeAttribute('hidden');
