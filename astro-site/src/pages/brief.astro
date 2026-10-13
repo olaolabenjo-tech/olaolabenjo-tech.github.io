@@ -1,0 +1,327 @@
+---
+/*
+  The enquiry form. Every "Send an enquiry" button on the site lands here.
+
+  The questions are the checklist from the original site's "Start a dataset
+  brief by email" section, plus the three contact fields needed to reply.
+  The label lives in config/contact.ts (ENQUIRY_LABEL) so every button matches.
+
+  The form posts to /api/brief (worker/index.ts), which emails it to the BSG
+  mailbox through Zoho and stores nothing. It works without JavaScript (a
+  plain POST and redirect); with JavaScript it submits in place, shows errors
+  inline, and — if sending fails — offers the same answers as a pre-filled
+  email so nothing typed is lost.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import { ENQUIRY_LABEL, ENQUIRY_MAILTO } from '../config/contact';
+
+const EMAIL = 'dataservices@bsgdataworks.com';
+const WHATSAPP = 'https://wa.me/2348067904903';
+const WHATSAPP_NUMBER = '+234 806 790 4903';
+
+const BUDGETS = ['Under US$5k', 'US$5k–50k', 'US$50k+', 'Not sure yet'];
+---
+
+<ServiceLayout
+  title="Send an Enquiry | BSG DataWorks"
+  description="Tell BSG DataWorks what your model needs: dataset type, languages, volume, timeline and governance requirements. We reply within 48 hours with scoping questions and a likely timeline."
+  canonicalPath="/brief"
+  ogDescription="Share your dataset requirements and get scoping questions and a likely timeline within 48 hours."
+  twitterTitle="Send an Enquiry | BSG DataWorks"
+  twitterDescription="Share your dataset requirements; we reply within 48 hours."
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">{ENQUIRY_LABEL}</p>
+        <h1>Tell us what your <em>model needs</em>.</h1>
+        <p class="hero-copy">
+          Share a few project details and we will reply within 48 hours with initial scoping
+          questions, a likely timeline, and the next step.
+        </p>
+      </div>
+      <aside class="hero-panel" aria-label="Other ways to reach us">
+        <p class="eyebrow">Prefer to write directly?</p>
+        <ul class="panel-list">
+          <li>Email <a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+          <li>
+            WhatsApp only <a href={WHATSAPP} target="_blank" rel="noopener" aria-label={`WhatsApp ${WHATSAPP_NUMBER} — opens WhatsApp`}>{WHATSAPP_NUMBER}</a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </header>
+
+  <section class="brief-section">
+    <div class="wrap">
+      <form class="brief-form" action="/api/brief" method="post" novalidate data-brief-form>
+        <div class="form-status" role="alert" tabindex="-1" data-status hidden></div>
+
+        <p class="form-note">
+          If you do not have all of this yet, send what you have — including if you are still
+          scoping the budget. We will fill in the rest on a call.
+          Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.
+        </p>
+
+        <fieldset>
+          <legend>About you</legend>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Name <span aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" maxlength="120" required />
+            </div>
+            <div class="field">
+              <label for="f-email">Work email <span aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" autocomplete="email" maxlength="200" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-org">Organisation <span aria-hidden="true">*</span></label>
+            <input id="f-org" name="organisation" type="text" autocomplete="organization" maxlength="200" required />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Your dataset</legend>
+
+          <div class="field">
+            <label for="f-use">Dataset type and intended model use <span aria-hidden="true">*</span></label>
+            <p class="hint" id="h-use">For example: conversational speech for an ASR model, or labelled images for a retail classifier.</p>
+            <textarea id="f-use" name="use" rows="4" maxlength="2000" required aria-describedby="h-use"></textarea>
+          </div>
+
+          <div class="field">
+            <label for="f-languages">Languages, markets, or participant profile</label>
+            <textarea id="f-languages" name="languages" rows="3" maxlength="2000"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-volume">Target volume and preferred format</label>
+              <input id="f-volume" name="volume" type="text" maxlength="1000" placeholder="For example: 200 hours, WAV with transcripts" />
+            </div>
+            <div class="field">
+              <label for="f-timeline">Desired delivery timeline</label>
+              <input id="f-timeline" name="timeline" type="text" maxlength="500" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="f-governance">Rights, governance, or compliance requirements</label>
+            <textarea id="f-governance" name="governance" rows="3" maxlength="2000"></textarea>
+          </div>
+
+          <fieldset class="choice">
+            <legend>Approximate pilot budget or licensing range, if known</legend>
+            <div class="choice-row">
+              {BUDGETS.map((budget, i) => (
+                <label class="choice-pill">
+                  <input type="radio" name="budget" value={budget} id={`f-budget-${i}`} />
+                  <span>{budget}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </fieldset>
+
+        <!-- Spam traps: a field people never see, and the time the form opened. -->
+        <div class="trap" aria-hidden="true">
+          <label for="f-website">Leave this empty</label>
+          <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+        <input type="hidden" name="started" data-started />
+
+        <p class="privacy-note">
+          We use these details only to reply to your enquiry. They are sent to our mailbox and are
+          not stored on this website. Please do not include personal data about contributors or
+          end users. See our <a href="/privacy-policy">Privacy Policy</a>.
+        </p>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit" data-submit>Send enquiry</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</ServiceLayout>
+
+<script define:vars={{ fallbackMailto: ENQUIRY_MAILTO }}>
+  // define:vars makes this an inline script, so it is plain JavaScript.
+  (function () {
+    var form = document.querySelector('[data-brief-form]');
+    if (!form) return;
+    var status = form.querySelector('[data-status]');
+    var submit = form.querySelector('[data-submit]');
+    form.querySelector('[data-started]').value = String(Date.now());
+
+    var MESSAGES = {
+      missing: 'Please fill in the required fields marked with an asterisk.',
+      email: 'Please check your work email address.',
+      'too-long': 'One of your answers is too long. Please shorten it and try again.',
+      'too-fast': 'That was quicker than we expected. Please check your answers and send again.',
+      invalid: 'Something in the form was not recognised. Please check your answers and try again.',
+    };
+
+    function showStatus(html) {
+      status.innerHTML = html;
+      status.hidden = false;
+      status.focus();
+    }
+
+    // The same answers as a pre-filled email, so nothing typed is lost.
+    function emailFallback() {
+      var data = new FormData(form);
+      var labels = {
+        name: 'Name', email: 'Work email', organisation: 'Organisation',
+        use: 'Dataset type and intended model use',
+        languages: 'Languages, markets, or participant profile',
+        volume: 'Target volume and preferred format', timeline: 'Desired delivery timeline',
+        governance: 'Rights, governance, or compliance requirements',
+        budget: 'Approximate pilot budget or licensing range',
+      };
+      var body = 'Hello BSG DataWorks,\n\n';
+      Object.keys(labels).forEach(function (key) {
+        body += labels[key] + ': ' + (String(data.get(key) || '').trim() || '—') + '\n';
+      });
+      body += '\nThanks,\n';
+      return fallbackMailto.split('?')[0] + '?subject=' + encodeURIComponent('Enquiry') + '&body=' + encodeURIComponent(body);
+    }
+
+    function markInvalid() {
+      var first = null;
+      form.querySelectorAll('[required]').forEach(function (input) {
+        var bad = !input.value.trim() || (input.type === 'email' && !input.checkValidity());
+        input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+        if (bad && !first) first = input;
+      });
+      return first;
+    }
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      var firstInvalid = markInvalid();
+      if (firstInvalid) {
+        showStatus(firstInvalid.type === 'email' && firstInvalid.value.trim() ? MESSAGES.email : MESSAGES.missing);
+        return;
+      }
+
+      submit.disabled = true;
+      submit.textContent = 'Sending…';
+
+      fetch(form.action, { method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' } })
+        .then(function (response) { return response.json().catch(function () { return { ok: false, code: 'unavailable' }; }); })
+        .then(function (result) {
+          if (result.ok) { window.location.href = '/brief/sent'; return; }
+          if (MESSAGES[result.code]) { showStatus(MESSAGES[result.code]); return; }
+          throw new Error(result.code);
+        })
+        .catch(function () {
+          showStatus(
+            'We could not send your enquiry just now. <a href="' + emailFallback().replace(/"/g, '&quot;') +
+            '">Send the same answers by email instead</a>, or write to <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a>.'
+          );
+        })
+        .finally(function () {
+          submit.disabled = false;
+          submit.textContent = 'Send enquiry';
+        });
+    });
+
+    // No-JavaScript round trip: the Worker sends the browser back with ?error=.
+    var code = new URLSearchParams(window.location.search).get('error');
+    if (code) showStatus(MESSAGES[code] || 'We could not send your enquiry just now. Please email <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a> instead.');
+  })();
+</script>
+
+<style>
+  h1 { max-width: 640px }
+  /* Contact routes, not features: no tick marks. */
+  .hero-panel .panel-list li::before { content: none }
+  .hero-panel .panel-list a { font-weight: 700; overflow-wrap: anywhere }
+
+  .brief-section { padding-top: 48px }
+  .brief-form { max-width: 760px; display: flex; flex-direction: column; gap: 28px }
+
+  .form-note { color: var(--muted); max-width: 680px }
+
+  fieldset { border: 0; margin: 0; padding: 0; min-width: 0; display: flex; flex-direction: column; gap: 18px }
+  legend {
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 4px;
+    padding: 0;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 6px; min-width: 0 }
+  .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px }
+  /* Side-by-side fields line up their boxes even when only one has a hint:
+     the boxes sit at the bottom of equal-height cells. */
+  .field-row .field > input { margin-top: auto }
+
+  label { font-weight: 600; font-size: .96rem }
+  .hint { font-size: .88rem; color: var(--muted); margin: -2px 0 0 }
+
+  input[type='text'],
+  input[type='email'],
+  textarea {
+    font: inherit;
+    font-size: 1rem;
+    color: var(--ink);
+    background: #fff;
+    border: 1px solid #A9B5AD;
+    border-radius: 8px;
+    padding: 11px 13px;
+    min-height: 46px;
+    width: 100%;
+  }
+  textarea { resize: vertical }
+  ::placeholder { color: #66716A; opacity: 1; font-size: .88rem }
+  input:focus-visible,
+  textarea:focus-visible { outline: 3px solid var(--amber); outline-offset: 1px; border-color: var(--green) }
+  [aria-invalid='true'] { border-color: #B3261E; box-shadow: 0 0 0 1px #B3261E }
+
+  /* Budget: radio buttons styled as pills; the input stays real and focusable. */
+  .choice legend { font-family: var(--sans); font-size: .96rem; font-weight: 600; margin-bottom: 8px }
+  .choice-row { display: flex; flex-wrap: wrap; gap: 10px }
+  .choice-pill { position: relative; font-weight: 500 }
+  .choice-pill input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer }
+  .choice-pill span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid #A9B5AD;
+    border-radius: 999px;
+    background: #fff;
+  }
+  .choice-pill input:checked + span { background: var(--mist); border-color: var(--green); color: var(--green-deep); font-weight: 700 }
+  .choice-pill input:focus-visible + span { outline: 3px solid var(--amber); outline-offset: 2px }
+
+  .trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden }
+
+  .privacy-note { font-size: .9rem; color: var(--muted); max-width: 680px }
+
+  .form-actions .btn { min-height: 48px; padding-inline: 28px; font-size: 1rem }
+  .form-actions .btn:disabled { opacity: .7; cursor: progress; transform: none }
+
+  .form-status {
+    border: 1px solid #B3261E;
+    border-left-width: 4px;
+    background: #FCEEEE;
+    color: #5C1410;
+    border-radius: 8px;
+    padding: 14px 16px;
+  }
+  .form-status:focus { outline: none }
+  .form-status :global(a) { color: #5C1410; font-weight: 700; text-decoration: underline }
+
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip: rect(0 0 0 0); white-space: nowrap;
+  }
+
+  @media (max-width: 640px) {
+    .field-row { grid-template-columns: 1fr }
+  }
+</style>

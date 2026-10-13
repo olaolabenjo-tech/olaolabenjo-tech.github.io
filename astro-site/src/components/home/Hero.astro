@@ -12,7 +12,7 @@
   is ever replaced — do not point this at the raw PNG.
 */
 import ScheduleCallButton from '../ScheduleCallButton.astro';
-import { EVALUATION_PACK_MAILTO } from '../../config/contact';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../../config/contact';
 
 const TIERS = [
   {
@@ -82,11 +82,7 @@ const HERO = '/assets/images/hero';
       your legal team can sign off on.
     </p>
     <div class="cta-row">
-      <a
-        class="btn btn-primary"
-        href={EVALUATION_PACK_MAILTO}
-        aria-label="Request an evaluation pack by email — opens your email application"
-      >Request an evaluation pack</a>
+      <a class="btn btn-primary" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
       <ScheduleCallButton class="btn btn-ghost" />
     </div>
   </div>

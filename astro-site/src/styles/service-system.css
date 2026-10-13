@@ -90,6 +90,11 @@ section { padding: 74px 0 }
   .hero { padding: 58px 0 40px }
 }
 
+@media (max-width: 640px) {
+  /* Phones: stack the hero. Two columns left ~170px each at 390px wide. */
+  .hero-grid { grid-template-columns: 1fr; gap: 28px }
+}
+
 @media (max-width: 560px) {
   .hero-panel { padding: 22px }
 }

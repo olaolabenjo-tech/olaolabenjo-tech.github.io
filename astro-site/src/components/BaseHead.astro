@@ -13,6 +13,8 @@ interface Props {
   twitterDescription?: string;
   twitterCard?: string;
   googleSiteVerification?: string;
+  /** Keep the page out of search results (e.g. a form's confirmation page). */
+  noindex?: boolean;
 }
 
 const {
@@ -26,6 +28,7 @@ const {
   twitterDescription,
   twitterCard = 'summary',
   googleSiteVerification,
+  noindex = false,
 } = Astro.props;
 
 const canonical = new URL(canonicalPath, Astro.site).href;
@@ -46,6 +49,7 @@ const canonical = new URL(canonicalPath, Astro.site).href;
 <meta name="description" content={description} />
 <link rel="canonical" href={canonical} />
 {googleSiteVerification && <meta name="google-site-verification" content={googleSiteVerification} />}
+{noindex && <meta name="robots" content="noindex" />}
 
 <meta property="og:type" content={ogType} />
 <meta property="og:site_name" content="BSG DataWorks" />

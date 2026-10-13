@@ -6,7 +6,7 @@
   internal hrefs changed (root-absolute and extensionless).
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
-import { EVALUATION_PACK_MAILTO } from '../config/contact';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
 
 
 const schema = {
@@ -44,11 +44,7 @@ const schema = {
         <h1>African speech data for <em>AI training</em>, built to your specification.</h1>
         <p class="hero-copy">Commission human-sourced speech data for ASR, speech-to-text, voice assistants, TTS, call-centre intelligence, evaluation, and multilingual AI. BSG DataWorks plans the collection, recruits consenting contributors, runs quality checks, and delivers the documentation your technical and legal teams need.</p>
         <div class="cta-row">
-          <a
-            class="btn btn-primary"
-            href={EVALUATION_PACK_MAILTO}
-            aria-label="Review available samples by email — opens your email application"
-          >Review available samples</a>
+          <a class="btn btn-primary" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
         </div>
       </div>
       <aside class="hero-panel" aria-label="Speech-data service overview">

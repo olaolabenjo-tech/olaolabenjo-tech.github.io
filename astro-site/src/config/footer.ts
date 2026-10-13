@@ -1,5 +1,5 @@
 import type { NavLink } from '../types';
-import { DATASET_BRIEF_MAILTO } from './contact';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from './contact';
 
 /**
  * Footer link columns.
@@ -22,7 +22,7 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
       { href: '/about', label: 'About' },
       { href: '/services', label: 'Services' },
       { href: '/faq', label: 'FAQ' },
-      { href: DATASET_BRIEF_MAILTO, label: 'Start a brief' },
+      { href: ENQUIRY_URL, label: ENQUIRY_LABEL },
     ],
   },
 ];
