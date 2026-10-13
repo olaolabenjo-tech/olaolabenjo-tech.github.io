@@ -1,0 +1,94 @@
+---
+/*
+  Closing call to action: the card that ends every inner page (added by
+  ServiceLayout). Visitors who read to the end get one clear next step, plus
+  the direct routes for people who would rather not use a form.
+*/
+import ScheduleCallButton from './ScheduleCallButton.astro';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
+
+const EMAIL = 'dataservices@bsgdataworks.com';
+const WHATSAPP = 'https://wa.me/2348067904903';
+const WHATSAPP_NUMBER = '+234 806 790 4903';
+---
+
+<section class="closing" aria-labelledby="closing-heading">
+  <div class="wrap">
+    <div class="closing-card">
+      <div>
+        <p class="eyebrow">Next step</p>
+        <h2 id="closing-heading">Ready to scope your dataset?</h2>
+        <p class="closing-copy">
+          Tell us what your model needs. We reply within 48 hours with initial scoping
+          questions, a likely timeline, and the next step.
+        </p>
+        <div class="closing-actions">
+          <a class="btn btn-primary" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
+          <ScheduleCallButton class="btn btn-secondary" />
+        </div>
+      </div>
+      <div class="closing-direct">
+        <p class="direct-title">Or reach us directly</p>
+        <p class="route"><strong>Email</strong> <a href={`mailto:${EMAIL}`}>{EMAIL}</a></p>
+        <p class="route">
+          <strong>WhatsApp</strong> <a href={WHATSAPP} target="_blank" rel="noopener" aria-label={`WhatsApp ${WHATSAPP_NUMBER} — opens WhatsApp`}>{WHATSAPP_NUMBER}</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .closing { padding: 24px 0 72px }
+
+  .closing-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: 56px;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-top: 4px solid var(--green);
+    border-radius: 16px;
+    padding: 44px 52px;
+    box-shadow: 0 18px 40px rgba(20, 35, 28, .07);
+  }
+
+  h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); margin: 0 0 12px }
+  .closing-copy { color: #3C4A42; font-size: 1.05rem; max-width: 560px; margin: 0 0 24px }
+
+  .closing-actions { display: flex; flex-wrap: wrap; gap: 12px }
+  .closing-actions :global(.btn) { min-height: 48px; padding-inline: 22px }
+
+  .direct-title {
+    font-family: var(--mono);
+    font-size: .76rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 4px;
+  }
+  .route {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px 12px;
+    min-height: 48px;
+    padding: 10px 0;
+    margin: 0;
+    border-top: 1px solid var(--line);
+    color: #3C4A42;
+  }
+  .route:last-child { border-bottom: 1px solid var(--line) }
+  .route strong { color: var(--ink); min-width: 84px }
+  .route a { overflow-wrap: anywhere }
+
+  @media (max-width: 860px) {
+    .closing-card { grid-template-columns: 1fr; gap: 28px; padding: 32px 24px }
+  }
+
+  @media (max-width: 560px) {
+    .closing { padding: 8px 0 56px }
+    .closing-actions :global(.btn) { flex: 1 1 100% }
+  }
+</style>

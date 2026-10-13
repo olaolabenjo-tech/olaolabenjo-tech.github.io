@@ -62,6 +62,17 @@ section { padding: 74px 0 }
 .btn-primary:hover { background: var(--green-deep) }
 .btn-secondary { background: transparent; color: var(--green) }
 
+/* Hero call to action, mobile only. On desktop the header's "Send an
+   enquiry" button is always in view; at 900px and below it moves into the
+   collapsed menu, so the hero carries it instead. 900px matches Nav.astro. */
+.hero-cta { display: none }
+@media (max-width: 900px) {
+  .hero-cta { display: inline-flex; min-height: 48px; margin-top: 20px; padding-inline: 24px }
+}
+@media (max-width: 560px) {
+  .hero-cta { display: flex; width: 100% }
+}
+
 /* ── Hero ─────────────────────────────────────────────────────── */
 .hero {
   padding: 82px 0 54px;
@@ -174,34 +185,11 @@ section { padding: 74px 0 }
 .evidence li { margin: 8px 0 }
 .evidence li::marker { color: var(--green) }
 
-/* ── Trust and consent baseline ─────────────────────────────────────── */
-.trust-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: .78rem;
-  color: var(--green-deep);
-  background: var(--mist);
-  border: 1px solid var(--green);
-  border-radius: 100px;
-  padding: 6px 14px;
-  margin: 0 0 14px;
-}
-.trust-chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green) }
-
+/* ── Trust line in running text (evidence boxes) ────────────────────── */
+/* The hero's trust line is components/HeroTrust.astro. */
 .trust-route { max-width: 680px; margin: 0 0 12px; color: #3C4A42; font-size: .9rem; line-height: 1.5 }
 .trust-route a { font-weight: 700 }
 
-.collection-consent {
-  max-width: 680px;
-  margin: 0 0 18px;
-  padding-left: 13px;
-  border-left: 3px solid var(--green);
-  color: #3C4A42;
-  font-size: .9rem;
-  line-height: 1.5;
-}
 
 /* ── Related-content strip ──────────────────────────────────────────── */
 .related-speech {

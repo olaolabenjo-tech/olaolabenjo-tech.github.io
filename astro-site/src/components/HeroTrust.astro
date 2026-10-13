@@ -1,0 +1,36 @@
+---
+/*
+  One quiet line under a speech page's hero buttons: how the data is
+  collected. The NDPC registration is deliberately not here — the homepage,
+  the compliance section and the footer already carry it.
+*/
+---
+
+<p class="hero-trust">
+  <span class="dot" aria-hidden="true"></span>
+  <span>
+    Data is collected only from adult contributors under written, informed consent.
+    See our <a href="/privacy-policy">Privacy Policy</a>.
+  </span>
+</p>
+
+<style>
+  .hero-trust {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    max-width: 640px;
+    margin: 22px 0 0;
+    color: #3C4A42;
+    font-size: .88rem;
+    line-height: 1.55;
+  }
+  .dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--green);
+    transform: translateY(-1px);
+  }
+</style>

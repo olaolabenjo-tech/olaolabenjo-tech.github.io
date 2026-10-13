@@ -1,14 +1,24 @@
 ---
-/* Layout for the service and policy pages. */
+/*
+  Layout for the service and policy pages.
+
+  Ends every page with the closing call to action (components/ClosingCta.astro).
+  Pages that are themselves the next step — the enquiry form and its
+  confirmation — opt out with `closingCta={false}`.
+*/
 import Shell from './Shell.astro';
 import type { ShellProps } from './Shell.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 
 import '../styles/service-system.css';
 
-const props = Astro.props as Omit<ShellProps, 'variant'>;
+type Props = Omit<ShellProps, 'variant'> & { closingCta?: boolean };
+
+const { closingCta = true, ...props } = Astro.props as Props;
 ---
 
 <Shell {...props} variant="service">
   <slot name="hero" slot="hero" />
   <slot />
+  {closingCta && <ClosingCta />}
 </Shell>

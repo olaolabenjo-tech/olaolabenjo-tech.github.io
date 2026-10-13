@@ -11,7 +11,7 @@
     go to the site-wide enquiry form at /brief.
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
-import ScheduleCallButton from '../components/ScheduleCallButton.astro';
+import HeroTrust from '../components/HeroTrust.astro';
 import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
 
 
@@ -40,16 +40,10 @@ const schema = {
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Available to evaluate · Yorùbá speech</p>
-        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
-        <p class="trust-route">Registered with the Nigeria Data Protection Commission. Certificate available on request. See our <a href="/privacy-policy">Privacy Policy</a>.</p>
-        <p class="collection-consent">Data is collected only from adult contributors under written, informed consent covering the intended commercial use and AI-training scope.</p>
-
         <h1>Yorùbá speech data for <em>AI training</em>, with tonal accuracy built in.</h1>
         <p class="hero-copy">Evaluate representative Yorùbá speech samples with time-aligned transcripts, or commission a scope built around your model, speakers, scenarios and delivery requirements. BSG DataWorks combines native-speaker language oversight, full tonal orthography, consent documentation and commercial licensing support.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
-          <ScheduleCallButton class="btn btn-secondary" />
-        </div>
+        <a class="btn btn-primary hero-cta" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
+        <HeroTrust />
       </div>
       <aside class="hero-panel" aria-label="Yorùbá speech-data overview">
         <p class="eyebrow">What teams can evaluate</p>

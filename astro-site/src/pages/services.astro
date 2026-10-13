@@ -1,21 +1,59 @@
 ---
 /*
-  Services hub.
+  Services hub — the "service directory" layout.
 
-  Consolidates the five services that used to sit on the homepage (201 words,
-  too thin for its own URL) and signposts the three that have dedicated pages.
-  All copy is carried over from what the site already published — the service
-  descriptions verbatim from index.html, the page summaries from each target
-  page's own og:description. Nothing was invented.
+  Five equal cards, one per service, plus a sixth tile linking to language
+  coverage. Copy is carried over from what the site already published;
+  nothing about capability was invented.
 
-  Corpus licensing and translation & localisation have no page of their own
-  yet; they are described here at the length the homepage described them.
-
-  The collection, annotation and compliance cards carried "Explore … →" links
-  to their dedicated pages. Those pages are not ported yet, so the links are
-  out until they resolve (see config/footer.ts PENDING).
+  Collection, annotation and compliance have dedicated pages on the old site
+  that are not ported yet; add a link to each card as its page lands (see
+  config/footer.ts PENDING).
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
+
+const SERVICES = [
+  {
+    tag: '01 · Build',
+    title: 'Commissioned data collection',
+    body: 'You specify languages, domains, demographics, devices, and volume. We recruit, obtain consent, collect, and QA — then deliver to your format.',
+  },
+  {
+    tag: '02 · Improve',
+    title: 'Annotation & labelling',
+    body: 'Full-service annotation on your existing data or ours, by trained native speakers.',
+    items: [
+      'Transcription and time-alignment',
+      'Classification and categorisation',
+      'Segmentation and diarisation',
+      'Entity and sentiment labelling',
+      'Image and video tagging to your schema',
+    ],
+  },
+  {
+    tag: '03 · Clear',
+    title: 'Data strategy & compliance consultancy',
+    body: 'Advisory from a practitioner who runs collection operations daily.',
+    items: [
+      'Data acquisition strategy for African markets',
+      'NDPA 2023 / NDPC compliance for data collection',
+      'Consent framework and documentation design',
+      'Vendor and dataset due diligence',
+      'African language technology advisory',
+    ],
+  },
+  {
+    tag: '04 · Ready-made',
+    title: 'Corpus licensing',
+    body: 'Ready-built datasets licensed commercially — exclusive or non-exclusive — with full documentation and consent audit trail.',
+  },
+  {
+    tag: '05 · Language',
+    title: 'Translation & localisation',
+    body: 'Professional language services across Nigerian languages, English, French, and German, backed by two decades of linguist-network management.',
+  },
+];
 
 
 const schema = {
@@ -43,140 +81,95 @@ const schema = {
   schema={schema}
 >
   <header class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow">Services · Nigeria &amp; West Africa</p>
-        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
-        <h1>Data built, made usable, or <em>cleared for use</em>.</h1>
-        <p class="hero-copy">
-          We work with teams at every stage: those who need data built from scratch, those who
-          already have data and need it made usable, and those who need to know whether their
-          African data strategy will survive a compliance review.
-        </p>
-      </div>
-      <aside class="hero-panel">
-        <p class="eyebrow">Five services</p>
-        <h2>Where teams usually start</h2>
-        <ul class="panel-list">
-          <li>Commissioned data collection</li>
-          <li>Annotation &amp; labelling</li>
-          <li>Data strategy &amp; compliance</li>
-          <li>Corpus licensing</li>
-          <li>Translation &amp; localisation</li>
-        </ul>
-      </aside>
+    <div class="wrap">
+      <p class="eyebrow">Services · Nigeria &amp; West Africa</p>
+      <h1>Data built, made usable, or <em>cleared for use</em>.</h1>
+      <p class="hero-copy">
+        We work with teams at every stage: those who need data built from scratch, those who
+        already have data and need it made usable, and those who need to know whether their
+        African data strategy will survive a compliance review.
+      </p>
+      <a class="btn btn-primary hero-cta" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
     </div>
   </header>
 
-  <section id="build">
+  <section id="services" aria-labelledby="services-heading">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Build and improve</p>
-        <h2>Data built to your specification, or made usable.</h2>
-        <p>
-          Everything is collected from consenting adult contributors under written, informed
-          consent covering the intended commercial use and AI-training scope.
-        </p>
+        <p class="eyebrow">Five services</p>
+        <h2 id="services-heading">Pick the one that fits your starting point.</h2>
       </div>
 
-      <div class="card-grid">
-        <article class="card">
-          <div class="icon">01</div>
-          <h3>Commissioned data collection</h3>
-          <p>
-            You specify languages, domains, demographics, devices, and volume. We recruit,
-            obtain consent, collect, and QA — then deliver to your format.
-          </p>
-        </article>
-
-        <article class="card">
-          <div class="icon">02</div>
-          <h3>Annotation &amp; labelling</h3>
-          <p>Full-service annotation on your existing data or ours, by trained native speakers:</p>
-          <ul class="card-list">
-            <li>Transcription and time-alignment</li>
-            <li>Classification and categorisation</li>
-            <li>Segmentation and diarisation</li>
-            <li>Entity and sentiment labeling</li>
-            <li>Image and video tagging to your schema</li>
-          </ul>
-        </article>
-
-        <article class="card">
-          <div class="icon">03</div>
-          <h3>Data strategy &amp; compliance consultancy</h3>
-          <p>Advisory from a practitioner who runs collection operations daily:</p>
-          <ul class="card-list">
-            <li>Data acquisition strategy for African markets</li>
-            <li>NDPA 2023 / NDPC compliance for data collection</li>
-            <li>Consent framework and documentation design</li>
-            <li>Vendor and dataset due diligence</li>
-            <li>African language technology advisory</li>
-          </ul>
-        </article>
+      <div class="svc-grid">
+        {SERVICES.map((service) => (
+          <article class="svc">
+            <p class="svc-tag">{service.tag}</p>
+            <h3>{service.title}</h3>
+            <p>{service.body}</p>
+            {service.items && (
+              <ul class="svc-list">
+                {service.items.map((item) => <li>{item}</li>)}
+              </ul>
+            )}
+          </article>
+        ))}
+        <a class="svc svc-languages" href="/language-coverage">
+          <p class="svc-tag">Languages</p>
+          <h3>Coverage by language</h3>
+          <p>What you can evaluate now, what is being collected, and what we build to your specification.</p>
+          <span class="svc-more">See language coverage <span aria-hidden="true">→</span></span>
+        </a>
       </div>
+
     </div>
   </section>
-
-  <section id="license" class="band">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">License and translate</p>
-        <h2>Ready-built data, and language services.</h2>
-        <p>Two routes that do not require a new collection project.</p>
-      </div>
-      <div class="scope-grid">
-        <article class="scope-card">
-          <h3>Corpus licensing</h3>
-          <p>
-            Ready-built datasets licensed commercially — exclusive or non-exclusive — with
-            full documentation and consent audit trail.
-          </p>
-        </article>
-        <article class="scope-card">
-          <h3>Translation &amp; localisation</h3>
-          <p>
-            Professional language services across Nigerian languages, English, French, and
-            German, backed by two decades of linguist-network management.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="which">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Choosing</p>
-        <h2>Not sure which one you need?</h2>
-      </div>
-      <div class="evidence">
-        <ul>
-          <li><strong>No data yet</strong> — commissioned collection, scoped to your model task.</li>
-          <li><strong>Data you cannot use</strong> — annotation and labelling to your schema.</li>
-          <li><strong>Data whose provenance you cannot evidence</strong> — strategy and compliance consultancy.</li>
-          <li><strong>A deadline before a collection could finish</strong> — corpus licensing from ready-built data.</li>
-          <li><strong>Existing content for a new market</strong> — translation and localisation.</li>
-        </ul>
-        <p class="trust-route">
-          Coverage by language is set out on the <a href="/language-coverage">language
-          coverage page</a>. Consent and provenance
-          practice is documented in our <a href="/privacy-policy">Privacy Policy</a>.
-        </p>
-      </div>
-    </div>
-  </section>
-
 </ServiceLayout>
 
 <style>
-  .card-list { margin: 10px 0 0; padding-left: 18px; font-size: .9rem; color: var(--muted) }
-  .card-list li { margin: 4px 0 }
-  .card-list li::marker { color: var(--green) }
-  .card-link { margin-top: 14px }
+  /* Single-column hero: the old side panel only listed the five services,
+     which now sit directly below. */
+  .hero h1 { max-width: 820px }
 
-  .evidence ul { margin: 0; padding-left: 20px }
-  .evidence li { margin: 10px 0 }
-  .evidence li::marker { color: var(--green) }
-  .evidence .trust-route { margin: 18px 0 0 }
+  #services { padding-top: 64px }
+
+  .svc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--card-gap);
+  }
+
+  .svc {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px;
+  }
+  .svc h3 { font-size: 1.35rem; margin: 0 }
+  .svc p { margin: 0; color: #3C4A42 }
+
+  .svc-tag {
+    font-family: var(--mono);
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--amber-text) !important;
+  }
+
+  .svc-list { margin: 0; padding-left: 18px; font-size: .92rem; color: #3C4A42 }
+  .svc-list li { margin: 3px 0 }
+  .svc-list li::marker { color: var(--green) }
+
+
+  /* The sixth tile fills the grid's last slot and links to language coverage. */
+  .svc-languages { background: var(--mist); border-color: #BFD0C2; color: inherit; text-decoration: none }
+  .svc-languages:hover { border-color: var(--green); text-decoration: none }
+  .svc-languages:hover h3 { text-decoration: underline; text-underline-offset: 4px }
+  .svc-more { margin-top: auto; padding-top: 14px; font-weight: 700; color: var(--green-deep) }
+
+  @media (max-width: 560px) {
+    .svc-grid { grid-template-columns: 1fr }
+    .svc { padding: 22px }
+  }
 </style>
