@@ -121,6 +121,10 @@ The homepage keeps a 43-word teaser linking out, following the pattern
 `#about` already set. Nothing linked to `#languages` from another page, so
 no inbound links broke; the anchor still exists for the two same-page links.
 
+Later removed: the teaser repeated the three tiers in the bar under the hero,
+which already links to `/language-coverage`, so the homepage now carries the
+tiers once.
+
 The header gained a **Languages dropdown** listing the hub and the four
 language pages, which also surfaces pages that were previously reachable only
 from body copy. The standalone "Speech data" nav item folded into it.
@@ -540,7 +544,6 @@ src/
 │       ├── DataTypes.astro      #collect
 │       ├── Services.astro       #services
 │       ├── Process.astro        four commissioning steps
-│       ├── Languages.astro      #languages
 │       ├── Standards.astro      #specs
 │       ├── Compliance.astro     #compliance
 │       └── Samples.astro        #samples
