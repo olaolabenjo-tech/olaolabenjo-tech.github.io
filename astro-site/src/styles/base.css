@@ -15,6 +15,10 @@
   --green-deep: #0A4A2C;
   --mist: #E9F1EB;
   --amber: #C98A1B;
+  /* Amber for text on light grounds. --amber is 2.6–2.9:1 on paper, white and
+     mist; this is 4.6:1 or better on all three (WCAG AA). Keep --amber for
+     decoration and for text on the dark footer and compliance block. */
+  --amber-text: #94620E;
   --line: #D8DFD9;
   --slate: #4A574F;
   --muted: #4C5A51;
@@ -55,6 +59,16 @@ body {
 
 a { color: var(--green); text-decoration: none }
 a:hover { text-decoration: underline }
+
+/* Links inside running text: underlined, because colour alone does not set
+   them apart from the text around them (WCAG 1.4.1). Styled links — buttons,
+   cards, nav — carry a class and are left alone. */
+main :where(p, li, dd, td) a:not([class]) {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: .18em;
+}
+main :where(p, li, dd, td) a:not([class]):hover { text-decoration-thickness: 2px }
 
 .skip-link { position: absolute; left: -9999px; top: auto }
 .skip-link:focus {

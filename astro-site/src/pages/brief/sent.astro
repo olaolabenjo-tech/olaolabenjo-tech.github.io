@@ -1,0 +1,35 @@
+---
+/* Confirmation after the enquiry form (src/pages/brief.astro) sends. Not indexed. */
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import ScheduleCallButton from '../../components/ScheduleCallButton.astro';
+---
+
+<ServiceLayout
+  title="Enquiry Received | BSG DataWorks"
+  description="Thanks — your enquiry has been sent to BSG DataWorks."
+  canonicalPath="/brief/sent"
+  noindex
+  closingCta={false}
+>
+  <header class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Enquiry received</p>
+      <h1>Thank you. <em>We have your enquiry.</em></h1>
+      <p class="hero-copy">
+        We will reply within 48 hours with initial scoping questions, a likely timeline, and the
+        next step. If anything changes in the meantime, reply to our email or write
+        to <a href="mailto:dataservices@bsgdataworks.com">dataservices@bsgdataworks.com</a>.
+      </p>
+      <div class="cta-row">
+        <ScheduleCallButton class="btn btn-primary" />
+        <a class="btn btn-secondary" href="/faq">Read the FAQ</a>
+      </div>
+    </div>
+  </header>
+</ServiceLayout>
+
+<style>
+  .hero { padding-bottom: 96px }
+  h1 { max-width: 720px }
+  .cta-row { margin-top: 26px }
+</style>

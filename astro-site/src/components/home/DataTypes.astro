@@ -22,8 +22,6 @@
       <span class="tag t-live">Available for evaluation</span>
       <h3>Speech &amp; Voice</h3>
       <p>Our deepest capability, with samples ready to evaluate today.</p>
-      <p class="mod-link"><a href="/african-speech-data">Explore African speech data →</a></p>
-      <p class="mod-link tight"><a href="/yoruba-speech-data">Explore Yorùbá speech data →</a></p>
       <ul>
         <li>Conversational and scripted speech</li>
         <li>Voice-over and TTS studio corpora</li>
@@ -31,6 +29,10 @@
         <li>Spontaneous &amp; code-switched speech</li>
         <li>Domain-specific: health, finance, legal, customer service</li>
       </ul>
+      <nav class="mod-rows" aria-label="Speech data pages">
+        <a class="mod-row" href="/african-speech-data">African speech data<span class="chev" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg></span></a>
+        <a class="mod-row" href="/yoruba-speech-data">Yorùbá speech data<span class="chev" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6" /></svg></span></a>
+      </nav>
     </div>
     <div class="mod">
       <span class="tag t-comm">On commission</span>
@@ -70,11 +72,37 @@
 </section>
 
 <style>
-  .mod-link { margin-top: 14px }
-  .mod-link.tight { margin-top: 8px }
+  /* Speech card only: link rows pinned to the card foot */
+  .mod-rows { margin-top: auto; padding-top: 18px; display: flex; flex-direction: column }
+  .mod-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    min-height: 48px;
+    border-top: 1px solid var(--line);
+    color: var(--green-deep);
+    font-weight: 700;
+    font-size: .94rem;
+    text-decoration: none;
+  }
+  .mod-row:last-child { border-bottom: 1px solid var(--line) }
+  .mod-row:hover { color: var(--green) }
+  .chev {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--mist);
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mod-row:hover .chev, .mod-row:focus-visible .chev { background: var(--green); color: #fff }
 
   .mod-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--card-gap) }
-  .mod { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 24px; position: relative }
+  .mod { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 24px; position: relative; display: flex; flex-direction: column }
   .mod .tag {
     font-family: var(--mono);
     font-size: .68rem;
@@ -82,7 +110,7 @@
     text-transform: uppercase;
     padding: 3px 9px;
     border-radius: 100px;
-    display: inline-block;
+    align-self: flex-start;
     margin-bottom: 12px;
   }
   .t-live { background: var(--mist); color: var(--green-deep); border: 1px solid var(--green) }

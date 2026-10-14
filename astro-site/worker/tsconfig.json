@@ -1,0 +1,16 @@
+{
+  // The Worker runs on Cloudflare, not in the browser or Astro, so it gets its
+  // own types (worker-configuration.d.ts, from `npx wrangler types
+  // worker/worker-configuration.d.ts`) and is excluded from the Astro project.
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "es2022",
+    "moduleResolution": "bundler",
+    "lib": ["es2022"],
+    "types": [],
+    "strict": true,
+    "noEmit": true,
+    "skipLibCheck": true
+  },
+  "include": ["index.ts", "worker-configuration.d.ts"]
+}

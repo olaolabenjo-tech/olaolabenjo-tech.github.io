@@ -20,7 +20,8 @@ button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px }
   margin-inline: auto;
 }
 
-section { padding: 62px 0 }
+/* 40px a side: an 80px gap between sections, down from 124px. */
+section { padding: 40px 0 }
 
 /* ── Typography ─────────────────────────────────────────────────────── */
 h1 {
@@ -50,7 +51,7 @@ h3 { font-family: var(--display); font-weight: 700; font-size: 1.05rem; margin-b
   font-size: .78rem;
   letter-spacing: .14em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-text);
   margin-bottom: 10px;
 }
 

@@ -2,17 +2,33 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "bsgdataworks",
   "compatibility_date": "2026-10-03",
-  // The site is fully static, so there is no Worker script: Cloudflare serves
-  // the Astro build output straight from the assets binding. public/_redirects
-  // is copied into dist/ and honoured here, which keeps the 301s from the old
-  // .html URLs working (see DESIGN-DECISIONS.md).
+  // The site is static: Cloudflare serves the Astro build straight from the
+  // assets binding. The one exception is /api/*, which runs worker/index.ts
+  // (the brief form). public/_redirects is copied into dist/ and honoured
+  // here, which keeps the 301s from the old .html URLs working (see
+  // DESIGN-DECISIONS.md).
+  "main": "worker/index.ts",
   "assets": {
     "directory": "./dist",
+    "binding": "ASSETS",
+    // Only these paths reach the Worker; everything else never runs code.
+    "run_worker_first": ["/api/*"],
     // Matches `build.format: 'directory'` + `trailingSlash: 'never'` in
     // astro.config.mjs: /about serves about/index.html, /about/ 307s to /about.
     "html_handling": "drop-trailing-slash",
     // Serves the nearest 404.html once src/pages/404.astro exists; until then
     // unknown paths get a plain 404.
     "not_found_handling": "404-page"
+  },
+  "vars": {
+    // Briefs are sent from and to the BSG mailbox.
+    "BRIEF_TO": "dataservices@bsgdataworks.com",
+    "BRIEF_FROM": "dataservices@bsgdataworks.com",
+    // The mailbox is on Zoho's Canadian data centre (MX: mx.zohocloud.ca).
+    "ZOHO_ACCOUNTS_HOST": "accounts.zohocloud.ca",
+    "ZOHO_MAIL_HOST": "mail.zohocloud.ca"
   }
+  // Secrets, set once with `npx wrangler secret put <NAME>` (never committed):
+  //   ZOHO_CLIENT_ID, ZOHO_CLIENT_SECRET, ZOHO_REFRESH_TOKEN, ZOHO_ACCOUNT_ID
+  // For local testing put them in .dev.vars (git-ignored).
 }

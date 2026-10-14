@@ -1,4 +1,5 @@
 import type { NavLink } from '../types';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from './contact';
 
 /**
  * Footer link columns.
@@ -16,12 +17,20 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
     ],
   },
   {
+    title: 'Services',
+    links: [
+      { href: '/services', label: 'All services' },
+      { href: '/african-data-collection-services', label: 'Data collection' },
+      { href: '/annotation-labelling-services', label: 'Annotation & labelling' },
+      { href: '/ai-training-data-compliance-nigeria', label: 'Compliance support' },
+    ],
+  },
+  {
     title: 'Company',
     links: [
       { href: '/about', label: 'About' },
-      { href: '/services', label: 'Services' },
       { href: '/faq', label: 'FAQ' },
-      { href: '/#contact', label: 'Start a brief' },
+      { href: ENQUIRY_URL, label: ENQUIRY_LABEL },
     ],
   },
 ];
@@ -32,7 +41,6 @@ export const FOOTER_COLUMNS: { title: string; links: NavLink[] }[] = [
  *   Data:    /african-ai-training-data-types       Data types
  *            /nigerian-english-speech-data         Nigerian English speech
  *            /nigerian-language-data               Nigerian language data
- *   Company: /african-data-collection-services     Data collection
- *            /annotation-labelling-services        Annotation & labelling
- *            /ai-training-data-compliance-nigeria  Compliance consultancy
+ *            /african-image-data                   African image data
+ *            /african-video-data                   African video data
  */

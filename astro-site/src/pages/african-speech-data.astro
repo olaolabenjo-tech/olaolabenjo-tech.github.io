@@ -6,8 +6,8 @@
   internal hrefs changed (root-absolute and extensionless).
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
-import ContactDirect from '../components/ContactDirect.astro';
-import { EVALUATION_PACK_MAILTO } from '../config/contact';
+import HeroTrust from '../components/HeroTrust.astro';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
 
 
 const schema = {
@@ -38,19 +38,10 @@ const schema = {
     <div class="wrap hero-grid">
       <div>
         <p class="eyebrow">Commissioned speech datasets · Nigeria & West Africa</p>
-        <p class="trust-chip">NDPC REGISTERED · NDPC/DCP/13596</p>
-        <p class="trust-route">Registered with the Nigeria Data Protection Commission. Certificate available on request. See our <a href="/privacy-policy">Privacy Policy</a>.</p>
-        <p class="collection-consent">Data is collected only from adult contributors under written, informed consent covering the intended commercial use and AI-training scope.</p>
-
         <h1>African speech data for <em>AI training</em>, built to your specification.</h1>
         <p class="hero-copy">Commission human-sourced speech data for ASR, speech-to-text, voice assistants, TTS, call-centre intelligence, evaluation, and multilingual AI. BSG DataWorks plans the collection, recruits consenting contributors, runs quality checks, and delivers the documentation your technical and legal teams need.</p>
-        <div class="cta-row">
-          <a
-            class="btn btn-primary"
-            href={EVALUATION_PACK_MAILTO}
-            aria-label="Review available samples by email — opens your email application"
-          >Review available samples</a>
-        </div>
+        <a class="btn btn-primary hero-cta" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
+        <HeroTrust />
       </div>
       <aside class="hero-panel" aria-label="Speech-data service overview">
         <p class="eyebrow">Built for real deployment</p>
@@ -96,21 +87,6 @@ const schema = {
     </div>
   </section>
 
-  <section id="process">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">How commissioning works</p>
-        <h2>A speech-data project with clear operational stages.</h2>
-        <p>We use an explicit process so your team can evaluate scope, evidence and delivery before committing to a full collection.</p>
-      </div>
-      <div class="process">
-        <article class="process-card"><h3>Brief</h3><p>Share the intended model use, languages, target volume, speaker requirements and delivery deadline.</p></article>
-        <article class="process-card"><h3>Scope</h3><p>We return initial questions, a likely plan, quality criteria and a commercial path for the work.</p></article>
-        <article class="process-card"><h3>Collect & QA</h3><p>We recruit and consent contributors, collect to the agreed specification, and run the required language and technical checks.</p></article>
-        <article class="process-card"><h3>Deliver</h3><p>You receive the agreed files, metadata, documentation and licensing materials through secure transfer.</p></article>
-      </div>
-    </div>
-  </section>
 
   <section>
     <div class="wrap evidence">
@@ -126,37 +102,9 @@ const schema = {
       <p>Answers on transcripts, language coverage, licensing and what to send first are in the <a href="/faq#languages">FAQ</a>.</p>
     </div>
   </section>
-
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-band">
-        <p class="eyebrow" style="color:#E6C98E">Start a speech-data brief</p>
-        <h2>Tell us what your model needs.</h2>
-        <p>Share a few project details and we will reply within 48 hours with initial scoping questions, a likely timeline and the next step.</p>
-        <div class="brief">
-          <p class="brief-title">What helps us get started</p>
-          <ul>
-            <li>Intended model use and speech-data scenario</li>
-            <li>Languages, markets or participant profile</li>
-            <li>Target volume, format and transcript requirements</li>
-            <li>Desired delivery timeline</li>
-            <li>Rights, governance or compliance requirements</li>
-            <li>Approximate pilot budget or licensing range, if known</li>
-          </ul>
-          <p class="brief-note"><em>If you do not have all of this yet, send what you have — including if you are still scoping the budget. We will fill in the rest on a call.</em></p>
-        </div>
-          <ContactDirect />
-<a class="btn" href="mailto:dataservices@bsgdataworks.com?subject=African%20speech%20data%20brief&amp;body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20discuss%20an%20African%20speech-data%20project.%0A%0A-%20Intended%20model%20use%20and%20speech-data%20scenario%3A%0A-%20Languages%2C%20markets%20or%20participant%20profile%3A%0A-%20Target%20volume%2C%20format%20and%20transcript%20requirements%3A%0A-%20Desired%20delivery%20timeline%3A%0A-%20Rights%2C%20governance%20or%20compliance%20requirements%3A%0A-%20Approximate%20pilot%20budget%20or%20licensing%20range%2C%20if%20known%3A%0A%0AThanks%2C%0A" aria-label="Start an African speech-data brief by email — opens your email application">Start a speech-data brief by email</a>
-      </div>
-    </div>
-  </section>
-  
 </ServiceLayout>
 
 <style>
-  /* The brief card above is 640px here, so the contact card matches it. */
-  .contact-band { --contact-measure: 640px }
-
   /*
     Page-scoped overrides, per DESIGN-DECISIONS.md: the shared system holds the
     majority value and outliers override locally rather than shifting 12 pages.

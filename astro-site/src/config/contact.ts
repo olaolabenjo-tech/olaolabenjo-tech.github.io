@@ -3,9 +3,20 @@
  * has a second caller, so the copies cannot drift apart.
  */
 
-/** The speech evaluation pack. Homepage hero, #samples, and the speech page. */
-export const EVALUATION_PACK_MAILTO =
-  'mailto:dataservices@bsgdataworks.com?subject=Evaluation%20pack%20request&body=Hello%20BSG%20DataWorks%2C%0A%0AI%20would%20like%20to%20request%20the%20speech%20evaluation%20pack.%0A%0A-%20Organisation%20and%20role%3A%0A-%20Intended%20model%20use%3A%0A-%20Languages%20or%20data%20types%20of%20interest%3A%0A-%20Any%20technical%20or%20compliance%20questions%3A%0A%0AThanks%2C%0A';
+/**
+ * The enquiry form (src/pages/brief.astro) and the one label every button to
+ * it uses: the header, the footer, the homepage hero and #samples, and both
+ * speech pages. Change the wording here, not on each button.
+ */
+export const ENQUIRY_URL = '/brief';
+export const ENQUIRY_LABEL = 'Send an enquiry';
+
+/**
+ * Enquiry by email: the form's fallback when sending fails. The form builds
+ * the message from the visitor's answers, so only the address is needed.
+ */
+export const ENQUIRY_MAILTO = 'mailto:dataservices@bsgdataworks.com';
+
 
 /**
  * Calendly event that "Schedule a call" opens: the full booking URL.

@@ -1,0 +1,119 @@
+---
+/*
+  AI training data compliance support. Ported from ai-training-data-compliance-nigeria.html through ServiceLayout.
+
+  Body content is carried over verbatim; internal hrefs are root-absolute and
+  extensionless, and links to pages not yet ported keep their text but lose
+  the link. Departures, following the earlier ports:
+  - No FAQ section: its questions live on /faq.
+  - No contact section: ServiceLayout ends the page with the closing card.
+  - Hero: no NDPC lines above the heading; the buttons became the
+    mobile-only "Send an enquiry" (the header carries it on desktop).
+  - "Where this helps" and "Governance artefacts" are merged into one section:
+    each topic card leads with the "Where this helps" description, then the
+    artefact list, so consent, provenance, safeguards and diligence each
+    appear once.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "AI Training Data Compliance Support in Nigeria",
+  "description": "Operational support for AI training data projects in Nigeria, including consent documentation, data provenance, governance safeguards, and procurement diligence.",
+  "provider": {
+    "@type": "Organization",
+    "name": "BSG DataWorks",
+    "url": "https://bsgdataworks.com/"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nigeria"
+  },
+  "serviceType": "AI Training Data Compliance and Governance Support"
+};
+---
+
+<ServiceLayout
+  title="AI Training Data Compliance in Nigeria | BSG DataWorks"
+  description="Operational compliance support for Nigerian AI training data projects: consent documentation, provenance records, safeguards, and procurement diligence."
+  canonicalPath="/ai-training-data-compliance-nigeria"
+  ogDescription="Practical consent, provenance, governance, and diligence support for AI training data projects in Nigeria."
+  twitterTitle="AI Training Data Compliance in Nigeria | BSG DataWorks"
+  twitterDescription="Practical consent, provenance, governance, and diligence support for AI training data projects in Nigeria."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">For scoped procurement and governance engagements</p>
+
+        <h1>AI training data <em>compliance support</em> for Nigeria.</h1>
+        <p class="hero-copy">BSG DataWorks helps teams procuring, collecting, or licensing human-sourced AI training data in Nigeria translate project requirements into practical consent, provenance, governance, and diligence evidence. Our support is operational; your legal advisers remain responsible for legal interpretation and project-specific legal advice.</p>
+        <a class="btn btn-primary hero-cta" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
+      </div>
+      <aside class="hero-panel" aria-label="Compliance support overview">
+        <p class="eyebrow">What teams can evaluate</p>
+        <h2>Make the data story reviewable.</h2>
+        <p>Build a clearer operational trail from contributor participation through collection, quality assurance, licensing, and buyer diligence.</p>
+        <ul class="panel-list"><li>Written, informed contributor-consent workflows</li><li>Data provenance and consent audit-trail documentation</li><li>Project-specific governance and diligence questions</li></ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="availability">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Support scope</p>
+        <h2>Operational support for the decisions around AI training data.</h2>
+        <p>Bring us in before commissioning, while reviewing an existing dataset, or when a procurement or governance team needs a more disciplined evidence trail. The scope is agreed around the project; it is not a blanket certification of legal compliance.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card"><p class="icon">01 / BEFORE COLLECTION</p><h3>New data programmes</h3><p>Turn planned collection activity into a clearer contributor-information, consent, provenance, and documentation approach before fieldwork begins.</p></article>
+        <article class="card"><p class="icon">02 / BEFORE PROCUREMENT</p><h3>Vendor and dataset diligence</h3><p>Structure the operational questions buyers and governance teams can ask about source, rights, contributor records, data flows, and intended AI use.</p></article>
+        <article class="card"><p class="icon">03 / BEFORE LICENSING</p><h3>Dataset readiness review</h3><p>Identify evidence gaps and practical safeguards to address before a data buyer, adviser, or internal reviewer examines the project.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="uses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Governance artefacts</p>
+        <h2>Evidence designed around the project, not a generic checklist.</h2>
+        <p>Our perspective starts with the operational decisions that affect a dataset's evidence trail, rather than with generic policy language alone. The final scope depends on the data type, collection method, participant profile, intended model use, buyers, and delivery route.</p>
+      </div>
+      <div class="spec-grid">
+        <article class="spec-card"><h3>Consent and contributor records</h3><p class="spec-lead">Support workflows for written, informed participation records that connect the collection purpose, commercial AI use, and the agreed data handling approach.</p><ul><li>Written participation and consent workflow</li><li>Clear project, data-use, and licensing context</li><li>Versioned consent and contributor-record approach</li><li>Escalation points where consent needs professional review</li></ul></article>
+        <article class="spec-card"><h3>Provenance and dataset evidence</h3><p class="spec-lead">Make the route from recruitment and collection through QA, dataset assembly, and delivery easier to explain and assess.</p><ul><li>Source, recruitment, and collection-method narrative</li><li>Collection, QA, and dataset-assembly record structure</li><li>Documentation of agreed use and licence conditions</li><li>Traceable evidence prepared for scoped diligence</li></ul></article>
+        <article class="spec-card"><h3>Sensitive data and re-identification safeguards</h3><p class="spec-lead">Surface potential sensitive-data, biometric-data, re-identification, and data-flow questions early enough to address them with the right project owners and advisers.</p><ul><li>Early flagging of potential biometric or sensitive-data questions</li><li>Data-minimisation and access-control considerations</li><li>Project documentation that prohibits re-identification</li><li>Clear boundaries for data use and onward handling</li></ul></article>
+        <article class="spec-card"><h3>Data flows and buyer diligence</h3><p class="spec-lead">Help teams frame practical supplier questions and define the evidence they need to review before commissioning or licensing training data.</p><ul><li>Processing parties, operational roles, and delivery route</li><li>Planned processing, storage, and transfer questions</li><li>Buyer-facing governance and due-diligence materials</li><li>Items that should be assessed by the buyer's legal advisers</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Working method</p>
+        <h2>From a project brief to a clearer evidence trail.</h2>
+        <p>We focus on making operational facts visible and reviewable. We do not replace your legal counsel, data-protection officer, or regulatory obligations.</p>
+      </div>
+      <div class="process">
+        <article class="process-card"><h3>Scope</h3><p>Clarify the data, intended AI use, project stage, markets, participant profile, and the questions the buyer or governance team needs answered.</p></article>
+        <article class="process-card"><h3>Map</h3><p>Identify the collection path, supporting records, parties, data flows, delivery expectations, and potential sensitive-data or re-identification issues.</p></article>
+        <article class="process-card"><h3>Document</h3><p>Turn the agreed operational facts into practical consent, provenance, governance, or diligence materials within the defined engagement scope.</p></article>
+        <article class="process-card"><h3>Hand over</h3><p>Provide the agreed materials and outstanding questions so project owners and professional advisers can make informed next decisions.</p></article>
+      </div>
+    </div>
+  </section>
+
+</ServiceLayout>
+
+<style>
+  /* The artefact cards sit on the dark band but stay light, so their text
+     takes the page ink rather than the band's white. */
+  .band .spec-card { color: var(--ink) }
+  .spec-lead { margin: 10px 0 0; color: #3C4A42; font-size: .95rem; line-height: 1.6 }
+</style>

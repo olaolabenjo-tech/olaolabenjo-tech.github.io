@@ -4,7 +4,7 @@
 
   Loaded by ServiceLayout only. The homepage uses home-system.css instead —
   several selectors here (`section`, `h1`-`h3`, `.btn`, `.eyebrow`, `.wrap`,
-  `.spec-card`, `.contact-band`) carry different values on the homepage.
+  `.spec-card`) carry different values on the homepage.
 */
 
 /* ── Focus ───────────────────────────────────────────────────────── */
@@ -23,7 +23,7 @@ h3 { font-size: 1.18rem; margin-bottom: 9px }
   font-size: .76rem;
   letter-spacing: .09em;
   text-transform: uppercase;
-  color: var(--amber);
+  color: var(--amber-text);
   font-weight: 600;
 }
 
@@ -62,6 +62,17 @@ section { padding: 74px 0 }
 .btn-primary:hover { background: var(--green-deep) }
 .btn-secondary { background: transparent; color: var(--green) }
 
+/* Hero call to action, mobile only. On desktop the header's "Send an
+   enquiry" button is always in view; at 900px and below it moves into the
+   collapsed menu, so the hero carries it instead. 900px matches Nav.astro. */
+.hero-cta { display: none }
+@media (max-width: 900px) {
+  .hero-cta { display: inline-flex; min-height: 48px; margin-top: 20px; padding-inline: 24px }
+}
+@media (max-width: 560px) {
+  .hero-cta { display: flex; width: 100% }
+}
+
 /* ── Hero ─────────────────────────────────────────────────────── */
 .hero {
   padding: 82px 0 54px;
@@ -88,6 +99,11 @@ section { padding: 74px 0 }
 @media (max-width: 800px) {
   .hero-grid { grid-template-columns: 1fr 1fr; gap: 30px }
   .hero { padding: 58px 0 40px }
+}
+
+@media (max-width: 640px) {
+  /* Phones: stack the hero. Two columns left ~170px each at 390px wide. */
+  .hero-grid { grid-template-columns: 1fr; gap: 28px }
 }
 
 @media (max-width: 560px) {
@@ -145,7 +161,7 @@ section { padding: 74px 0 }
   font-family: var(--mono);
   font-weight: 700;
   font-size: .82rem;
-  color: var(--amber);
+  color: var(--amber-text);
   margin-bottom: 14px;
 }
 .process-card p { font-size: .91rem; color: var(--muted) }
@@ -169,34 +185,11 @@ section { padding: 74px 0 }
 .evidence li { margin: 8px 0 }
 .evidence li::marker { color: var(--green) }
 
-/* ── Trust and consent baseline ─────────────────────────────────────── */
-.trust-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--mono);
-  font-size: .78rem;
-  color: var(--green-deep);
-  background: var(--mist);
-  border: 1px solid var(--green);
-  border-radius: 100px;
-  padding: 6px 14px;
-  margin: 0 0 14px;
-}
-.trust-chip::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--green) }
-
+/* ── Trust line in running text (evidence boxes) ────────────────────── */
+/* The hero's trust line is components/HeroTrust.astro. */
 .trust-route { max-width: 680px; margin: 0 0 12px; color: #3C4A42; font-size: .9rem; line-height: 1.5 }
 .trust-route a { font-weight: 700 }
 
-.collection-consent {
-  max-width: 680px;
-  margin: 0 0 18px;
-  padding-left: 13px;
-  border-left: 3px solid var(--green);
-  color: #3C4A42;
-  font-size: .9rem;
-  line-height: 1.5;
-}
 
 /* ── Related-content strip ──────────────────────────────────────────── */
 .related-speech {
@@ -214,38 +207,6 @@ section { padding: 74px 0 }
 }
 .related-speech h2 { margin: 5px 0 10px; font-size: clamp(1.35rem, 2.5vw, 1.8rem) }
 .related-speech p:last-child { margin: 0; color: #3C4A42 }
-
-/* ── Contact band ───────────────────────────────────────────────────── */
-.contact-band {
-  border-radius: 16px;
-  background: linear-gradient(135deg, #0A4A2C, #0E6B3F);
-  color: #fff;
-  padding: 42px;
-  text-align: center;
-}
-.contact-band h2 { color: #fff }
-.contact-band > p { color: #EAF2EC; max-width: 680px; margin: 12px auto 20px }
-.contact-band .btn { background: #fff; border-color: #fff; color: var(--green-deep) }
-
-.brief {
-  max-width: 640px;
-  margin: 0 auto 22px;
-  padding: 17px 20px;
-  text-align: left;
-  background: rgba(255, 255, 255, .1);
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 10px;
-}
-.brief-title {
-  font-family: var(--mono);
-  font-size: .76rem;
-  text-transform: uppercase;
-  letter-spacing: .08em;
-  font-weight: 600;
-}
-.brief ul { padding-left: 20px; margin: 8px 0 0 }
-.brief li { font-size: .92rem; margin: 4px 0 }
-.brief-note { font-size: .88rem; margin-top: 12px; color: #EAF2EC }
 
 
 /* ── Patterns introduced by about.html / index.html ─────────────────── */
@@ -316,7 +277,7 @@ section { padding: 74px 0 }
 .role {
   font-family: var(--mono);
   font-size: .78rem;
-  color: var(--amber);
+  color: var(--amber-text);
   letter-spacing: .08em;
   text-transform: uppercase;
   margin-top: -3px;
@@ -344,7 +305,6 @@ section { padding: 74px 0 }
 
 @media (max-width: 800px) {
   .card-grid, .scope-grid, .spec-grid, .process { grid-template-columns: 1fr 1fr }
-  .contact-band { padding: 32px 22px }
 }
 
 @media (max-width: 760px) {

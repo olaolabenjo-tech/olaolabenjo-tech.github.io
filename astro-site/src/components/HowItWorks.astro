@@ -1,0 +1,79 @@
+---
+/*
+  "How commissioning works" — the one process section, shared by every page
+  that shows it (the homepage and Data collection), so the step names and
+  promises can never drift apart. Edit the steps here, not on a page.
+
+  Pages with a genuinely different route keep their own: Compliance
+  (Scope · Map · Document · Hand over) and Yorùbá speech data (sample-led).
+
+  Styles are self-contained so it looks the same in both design systems;
+  the eyebrow and h2 take each system's own heading styles.
+*/
+const STEPS = [
+  {
+    title: 'Brief',
+    body: 'Tell us the languages, data type, domain, volume, and any demographic or device requirements.',
+  },
+  {
+    title: 'Quote',
+    body: 'You receive scope, timeline, and pricing within 48 hours, with a sample plan and QA criteria.',
+  },
+  {
+    title: 'Collect',
+    body: 'We recruit and consent contributors, collect to spec, and report progress weekly.',
+  },
+  {
+    title: 'Deliver',
+    body: "QA'd data arrives with metadata, data card, and licence. Free re-delivery on any batch failing agreed QA thresholds (up to two re-deliveries per batch).",
+  },
+];
+---
+
+<section class="how" id="how-it-works" aria-labelledby="how-heading">
+  <div class="wrap">
+    <p class="eyebrow">How commissioning works</p>
+    <h2 id="how-heading">From brief to delivery.</h2>
+    <ol class="steps">
+      {STEPS.map((step) => (
+        <li class="step">
+          <h3>{step.title}</h3>
+          <p>{step.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--card-gap);
+    counter-reset: s;
+  }
+  .step { position: relative; padding-top: 42px }
+  .step::before {
+    counter-increment: s;
+    content: counter(s);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: .9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .step h3 { font-family: var(--display); font-size: 1.1rem; margin: 0 0 6px }
+  .step p { font-size: .92rem; line-height: 1.6; color: var(--slate); margin: 0 }
+</style>

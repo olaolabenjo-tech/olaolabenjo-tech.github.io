@@ -1,4 +1,5 @@
 import type { NavLink } from '../types';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from './contact';
 
 /**
  * The site-wide header menu. One menu on every page.
@@ -8,13 +9,23 @@ import type { NavLink } from '../types';
  * and moved up as each one lands.
  *
  * Targets are real URLs rather than in-page anchors, because the same menu
- * renders everywhere; the two homepage anchors are absolute so they work from
- * any page. The last item is styled as the call to action — keep it last.
+ * renders everywhere. "Send an enquiry" goes to the enquiry form at /brief.
+ * The last item is
+ * styled as the call to action — keep it last.
  */
 export const SITE_NAV: NavLink[] = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
+  {
+    label: 'Services',
+    href: '/services',
+    children: [
+      { href: '/services', label: 'All services' },
+      { href: '/african-data-collection-services', label: 'Data collection' },
+      { href: '/annotation-labelling-services', label: 'Annotation & labelling' },
+      { href: '/ai-training-data-compliance-nigeria', label: 'Compliance support' },
+    ],
+  },
   {
     label: 'Languages',
     href: '/language-coverage',
@@ -24,7 +35,7 @@ export const SITE_NAV: NavLink[] = [
       { href: '/yoruba-speech-data', label: 'Yorùbá speech data' },
     ],
   },
-  { href: '/#contact', label: 'Start a brief' },
+  { href: ENQUIRY_URL, label: ENQUIRY_LABEL },
 ];
 
 /**
@@ -32,7 +43,6 @@ export const SITE_NAV: NavLink[] = [
  *
  *   top level:
  *     { href: '/african-ai-training-data-types',       label: 'Data types' }
- *     { href: '/ai-training-data-compliance-nigeria',  label: 'Compliance' }
  *
  *   inside the Languages dropdown:
  *     { href: '/nigerian-english-speech-data', label: 'Nigerian English speech' }

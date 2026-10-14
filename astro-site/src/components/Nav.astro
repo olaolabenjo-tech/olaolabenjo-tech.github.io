@@ -225,11 +225,28 @@ const activeGroups = new Set(
 
   .nav-links { display: flex; align-items: center; gap: 18px; font-size: .88rem; font-weight: 500 }
   .nav-links > a { color: var(--ink) }
-  .nav-links > a:last-child { color: var(--green); font-weight: 700 }
 
   /* ── Current page ─────────────────────────────────────────────────── */
   .nav-links > a[aria-current="page"],
   .nav-group-toggle[data-current="true"] { color: var(--green-deep); font-weight: 700 }
+
+  /* ── Call to action ───────────────────────────────────────────────────
+     The last item ("Send an enquiry", config/navigation.ts) is a filled
+     button, so the one thing we want visitors to do stands out from the
+     menu. On its own page it darkens instead of taking the underline. */
+  .nav-links > a:last-child {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 0 16px;
+    border-radius: 6px;
+    background: var(--green);
+    color: #fff;
+    font-weight: 700;
+  }
+  .nav-links > a:last-child:hover { background: var(--green-deep); color: #fff; text-decoration: none }
+  .nav-links > a:last-child[aria-current="page"] { background: var(--green-deep); color: #fff }
 
   /* ── Toggle button ────────────────────────────────────────────────── */
   .nav-toggle {
@@ -327,6 +344,7 @@ const activeGroups = new Set(
       height: 3px;
       background: var(--green);
     }
+    .nav-links > a:last-child::after { content: none }
   }
 
   /* ── Mobile ───────────────────────────────────────────────────────── */
@@ -357,6 +375,16 @@ const activeGroups = new Set(
       box-shadow: inset 3px 0 0 var(--green);
       padding-left: 10px;
     }
+
+    /* The call to action spans the open panel, below the links. */
+    .nav-links > a:last-child {
+      align-self: stretch;
+      min-height: 46px;
+      margin-top: 10px;
+      padding: 0 16px;
+      font-size: .95rem;
+    }
+    .nav-links > a:last-child[aria-current="page"] { box-shadow: none; padding-left: 16px }
   }
 
   @media (max-width: 560px) {

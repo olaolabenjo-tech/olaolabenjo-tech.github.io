@@ -1,0 +1,112 @@
+---
+/*
+  Annotation and labelling services. Ported from annotation-labelling-services.html through ServiceLayout.
+
+  Body content is carried over verbatim; internal hrefs are root-absolute and
+  extensionless, and links to pages not yet ported keep their text but lose
+  the link. Departures, following the earlier ports:
+  - No FAQ section: its questions live on /faq.
+  - No contact section: ServiceLayout ends the page with the closing card.
+  - Hero: no NDPC lines above the heading; the buttons became the
+    mobile-only "Send an enquiry" (the header carries it on desktop).
+  - No process section: it repeated the shared one (homepage, Data collection).
+  - No "Annotation tasks" section: its speech / text / image-video / combined
+    cards were a fourth copy of the data-types list, so the tasks are merged
+    into the "Tasks and outputs" list below.
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Annotation and Labelling Services for AI Training",
+  "description": "Human-led annotation and labelling services for speech, text, image and video AI training data, including transcription, time alignment, classification, segmentation, diarisation and tagging.",
+  "provider": {
+    "@type": "Organization",
+    "name": "BSG DataWorks",
+    "url": "https://bsgdataworks.com/"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nigeria"
+  },
+  "serviceType": "AI data annotation, transcription, labelling and tagging services"
+};
+---
+
+<ServiceLayout
+  title="Annotation and Labelling Services for AI Training | BSG DataWorks"
+  description="Human-led annotation and labelling services for speech, text, image and video AI data, including transcription, time alignment, classification, segmentation, diarisation and tagging."
+  canonicalPath="/annotation-labelling-services"
+  ogDescription="Annotation and labelling for speech, text, image and video AI data, delivered to your agreed schema with documented quality criteria."
+  twitterTitle="Annotation and Labelling Services for AI Training | BSG DataWorks"
+  twitterDescription="Human-led annotation and labelling for AI training data across speech, text, image and video."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Annotation services · existing or commissioned data</p>
+
+        <h1>Human-led <em>annotation and labelling</em> for AI training data.</h1>
+        <p class="hero-copy">Make speech, text, image and video data usable for your model workflow. BSG DataWorks applies trained native-speaker and project-specific annotation support to your existing materials or to data collected through our contributor networks.</p>
+        <a class="btn btn-primary hero-cta" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
+      </div>
+      <aside class="hero-panel" aria-label="Annotation and labelling services overview">
+        <p class="eyebrow">What teams can scope</p>
+        <h2>More than a generic label.</h2>
+        <p>Start with your model task, data assets, label schema and delivery format so the annotation work is defined around an operational use case.</p>
+        <ul class="panel-list"><li>Transcription, time alignment and language annotation</li><li>Classification, segmentation, diarisation and entity or sentiment labels</li><li>Image and video tagging to your agreed schema</li></ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="availability">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Service scope</p>
+        <h2>Bring your data, your schema, or a collection brief.</h2>
+        <p>We support teams that already hold data and need it made usable, as well as teams that want data collection and annotation planned together. The task definitions, quality criteria and delivery format are agreed before work begins.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card"><p class="icon">01 · EXISTING DATA</p><h3>Annotate what you already hold.</h3><p>Apply a defined annotation task to your speech, text, image or video materials, with the workflow scoped to your model objective and label requirements.</p></article>
+        <article class="card"><p class="icon">02 · COLLECTION + LABELS</p><h3>Plan data and annotation together.</h3><p>Where BSG DataWorks collects the source material, annotation, transcription, metadata and documentation can be scoped as part of the same delivery.</p></article>
+        <article class="card"><p class="icon">03 · SPECIFICATION</p><h3>Set a usable annotation brief.</h3><p>Define the taxonomy, examples, format, review requirements, handoff criteria and timeline before the annotation work is released.</p></article>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="delivery">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Quality and delivery</p>
+        <h2>Agree the evidence behind the labels before work starts.</h2>
+        <p>Annotation is documented around the task definition, expected outputs, quality criteria and delivery route. The final package is determined by the agreed project scope.</p>
+      </div>
+      <div class="spec-grid">
+        <article class="spec-card"><h3>Tasks and outputs</h3><ul><li><strong>Speech and audio:</strong> transcription, time alignment and speaker diarisation</li><li><strong>Text and language:</strong> classification, categorisation, entity and sentiment labelling</li><li><strong>Image and video:</strong> tagging, classification and segmentation to the agreed schema</li><li><strong>Combined datasets:</strong> one agreed workflow where data needs several task types</li><li>JSON, TXT or CSV delivery formats where agreed</li><li>Metadata fields and label structure aligned to the project brief</li></ul></article>
+        <article class="spec-card"><h3>Quality and documentation</h3><ul><li>Trained native-speaker support for relevant language tasks</li><li>Native-speaker linguists review transcriptions</li><li>Inter-annotator agreement of at least 80%, reported per batch where applicable</li><li>Quality criteria, reporting and redelivery thresholds agreed for the project</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+
+</ServiceLayout>
+
+<style>
+  /*
+    Two light sections now sit back to back (the dark band between them was
+    removed), so the shared 74px section padding stacked into a 148px gap.
+    24px a side gives one even 48px gap between every group of cards,
+    including the closing card (which adds its own 24px).
+  */
+  section { padding: 24px 0 }
+  section:first-of-type { padding-top: 64px }
+
+  /* Phones: the closing card adds only 8px above itself there. */
+  @media (max-width: 560px) {
+    #delivery { padding-bottom: 40px }
+  }
+</style>

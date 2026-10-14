@@ -105,7 +105,8 @@ const BARS = [
 
   .foot-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr;
+    /* Brand, then one column per FOOTER_COLUMNS entry. */
+    grid-template-columns: 1.3fr repeat(3, 1fr);
     gap: clamp(24px, 3.4vw, 44px);
     padding-block: clamp(30px, 4vw, 44px) clamp(24px, 3vw, 32px);
   }
@@ -144,7 +145,7 @@ const BARS = [
   .foot-col a { color: rgba(226, 240, 236, .78); text-decoration: none; font-size: .9rem }
   .foot-col a:hover { color: #fff; text-decoration: underline }
 
-  .brand-contact { margin-top: 14px; display: flex; flex-direction: column; gap: 5px }
+  .brand-contact { margin-top: 14px; display: flex; flex-direction: column; align-items: flex-start; gap: 5px }
   .brand-contact a {
     color: #fff;
     font-weight: 700;
@@ -222,6 +223,32 @@ const BARS = [
 
   .legal-links a:hover,
   .cookie-settings:hover { color: #fff; text-decoration: underline }
+
+  /* ── Tap targets ───────────────────────────────────────────────────────
+     Every footer link is at least 24px tall (WCAG 2.2 target size), and 44px
+     on touch screens, where the gaps between links fold into the targets so
+     the footer does not get taller than it needs to. */
+  .foot-col a,
+  .brand-contact a,
+  .legal-links a,
+  .cookie-settings {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+  }
+
+  @media (pointer: coarse), (max-width: 560px) {
+    .foot-col ul,
+    .brand-contact { gap: 0 }
+    .foot-col a,
+    .brand-contact a,
+    .legal-links a,
+    .cookie-settings { min-height: 44px }
+    .legal-links { gap: 4px }
+    .legal-links a,
+    .cookie-settings { padding-inline: 4px }
+    .legal-links { margin-inline: -4px }
+  }
 
   /* ── Responsive ────────────────────────────────────────────────────── */
   @media (max-width: 860px) {

@@ -121,6 +121,10 @@ The homepage keeps a 43-word teaser linking out, following the pattern
 `#about` already set. Nothing linked to `#languages` from another page, so
 no inbound links broke; the anchor still exists for the two same-page links.
 
+Later removed: the teaser repeated the three tiers in the bar under the hero,
+which already links to `/language-coverage`, so the homepage now carries the
+tiers once.
+
 The header gained a **Languages dropdown** listing the hub and the four
 language pages, which also surfaces pages that were previously reachable only
 from body copy. The standalone "Speech data" nav item folded into it.
@@ -378,6 +382,8 @@ hashing the rendered `<nav>`):
 - **One menu**, `src/config/navigation.ts`. Every target is a real URL, since
   the same menu renders on every page — `#faq` would be dead everywhere but
   one. The two homepage anchors are absolute (`/#services`, `/#contact`).
+  (Later: the `#contact` section was removed and "Start a brief" now opens
+  the dataset brief email.)
 - **One breakpoint**, 900px, raised from 800/860 because the shared menu is
   wider than any single page's used to be.
 - `.nav-inner` carries **its own measure** (`min(1080px, 100% - 48px)`)
@@ -498,7 +504,9 @@ where Astro scopes it automatically.
 Blocks genuinely shared by both systems — `ContactDirect`, `PolicyNotice` —
 became components with their own scoped styles rather than being duplicated
 into each sheet. (`PolicyNotice` has since been narrowed to the homepage; the
-footer's Privacy Policy link covers every other page.)
+footer's Privacy Policy link covers every other page. `ContactDirect` was
+removed with the per-page brief sections: "Start a brief" in the header and
+footer is now the one brief, sending a single dataset brief email.)
 
 **Do not "unify" these systems as a cleanup.** They are three deliberate
 designs. Merging them is a design decision for a human, taken after cutover.
@@ -529,19 +537,17 @@ src/
 │   ├── Nav.astro                sticky nav — home | service variants
 │   ├── Footer.astro             corporate | service variants
 │   ├── JsonLd.astro             schema.org blocks
-│   ├── ContactDirect.astro      email + WhatsApp route (both systems)
 │   ├── PolicyNotice.astro       closing privacy teaser (homepage only)
+│   ├── HowItWorks.astro         the one process section (homepage, Data collection)
+│   ├── ClosingCta.astro         closing card on inner pages (added by ServiceLayout)
 │   └── home/                    one component per homepage section
 │       ├── Hero.astro           reg chip, headline, CTAs, proof strip
 │       ├── Waveform.astro       decorative separator
 │       ├── DataTypes.astro      #collect
 │       ├── Services.astro       #services
-│       ├── Process.astro        four commissioning steps
-│       ├── Languages.astro      #languages
 │       ├── Standards.astro      #specs
 │       ├── Compliance.astro     #compliance
-│       ├── Samples.astro        #samples
-│       └── ContactBand.astro    #contact
+│       └── Samples.astro        #samples
 └── layouts/
     ├── Shell.astro              chrome, head, nav, footer — not used directly
     ├── ServiceLayout.astro      Shell + service-system.css
@@ -599,7 +605,8 @@ have fuller dedicated pages that they link to.
 - Its contact block is worded differently from the shared `ContactDirect`
   component ("Start a dataset brief by email" vs "Prefer to write directly?"),
   so that markup stays local to the page rather than being forced into the
-  component.
+  component. (Both have since been removed with the per-page brief
+  sections.)
 - `about.html` was the newest hand-written page and had drifted from the
   service baseline in a dozen small ways (`h1` 2.55/4.65/770, `h2` 1.8,
   `h3` 1.16, `.eyebrow` tracking, hero padding and grid, `.section-head`
