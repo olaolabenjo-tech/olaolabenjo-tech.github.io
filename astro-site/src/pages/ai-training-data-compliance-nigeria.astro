@@ -9,6 +9,10 @@
   - No contact section: ServiceLayout ends the page with the closing card.
   - Hero: no NDPC lines above the heading; the buttons became the
     mobile-only "Send an enquiry" (the header carries it on desktop).
+  - "Where this helps" and "Governance artefacts" are merged into one section:
+    each topic card leads with the "Where this helps" description, then the
+    artefact list, so consent, provenance, safeguards and diligence each
+    appear once.
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
@@ -76,31 +80,15 @@ const schema = {
   <section class="band" id="uses">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">Where this helps</p>
-        <h2>Governance work grounded in how data is actually collected.</h2>
-        <p>Our perspective starts with the operational decisions that affect a dataset's evidence trail, rather than with generic policy language alone.</p>
-      </div>
-      <div class="scope-grid">
-        <article class="scope-card"><h3>Procurement preparation</h3><p>Help teams frame practical supplier questions and define the evidence they need to review before commissioning or licensing training data.</p></article>
-        <article class="scope-card"><h3>Consent and contributor design</h3><p>Support workflows for written, informed participation records that connect the collection purpose, commercial AI use, and the agreed data handling approach.</p></article>
-        <article class="scope-card"><h3>Data provenance documentation</h3><p>Make the route from recruitment and collection through QA, dataset assembly, and delivery easier to explain and assess.</p></article>
-        <article class="scope-card"><h3>Risk and safeguards review</h3><p>Surface potential sensitive-data, biometric-data, re-identification, and data-flow questions early enough to address them with the right project owners and advisers.</p></article>
-      </div>
-    </div>
-  </section>
-
-  <section id="delivery">
-    <div class="wrap">
-      <div class="section-head">
         <p class="eyebrow">Governance artefacts</p>
         <h2>Evidence designed around the project, not a generic checklist.</h2>
-        <p>The final scope depends on the data type, collection method, participant profile, intended model use, buyers, and delivery route. These are common operational areas a team may ask us to document or review.</p>
+        <p>Our perspective starts with the operational decisions that affect a dataset's evidence trail, rather than with generic policy language alone. The final scope depends on the data type, collection method, participant profile, intended model use, buyers, and delivery route.</p>
       </div>
       <div class="spec-grid">
-        <article class="spec-card"><h3>Consent and contributor records</h3><ul><li>Written participation and consent workflow</li><li>Clear project, data-use, and licensing context</li><li>Versioned consent and contributor-record approach</li><li>Escalation points where consent needs professional review</li></ul></article>
-        <article class="spec-card"><h3>Provenance and dataset evidence</h3><ul><li>Source, recruitment, and collection-method narrative</li><li>Collection, QA, and dataset-assembly record structure</li><li>Documentation of agreed use and licence conditions</li><li>Traceable evidence prepared for scoped diligence</li></ul></article>
-        <article class="spec-card"><h3>Sensitive data and re-identification safeguards</h3><ul><li>Early flagging of potential biometric or sensitive-data questions</li><li>Data-minimisation and access-control considerations</li><li>Project documentation that prohibits re-identification</li><li>Clear boundaries for data use and onward handling</li></ul></article>
-        <article class="spec-card"><h3>Data flows and buyer diligence</h3><ul><li>Processing parties, operational roles, and delivery route</li><li>Planned processing, storage, and transfer questions</li><li>Buyer-facing governance and due-diligence materials</li><li>Items that should be assessed by the buyer's legal advisers</li></ul></article>
+        <article class="spec-card"><h3>Consent and contributor records</h3><p class="spec-lead">Support workflows for written, informed participation records that connect the collection purpose, commercial AI use, and the agreed data handling approach.</p><ul><li>Written participation and consent workflow</li><li>Clear project, data-use, and licensing context</li><li>Versioned consent and contributor-record approach</li><li>Escalation points where consent needs professional review</li></ul></article>
+        <article class="spec-card"><h3>Provenance and dataset evidence</h3><p class="spec-lead">Make the route from recruitment and collection through QA, dataset assembly, and delivery easier to explain and assess.</p><ul><li>Source, recruitment, and collection-method narrative</li><li>Collection, QA, and dataset-assembly record structure</li><li>Documentation of agreed use and licence conditions</li><li>Traceable evidence prepared for scoped diligence</li></ul></article>
+        <article class="spec-card"><h3>Sensitive data and re-identification safeguards</h3><p class="spec-lead">Surface potential sensitive-data, biometric-data, re-identification, and data-flow questions early enough to address them with the right project owners and advisers.</p><ul><li>Early flagging of potential biometric or sensitive-data questions</li><li>Data-minimisation and access-control considerations</li><li>Project documentation that prohibits re-identification</li><li>Clear boundaries for data use and onward handling</li></ul></article>
+        <article class="spec-card"><h3>Data flows and buyer diligence</h3><p class="spec-lead">Help teams frame practical supplier questions and define the evidence they need to review before commissioning or licensing training data.</p><ul><li>Processing parties, operational roles, and delivery route</li><li>Planned processing, storage, and transfer questions</li><li>Buyer-facing governance and due-diligence materials</li><li>Items that should be assessed by the buyer's legal advisers</li></ul></article>
       </div>
     </div>
   </section>
@@ -122,3 +110,10 @@ const schema = {
   </section>
 
 </ServiceLayout>
+
+<style>
+  /* The artefact cards sit on the dark band but stay light, so their text
+     takes the page ink rather than the band's white. */
+  .band .spec-card { color: var(--ink) }
+  .spec-lead { margin: 10px 0 0; color: #3C4A42; font-size: .95rem; line-height: 1.6 }
+</style>
