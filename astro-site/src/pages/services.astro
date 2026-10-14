@@ -16,13 +16,13 @@ const SERVICES = [
   {
     tag: '01 · Build',
     title: 'Commissioned data collection',
-    link: { href: '/african-data-collection-services', label: 'Explore African data collection services' },
+    link: { href: '/african-data-collection-services', about: 'African data collection services' },
     body: 'You specify languages, domains, demographics, devices, and volume. We recruit, obtain consent, collect, and QA — then deliver to your format.',
   },
   {
     tag: '02 · Improve',
     title: 'Annotation & labelling',
-    link: { href: '/annotation-labelling-services', label: 'Explore annotation and labelling services' },
+    link: { href: '/annotation-labelling-services', about: 'annotation and labelling services' },
     body: 'Full-service annotation on your existing data or ours, by trained native speakers.',
     items: [
       'Transcription and time-alignment',
@@ -35,7 +35,7 @@ const SERVICES = [
   {
     tag: '03 · Clear',
     title: 'Data strategy & compliance consultancy',
-    link: { href: '/ai-training-data-compliance-nigeria', label: 'Explore AI training data compliance support' },
+    link: { href: '/ai-training-data-compliance-nigeria', about: 'AI training data compliance support' },
     body: 'Advisory from a practitioner who runs collection operations daily.',
     items: [
       'Data acquisition strategy for African markets',
@@ -114,16 +114,18 @@ const schema = {
               </ul>
             )}
             {service.link && (
-              <a class="svc-more" href={service.link.href}>{service.link.label} <span aria-hidden="true">→</span></a>
+              <a class="svc-pill" href={service.link.href} aria-label={`Learn more about ${service.link.about}`}>
+                Learn more <span aria-hidden="true">→</span>
+              </a>
             )}
           </article>
         ))}
-        <a class="svc svc-languages" href="/language-coverage">
+        <article class="svc svc-languages">
           <p class="svc-tag">Languages</p>
           <h3>Coverage by language</h3>
           <p>What you can evaluate now, what is being collected, and what we build to your specification.</p>
-          <span class="svc-more">See language coverage <span aria-hidden="true">→</span></span>
-        </a>
+          <a class="svc-pill" href="/language-coverage">See language coverage <span aria-hidden="true">→</span></a>
+        </article>
       </div>
 
     </div>
@@ -168,17 +170,27 @@ const schema = {
 
 
   /* The sixth tile fills the grid's last slot and links to language coverage. */
-  .svc-languages { background: var(--mist); border-color: #BFD0C2; color: inherit; text-decoration: none }
-  .svc-languages:hover { border-color: var(--green); text-decoration: none }
-  .svc-languages:hover h3 { text-decoration: underline; text-underline-offset: 4px }
-  /* "Explore …" links sit at the foot of their card, so they line up in a row. */
-  .svc-more {
+  .svc-languages { background: var(--mist); border-color: #BFD0C2 }
+
+  /* Card links: a solid pill pinned to the foot of the card, so the pills
+     line up across a row. "Learn more" repeats on purpose; each carries an
+     aria-label naming its service for screen readers. */
+  .svc-pill {
+    align-self: flex-start;
     margin-top: auto;
-    padding-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 20px;
+    border-radius: 999px;
+    background: var(--green);
+    color: #fff;
     font-weight: 700;
-    color: var(--green-deep);
+    text-decoration: none;
   }
-  a.svc-more { text-decoration: underline; text-underline-offset: 4px }
+  .svc-pill:hover { background: var(--green-deep); color: #fff; text-decoration: none }
+  .svc-pill:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px }
 
   @media (max-width: 560px) {
     .svc-grid { grid-template-columns: 1fr }
