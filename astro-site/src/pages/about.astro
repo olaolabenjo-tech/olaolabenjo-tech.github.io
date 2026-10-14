@@ -58,12 +58,14 @@ import ServiceLayout from '../layouts/ServiceLayout.astro';
         <h2 id="what-we-do-heading">Collection, preparation, and licensing support for African AI data.</h2>
         <p>We provide African-language and African-accented datasets across four data types: speech and voice, text, image, and video. Our work is available through commissioned collection, annotation and labelling, and commercial dataset licensing. Nigerian-accented English and Yorùbá speech samples are available for evaluation; Igbo, Hausa, and Nigerian Pidgin are in the collection pipeline.</p>
       </div>
-      <div class="data-grid" aria-label="Four data types">
-        <article class="data-card"><span class="icon">01 · Data type</span><h3>Speech and voice</h3><p>Human-sourced speech, voice, transcription, and related language-data work.</p></article>
-        <article class="data-card"><span class="icon">02 · Data type</span><h3>Text</h3><p>Language resources, transcripts, and text data for AI training and evaluation.</p></article>
-        <article class="data-card"><span class="icon">03 · Data type</span><h3>Image</h3><p>Human-generated image data collected and prepared to project requirements.</p></article>
-        <article class="data-card"><span class="icon">04 · Data type</span><h3>Video</h3><p>Real-world video data and client-specific collection projects for African languages and dialects.</p></article>
-      </div>
+      <!-- Short links rather than a fourth list of data types: the homepage and
+           Data collection carry the full list. -->
+      <nav class="data-grid service-links" aria-label="Our services">
+        <a class="data-card service-link" href="/african-data-collection-services"><span class="icon">01 · Build</span><span class="link-title">Data collection <span aria-hidden="true">→</span></span></a>
+        <a class="data-card service-link" href="/annotation-labelling-services"><span class="icon">02 · Improve</span><span class="link-title">Annotation &amp; labelling <span aria-hidden="true">→</span></span></a>
+        <a class="data-card service-link" href="/ai-training-data-compliance-nigeria"><span class="icon">03 · Clear</span><span class="link-title">Compliance support <span aria-hidden="true">→</span></span></a>
+        <a class="data-card service-link" href="/services"><span class="icon">04 · Ready-made</span><span class="link-title">Licensing &amp; translation <span aria-hidden="true">→</span></span></a>
+      </nav>
       <div class="body-copy" style="margin-top:32px;color:#EAF2EC">
         <p>We help organisations obtain African data that reflects real languages, markets, and user contexts, supported by documented contributor consent, traceable provenance, and practical quality workflows. Based in Nigeria and working across West Africa, BSG combines linguistic-network experience built since 2005 with focused data collection, preparation, and compliance support for technical and legal teams. Our initial specialization is Nigerian English and Yorùbá, with plans to expand into Nigerian Pidgin, Igbo, Hausa, Kanuri and other African languages.</p>
       </div>
@@ -140,6 +142,19 @@ import ServiceLayout from '../layouts/ServiceLayout.astro';
   h2 { font-size: clamp(1.8rem, 3.2vw, 3rem) }
   h3 { font-size: 1.16rem }
   .eyebrow { letter-spacing: .1em }
+
+  /* "What we do": four short links to the service pages. */
+  .service-link {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 44px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .service-link:hover { border-color: var(--green); text-decoration: none }
+  .service-link:hover .link-title { text-decoration: underline; text-underline-offset: 4px }
+  .link-title { font-family: var(--display); font-weight: 700; font-size: 1.12rem; color: var(--green-deep) }
 
   .hero { padding: 82px 0 58px; border-bottom: 1px solid var(--line) }
   .hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(275px, .75fr); gap: 52px }
