@@ -105,7 +105,8 @@ const BARS = [
 
   .foot-grid {
     display: grid;
-    grid-template-columns: 1.3fr 1fr 1fr;
+    /* Brand, then one column per FOOTER_COLUMNS entry. */
+    grid-template-columns: 1.3fr repeat(3, 1fr);
     gap: clamp(24px, 3.4vw, 44px);
     padding-block: clamp(30px, 4vw, 44px) clamp(24px, 3vw, 32px);
   }

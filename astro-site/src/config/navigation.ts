@@ -16,7 +16,16 @@ import { ENQUIRY_LABEL, ENQUIRY_URL } from './contact';
 export const SITE_NAV: NavLink[] = [
   { href: '/', label: 'Home' },
   { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
+  {
+    label: 'Services',
+    href: '/services',
+    children: [
+      { href: '/services', label: 'All services' },
+      { href: '/african-data-collection-services', label: 'Data collection' },
+      { href: '/annotation-labelling-services', label: 'Annotation & labelling' },
+      { href: '/ai-training-data-compliance-nigeria', label: 'Compliance support' },
+    ],
+  },
   {
     label: 'Languages',
     href: '/language-coverage',
@@ -34,7 +43,6 @@ export const SITE_NAV: NavLink[] = [
  *
  *   top level:
  *     { href: '/african-ai-training-data-types',       label: 'Data types' }
- *     { href: '/ai-training-data-compliance-nigeria',  label: 'Compliance' }
  *
  *   inside the Languages dropdown:
  *     { href: '/nigerian-english-speech-data', label: 'Nigerian English speech' }

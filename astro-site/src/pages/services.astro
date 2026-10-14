@@ -6,9 +6,8 @@
   coverage. Copy is carried over from what the site already published;
   nothing about capability was invented.
 
-  Collection, annotation and compliance have dedicated pages on the old site
-  that are not ported yet; add a link to each card as its page lands (see
-  config/footer.ts PENDING).
+  Collection, annotation and compliance link to their own pages; licensing
+  and translation have none yet.
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
@@ -17,11 +16,13 @@ const SERVICES = [
   {
     tag: '01 · Build',
     title: 'Commissioned data collection',
+    link: { href: '/african-data-collection-services', label: 'Explore African data collection services' },
     body: 'You specify languages, domains, demographics, devices, and volume. We recruit, obtain consent, collect, and QA — then deliver to your format.',
   },
   {
     tag: '02 · Improve',
     title: 'Annotation & labelling',
+    link: { href: '/annotation-labelling-services', label: 'Explore annotation and labelling services' },
     body: 'Full-service annotation on your existing data or ours, by trained native speakers.',
     items: [
       'Transcription and time-alignment',
@@ -34,6 +35,7 @@ const SERVICES = [
   {
     tag: '03 · Clear',
     title: 'Data strategy & compliance consultancy',
+    link: { href: '/ai-training-data-compliance-nigeria', label: 'Explore AI training data compliance support' },
     body: 'Advisory from a practitioner who runs collection operations daily.',
     items: [
       'Data acquisition strategy for African markets',
@@ -111,6 +113,9 @@ const schema = {
                 {service.items.map((item) => <li>{item}</li>)}
               </ul>
             )}
+            {service.link && (
+              <a class="svc-more" href={service.link.href}>{service.link.label} <span aria-hidden="true">→</span></a>
+            )}
           </article>
         ))}
         <a class="svc svc-languages" href="/language-coverage">
@@ -166,7 +171,14 @@ const schema = {
   .svc-languages { background: var(--mist); border-color: #BFD0C2; color: inherit; text-decoration: none }
   .svc-languages:hover { border-color: var(--green); text-decoration: none }
   .svc-languages:hover h3 { text-decoration: underline; text-underline-offset: 4px }
-  .svc-more { margin-top: auto; padding-top: 14px; font-weight: 700; color: var(--green-deep) }
+  /* "Explore …" links sit at the foot of their card, so they line up in a row. */
+  .svc-more {
+    margin-top: auto;
+    padding-top: 14px;
+    font-weight: 700;
+    color: var(--green-deep);
+  }
+  a.svc-more { text-decoration: underline; text-underline-offset: 4px }
 
   @media (max-width: 560px) {
     .svc-grid { grid-template-columns: 1fr }

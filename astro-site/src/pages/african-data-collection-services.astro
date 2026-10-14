@@ -1,0 +1,124 @@
+---
+/*
+  African data collection services. Ported from african-data-collection-services.html through ServiceLayout.
+
+  Body content is carried over verbatim; internal hrefs are root-absolute and
+  extensionless, and links to pages not yet ported keep their text but lose
+  the link. Departures, following the earlier ports:
+  - No FAQ section: its questions live on /faq.
+  - No contact section: ServiceLayout ends the page with the closing card.
+  - Hero: no NDPC lines above the heading; the buttons became the
+    mobile-only "Send an enquiry" (the header carries it on desktop).
+*/
+import ServiceLayout from '../layouts/ServiceLayout.astro';
+import HeroTrust from '../components/HeroTrust.astro';
+import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "African Data Collection Services for AI Training",
+  "description": "Commissioned human-sourced African data collection for AI training across speech, text, image and video, with contributor consent, quality assurance, documentation and commercial delivery.",
+  "provider": {
+    "@type": "Organization",
+    "name": "BSG DataWorks",
+    "url": "https://bsgdataworks.com/"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "Nigeria"
+  },
+  "serviceType": "AI training data collection and contributor recruitment services"
+};
+---
+
+<ServiceLayout
+  title="African Data Collection Services for AI Training | BSG DataWorks"
+  description="Commissioned African data collection for AI training across speech, text, image and video, with consenting contributors, quality assurance, documentation and commercial delivery."
+  canonicalPath="/african-data-collection-services"
+  ogDescription="Commissioned African speech, text, image and video data collection for AI training, scoped to your use case with consent, QA and documentation."
+  twitterTitle="African Data Collection Services for AI Training | BSG DataWorks"
+  twitterDescription="Commissioned African data collection for AI training across speech, text, image and video."
+  schema={schema}
+>
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">Commissioned collection · Nigeria & West Africa</p>
+
+        <h1>African data collection for <em>AI training</em>, built to your brief.</h1>
+        <p class="hero-copy">Commission human-sourced speech, text, image and video data around the people, languages, scenarios and technical requirements your model needs. BSG DataWorks recruits consenting contributors, runs collection and quality workflows, and delivers the records your technical and legal teams need.</p>
+        <a class="btn btn-primary hero-cta" href={ENQUIRY_URL}>{ENQUIRY_LABEL}</a>
+        <HeroTrust />
+      </div>
+      <aside class="hero-panel" aria-label="African data collection services overview">
+        <p class="eyebrow">What teams can specify</p>
+        <h2>More than a file delivery.</h2>
+        <p>Start with a clear collection specification so recruitment, consent, capture, quality checks and final documentation are aligned to the intended model use.</p>
+        <ul class="panel-list"><li>Languages, domains, demographics, devices and target volume</li><li>Speech, text, image and video scenarios to brief</li><li>Consent, provenance, metadata and commercial-delivery requirements</li></ul>
+      </aside>
+    </div>
+  </header>
+
+  <section id="availability">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Collection scope</p>
+        <h2>Start with the task, then build the data route around it.</h2>
+        <p>Most BSG DataWorks collection work is commissioned. You define the model use, data type, language or market, contributor profile, scenario, device requirements and volume; we turn that brief into an operational collection plan.</p>
+      </div>
+      <div class="card-grid">
+        <article class="card"><p class="icon">01 · SPECIFY</p><h3>Define the data your model needs.</h3><p>Set the use case, modality, language, domain, target participants, capture setting, required metadata and delivery criteria before fieldwork begins.</p></article>
+        <article class="card"><p class="icon">02 · RECRUIT + CONSENT</p><h3>Build a documented contributor route.</h3><p>Recruit contributors to the agreed profile, obtain informed consent, and maintain the records required for the agreed commercial scope.</p></article>
+        <article class="card"><p class="icon">03 · COLLECT + QA</p><h3>Deliver to an agreed standard.</h3><p>Run the capture, collection and quality workflow to brief, then deliver the agreed data, metadata and supporting documentation through an approved route.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="uses">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Data types and use cases</p>
+        <h2>Collect the human-sourced data your AI system needs to learn from.</h2>
+        <p>Collection design should reflect the target model behaviour, not simply the available format. We scope the relevant data type, scenario and contributor profile with you before collection begins.</p>
+      </div>
+      <div class="scope-grid">
+        <article class="scope-card"><h3>Speech and voice</h3><p>Collect scripted, conversational-style, dialogue, voice-over or domain-specific speech with the transcript, time-alignment and metadata requirements agreed for the project.</p></article>
+        <article class="scope-card"><h3>Text and language</h3><p>Scope written, transcribed, bilingual, prompt-response or instruction data around the language treatment and use case required for low-resource NLP and language systems.</p></article>
+        <article class="scope-card"><h3>Image and video</h3><p>Plan consented image or scenario-based video capture around the required objects, environments, activities, devices, angles and lighting variation.</p></article>
+        <article class="scope-card"><h3>Custom and combined projects</h3><p>Use a coordinated brief where the work needs more than one modality, such as speech with image, video with structured tags, or collection with downstream annotation.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="delivery">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Quality, rights and delivery</p>
+        <h2>Agree the evidence behind the data before collection starts.</h2>
+        <p>Each collection scope documents the technical specification, contributor requirements, quality criteria, documentation package and delivery path. The final package is agreed in the applicable proposal, statement of work or licence.</p>
+      </div>
+      <div class="spec-grid">
+        <article class="spec-card"><h3>Collection specification</h3><ul><li>Language, domain, scenario, contributor and device requirements to brief</li><li>Audio, image or video formats and capture variation agreed for the project</li><li>Transcript, metadata and annotation requirements where applicable</li><li>Quality criteria and reporting defined before delivery</li></ul></article>
+        <article class="spec-card"><h3>Rights and documentation</h3><ul><li>Written, informed contributor consent covering the agreed commercial use</li><li>Contributor records and data provenance retained for the agreed scope</li><li>Data-card, licence and consent documentation materials for the delivery</li><li>Client-specified secure transfer or another approved delivery destination</li></ul></article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">From collection brief to delivery</p>
+        <h2>A clear operational route for custom African data.</h2>
+        <p>Share enough detail for BSG DataWorks to assess fit, then agree the collection plan and evidence requirements before work starts.</p>
+      </div>
+      <div class="process">
+        <article class="process-card"><h3>Brief</h3><p>Share the model use, data type, language or market, scenario, target profile, volume, technical requirements and timeline.</p></article>
+        <article class="process-card"><h3>Scope</h3><p>Agree the collection plan, consent route, delivery specification, quality criteria and commercial path.</p></article>
+        <article class="process-card"><h3>Collect & QA</h3><p>Recruit and consent contributors, collect to the agreed specification and report progress against the project plan.</p></article>
+        <article class="process-card"><h3>Deliver</h3><p>Receive the agreed data, metadata, quality reporting and documentation through client-specified secure transfer or an approved destination.</p></article>
+      </div>
+    </div>
+  </section>
+
+</ServiceLayout>
