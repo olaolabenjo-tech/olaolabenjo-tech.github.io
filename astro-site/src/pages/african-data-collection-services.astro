@@ -9,8 +9,10 @@
   - No contact section: ServiceLayout ends the page with the closing card.
   - Hero: no NDPC lines above the heading; the buttons became the
     mobile-only "Send an enquiry" (the header carries it on desktop).
+  - Process: the shared HowItWorks section replaces this page's own copy.
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
+import HowItWorks from '../components/HowItWorks.astro';
 import HeroTrust from '../components/HeroTrust.astro';
 import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
 
@@ -105,20 +107,6 @@ const schema = {
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">From collection brief to delivery</p>
-        <h2>A clear operational route for custom African data.</h2>
-        <p>Share enough detail for BSG DataWorks to assess fit, then agree the collection plan and evidence requirements before work starts.</p>
-      </div>
-      <div class="process">
-        <article class="process-card"><h3>Brief</h3><p>Share the model use, data type, language or market, scenario, target profile, volume, technical requirements and timeline.</p></article>
-        <article class="process-card"><h3>Scope</h3><p>Agree the collection plan, consent route, delivery specification, quality criteria and commercial path.</p></article>
-        <article class="process-card"><h3>Collect & QA</h3><p>Recruit and consent contributors, collect to the agreed specification and report progress against the project plan.</p></article>
-        <article class="process-card"><h3>Deliver</h3><p>Receive the agreed data, metadata, quality reporting and documentation through client-specified secure transfer or an approved destination.</p></article>
-      </div>
-    </div>
-  </section>
+  <HowItWorks />
 
 </ServiceLayout>

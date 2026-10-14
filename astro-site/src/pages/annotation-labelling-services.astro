@@ -9,6 +9,7 @@
   - No contact section: ServiceLayout ends the page with the closing card.
   - Hero: no NDPC lines above the heading; the buttons became the
     mobile-only "Send an enquiry" (the header carries it on desktop).
+  - No process section: it repeated the shared one (homepage, Data collection).
 */
 import ServiceLayout from '../layouts/ServiceLayout.astro';
 import { ENQUIRY_LABEL, ENQUIRY_URL } from '../config/contact';
@@ -103,20 +104,5 @@ const schema = {
     </div>
   </section>
 
-  <section>
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">From brief to delivery</p>
-        <h2>A practical route from raw files to usable labels.</h2>
-        <p>Share enough detail for a suitable workflow to be scoped, then agree the annotation instructions and quality criteria before production begins.</p>
-      </div>
-      <div class="process">
-        <article class="process-card"><h3>Brief</h3><p>Share the model use, source data type, volume, target labels, language requirements and intended delivery date.</p></article>
-        <article class="process-card"><h3>Scope</h3><p>Agree the annotation task, label schema, delivery format, quality criteria and commercial route.</p></article>
-        <article class="process-card"><h3>Annotate</h3><p>Run the agreed workflow with trained annotators and native-speaker support where the task requires it.</p></article>
-        <article class="process-card"><h3>Deliver</h3><p>Receive the agreed labels, metadata, quality reporting and documentation through a client-specified secure transfer or approved destination.</p></article>
-      </div>
-    </div>
-  </section>
 
 </ServiceLayout>

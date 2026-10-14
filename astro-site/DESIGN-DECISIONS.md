@@ -538,12 +538,13 @@ src/
 │   ├── Footer.astro             corporate | service variants
 │   ├── JsonLd.astro             schema.org blocks
 │   ├── PolicyNotice.astro       closing privacy teaser (homepage only)
+│   ├── HowItWorks.astro         the one process section (homepage, Data collection)
+│   ├── ClosingCta.astro         closing card on inner pages (added by ServiceLayout)
 │   └── home/                    one component per homepage section
 │       ├── Hero.astro           reg chip, headline, CTAs, proof strip
 │       ├── Waveform.astro       decorative separator
 │       ├── DataTypes.astro      #collect
 │       ├── Services.astro       #services
-│       ├── Process.astro        four commissioning steps
 │       ├── Standards.astro      #specs
 │       ├── Compliance.astro     #compliance
 │       └── Samples.astro        #samples
