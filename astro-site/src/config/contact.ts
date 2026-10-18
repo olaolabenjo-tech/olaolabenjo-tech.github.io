@@ -23,7 +23,7 @@ export const ENQUIRY_MAILTO = 'mailto:dataservices@bsgdataworks.com';
  *
  * Empty means not set up: the button falls back to CALL_REQUEST_MAILTO.
  */
-export const CALENDLY_URL = 'https://calendly.com/soniwavetech/discovery-call';
+export const CALENDLY_URL = 'https://calendly.com/bsgdataworks/30min';
 
 /**
  * Call request by email. The "Schedule a call" fallback when CALENDLY_URL is
